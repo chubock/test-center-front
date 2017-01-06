@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {ChoiceQuestion} from "./model/ChoiceQuestion";
+import {Choice} from "./model/Choice";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  question: ChoiceQuestion;
+  
+  constructor() {
+    this.question = new ChoiceQuestion("This is a sample Question Choice");
+    this.question.pushChoice(new Choice("This is first choice"));
+    this.question.pushChoice(new Choice("This is second choice"));
+    this.question.pushChoice(new Choice("This is third choice"));
+    this.question.answer = 1;
+  }
 }
