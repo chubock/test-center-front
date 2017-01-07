@@ -1,26 +1,28 @@
 <div class="form-horizontal well well-sm">
   <div class="form-group">
-    <label for="questionText" class="col-sm-3 control-label">Question :</label>
-    <div class="col-sm-9" [class.control-text]="mode == 'VIEW'">
+    <label for="questionText" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-xs-1': mode == 'ANSWER' || mode == 'ANSWERED'}">{{mode == 'EDIT' || mode == 'VIEW' ? 'Question :' : number + '-'}}</label>
+    <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-xs-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode != 'EDIT'">
       <textarea name="questionText" [(ngModel)]="question.text" class="form-control" *ngIf="mode == 'EDIT'"></textarea>
-      <span *ngIf="mode == 'VIEW'">{{question.text}}</span>
+      <span *ngIf="mode != 'EDIT'">{{question.text}}</span>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-xs-3">Choices :</label>
+    <label *ngIf="mode == 'EDIT' || mode == 'VIEW'" class="control-label col-xs-3">Choices :</label>
     <div class="col-xs-9" *ngIf="mode == 'EDIT' && dynamicChoices">
       <button type="button" class="btn btn-default" (click)="question.pushChoice()"><span class="glyphicon glyphicon-plus"></span></button>
       <button type="button" class="btn btn-default" (click)="question.popChoice()" style="float: right;" [disabled]="question.choices.length < 3"><span class="glyphicon glyphicon-minus"></span></button>
     </div>
   </div>
   <div class="form-group" *ngFor="let choice of question.choices; let i = index;">
-    <div class="col-sm-3 text-right">
-      <p-radioButton *ngIf="!multipleAnswer" name="key" value="{{i + 1}}" [(ngModel)]="question.answer" [disabled]="mode == 'VIEW'"></p-radioButton>
-      <p-checkbox *ngIf="multipleAnswer" name="answers" value="{{i + 1}}" [(ngModel)]="question.answers" [disabled]="mode == 'VIEW'"></p-checkbox>
+    <div class="text-right" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-1': mode == 'ANSWER' || mode == 'ANSWERED'}">
+      <p-radioButton *ngIf="mode == 'EDIT' || mode == 'VIEW' && !multipleAnswer" name="key" value="{{i}}" [(ngModel)]="question.answer" [disabled]="mode == 'VIEW'"></p-radioButton>
+      <p-radioButton *ngIf="mode == 'ANSWER' || mode == 'ANSWERED' && !multipleAnswer" name="selected" value="{{i}}" [(ngModel)]="question.selected" [disabled]="mode == 'ANSWERED'"></p-radioButton>
+      <p-checkbox *ngIf="mode == 'EDIT' || mode == 'VIEW' && multipleAnswer" name="answers" value="{{i}}" [(ngModel)]="question.answers" [disabled]="mode == 'VIEW'"></p-checkbox>
+      <p-checkbox *ngIf="mode == 'ANSWER' || mode == 'ANSWERED' && multipleAnswer" name="selects" value="{{i}}" [(ngModel)]="question.selects" [disabled]="mode == 'ANSWERED'"></p-checkbox>
     </div>
-    <div class="col-sm-9">
+    <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}">
       <input *ngIf="mode == 'EDIT'" type="text" class="form-control" [(ngModel)]="question.choices[i].text">
-      <span *ngIf="mode == 'VIEW'">{{question.text}}</span>
+      <span [ngClass]="{'text-success': mode == 'ANSWERED' && question.isAnswer(i), 'text-danger': mode == 'ANSWERED' && question.isSelected(i) && !question.isAnswer(i)}" *ngIf="mode != 'EDIT'">{{question.choices[i].text}}</span>
     </div>
   </div>
 </div>
@@ -30,5 +32,9 @@
 <span *ngIf="!multipleAnswer" style="display: block;">{{question.answer}}</span>
 <div *ngIf="multipleAnswer">
   <span style="display: block;" *ngFor="let answer of question.answers;">{{answer}}</span>
+</div>
+<span *ngIf="!multipleAnswer" style="display: block;">{{question.selected}}</span>
+<div *ngIf="multipleAnswer">
+  <span style="display: block;" *ngFor="let select of question.selects;">{{select}}</span>
 </div>
 

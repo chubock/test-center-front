@@ -13,13 +13,14 @@ import {Choice} from "../model/Choice";
 })
 export class ChoiceQuestionComponent implements OnInit{
   @Input() question: ChoiceQuestion = null;
+  @Input() number: number = 1;
   @Input() numberOfChoices: number = 3;
   @Input() multipleAnswer: boolean = false;
   @Input() dynamicChoices: boolean = false;
   @Input() mode:string = "EDIT";
-  
+
   constructor() {}
-  
+
   ngOnInit():void {
     if (this.question == null) {
       this.question = new ChoiceQuestion();
@@ -27,5 +28,5 @@ export class ChoiceQuestionComponent implements OnInit{
         this.question.pushChoice();
     }
   }
-  
+
 }

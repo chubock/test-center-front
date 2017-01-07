@@ -62,4 +62,12 @@ export class ChoiceQuestion extends Question{
     this._choices.splice(-1, 1);
     return ret;
   }
+
+  isSelected(key:number): boolean {
+    return this._selects.indexOf(key) != -1;
+  }
+
+  isAnswer(key:number): boolean {
+    return this._answers.indexOf(key) != -1;
+  }
 }
