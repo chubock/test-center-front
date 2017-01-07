@@ -5,46 +5,12 @@ import {Choice} from "./Choice";
  */
 
 export class ChoiceQuestion extends Question{
-  private _answers: number[] = [];
   private _choices: Choice[] = [];
-  private _selects: number[] = [];
 
-  constructor(text:string = "") {
+  constructor(text:string = "", numberOfChoices: number = 3) {
     super(text);
-  }
-
-  get answer(): number {
-    return this._answers[0];
-  }
-
-  set answer(answer: number) {
-    this._answers = [];
-    this._answers.push(answer)
-  }
-
-  get answers(): number[] {
-    return this._answers;
-  }
-
-  set answers(answers: number[]) {
-    this._answers = answers;
-  }
-
-  get selected(): number {
-    return this._selects[0];
-  }
-
-  set selected(selected: number) {
-    this._selects = [];
-    this._selects.push(selected)
-  }
-
-  get selects(): number[] {
-    return this._selects;
-  }
-
-  set selects(selects: number[]) {
-    this._selects = selects;
+    for (var i=0; i<numberOfChoices; i++)
+      this.pushChoice(new Choice());
   }
 
   get choices(): Choice[] {
@@ -61,13 +27,5 @@ export class ChoiceQuestion extends Question{
     var ret = this._choices[this._choices.length - 1];
     this._choices.splice(-1, 1);
     return ret;
-  }
-
-  isSelected(key:number): boolean {
-    return this._selects.indexOf(key) != -1;
-  }
-
-  isAnswer(key:number): boolean {
-    return this._answers.indexOf(key) != -1;
   }
 }

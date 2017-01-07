@@ -15,10 +15,8 @@
   </div>
   <div class="form-group" *ngFor="let choice of question.choices; let i = index;">
     <div class="text-right" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-1': mode == 'ANSWER' || mode == 'ANSWERED'}">
-      <p-radioButton *ngIf="mode == 'EDIT' || mode == 'VIEW' && !multipleAnswer" name="key" value="{{i}}" [(ngModel)]="question.answer" [disabled]="mode == 'VIEW'"></p-radioButton>
-      <p-radioButton *ngIf="mode == 'ANSWER' || mode == 'ANSWERED' && !multipleAnswer" name="selected" value="{{i}}" [(ngModel)]="question.selected" [disabled]="mode == 'ANSWERED'"></p-radioButton>
-      <p-checkbox *ngIf="mode == 'EDIT' || mode == 'VIEW' && multipleAnswer" name="answers" value="{{i}}" [(ngModel)]="question.answers" [disabled]="mode == 'VIEW'"></p-checkbox>
-      <p-checkbox *ngIf="mode == 'ANSWER' || mode == 'ANSWERED' && multipleAnswer" name="selects" value="{{i}}" [(ngModel)]="question.selects" [disabled]="mode == 'ANSWERED'"></p-checkbox>
+      <p-checkbox *ngIf="mode == 'EDIT' || mode == 'VIEW'" name="answers" value="{{i}}" [(ngModel)]="question.answers" [disabled]="mode == 'VIEW'"></p-checkbox>
+      <p-checkbox *ngIf="mode == 'ANSWER' || mode == 'ANSWERED'" name="selects" value="{{i}}" [(ngModel)]="question.selects" [disabled]="mode == 'ANSWERED'"></p-checkbox>
     </div>
     <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}">
       <input *ngIf="mode == 'EDIT'" type="text" class="form-control" [(ngModel)]="question.choices[i].text">
@@ -29,12 +27,10 @@
 
 <span style="display: block;">{{question.text}}</span>
 <span *ngFor="let choice of question.choices; let i = index" style="display: block;">{{question.choices[i].text}}</span>
-<span *ngIf="!multipleAnswer" style="display: block;">{{question.answer}}</span>
-<div *ngIf="multipleAnswer">
+<div>
   <span style="display: block;" *ngFor="let answer of question.answers;">{{answer}}</span>
 </div>
-<span *ngIf="!multipleAnswer" style="display: block;">{{question.selected}}</span>
-<div *ngIf="multipleAnswer">
+<div>
   <span style="display: block;" *ngFor="let select of question.selects;">{{select}}</span>
 </div>
 

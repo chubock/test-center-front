@@ -4,13 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import {ChoiceQuestionComponent} from "./component/ChoiceQuestionComponent";
 import {RadioButtonModule, CheckboxModule} from "primeng/primeng";
+import {SingleAnswerChoiceQuestionComponent} from "./component/SingleAnswerChoiceQuestionComponent";
+import {MultipleAnswerChoiceQuestionComponent} from "./component/MultipleAnswerChoiceQuestionComponent";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChoiceQuestionComponent
+    SingleAnswerChoiceQuestionComponent,
+    MultipleAnswerChoiceQuestionComponent
   ],
   imports: [
     BrowserModule,
