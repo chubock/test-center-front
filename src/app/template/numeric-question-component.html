@@ -6,31 +6,28 @@
     <a class="btn no-padding" *ngIf="mode == 'EDIT'"><span class="glyphicon glyphicon-ok"></span></a>
   </div>
   <div class="form-group">
-    <label for="questionText" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-xs-1': mode == 'ANSWER' || mode == 'ANSWERED'}">{{mode == 'EDIT' || mode == 'VIEW' ? 'Question :' : number + '-'}}</label>
-    <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-xs-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode != 'EDIT'">
+    <label for="questionText" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-1': mode == 'ANSWER' || mode == 'ANSWERED'}">{{mode == 'EDIT' || mode == 'VIEW' ? 'Question :' : number + '-'}}</label>
+    <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode == 'VIEW' || mode == 'ANSWERED'">
       <textarea name="questionText" [(ngModel)]="question.text" class="form-control" *ngIf="mode == 'EDIT'"></textarea>
       <span *ngIf="mode != 'EDIT'">{{question.text}}</span>
     </div>
   </div>
-  <div *ngIf="mode == 'EDIT' || mode == 'VIEW'" class="form-group">
-    <label for="nominatorAnswer" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-xs-1': mode == 'ANSWER' || mode == 'ANSWERED'}">Answer: </label>
-    <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-xs-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode != 'EDIT'">
-      <input name="nominatorAnswer" [(ngModel)]="question.nominatorAnswer" class="form-control input-sm" *ngIf="mode == 'EDIT'">
+  <div class="form-group">
+    <label for="nominator" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-1': mode == 'ANSWER' || mode == 'ANSWERED'}">Answer: </label>
+    <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode == 'VIEW' || mode == 'ANSWERED'">
+      <div class="col-xs-2 col-sm-1 no-padding" *ngIf="mode == 'EDIT' || mode == 'ANSWER'">
+        <input *ngIf="mode == 'EDIT'" name="nominator" [(ngModel)]="question.nominatorAnswer" class="form-control">
+        <input *ngIf="mode == 'ANSWER'" name="nominator" [(ngModel)]="question.nominator" class="form-control">
+      </div>
       <span *ngIf="mode == 'VIEW'"> {{question.nominatorAnswer}} </span>
-      <span *ngIf="mode == 'VIEW' && question.fraction"> / </span>
-      <input name="denominatorAnswer" [(ngModel)]="question.nominatorAnswer" class="input-sm" *ngIf="mode == 'EDIT' && question.fraction">
+      <span *ngIf="mode == 'ANSWERED'" [ngClass]="{'text-success': question.nominator == question.nominatorAnswer, 'text-danger': question.nominator != question.nominatorAnswer}"> {{question.nominator}} </span>
+      <span class="text-center" [ngClass]="{'col-xs-1': mode == 'EDIT' || mode == 'ANSWER', 'big-slash': mode == 'EDIT' || mode == 'ANSWER'}" *ngIf="question.fraction"> / </span>
+      <div class="col-xs-2 col-sm-1 no-padding" *ngIf="(mode == 'EDIT' || mode == 'ANSWER') && question.fraction">
+        <input *ngIf="mode == 'EDIT'" name="denominator" [(ngModel)]="question.denominatorAnswer" class="form-control">
+        <input *ngIf="mode == 'ANSWER'" name="denominator" [(ngModel)]="question.denominator" class="form-control">
+      </div>
       <span *ngIf="mode == 'VIEW' && question.fraction"> {{question.denominatorAnswer}} </span>
-    </div>
-  </div>
-
-  <div *ngIf="mode == 'ANSWERED' || mode == 'ANSWER'" class="form-group">
-    <label for="nominator" class="col-xs-12">Answer: </label>
-    <div class="col-xs-offset-1 col-xs-11">
-      <input name="nominator" [(ngModel)]="question.nominator" class="input-sm" *ngIf="mode == 'EDIT'">
-      <span *ngIf="mode == 'VIEW'"> {{question.nominator}} </span>
-      <span *ngIf="mode == 'VIEW' && question.fraction"> / </span>
-      <input name="denominator" [(ngModel)]="question.denominator" class="input-sm" *ngIf="mode == 'EDIT' && question.fraction">
-      <span *ngIf="mode == 'VIEW' && question.fraction"> {{question.denominator}} </span>
+      <span *ngIf="mode == 'ANSWERED' && question.fraction" [ngClass]="{'text-success': question.denominator == question.denominatorAnswer, 'text-danger': question.denominator != question.denominatorAnswer}"> {{question.denominator}} </span>
     </div>
   </div>
 

@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {Choice} from "./model/Choice";
 import {SingleAnswerChoiceQuestion} from "./model/SingleAnswerChoiceQuestion";
 import {MultipleAnswerChoiceQuestion} from "./model/MultipleAnswerChoiceQuestion";
 import {WritingQuestion} from "./model/WritingQuestion";
@@ -36,9 +35,12 @@ export class AppComponent {
 
     this.numericQuestion = new NumericQuestion("This is a sample Question Choice");
     this.numericQuestion.nominatorAnswer = 10;
+    this.numericQuestion.nominator = 5;
     this.fractionNumericQuestion = new NumericQuestion("This is a sample Question Choice", true);
     this.fractionNumericQuestion.nominatorAnswer = 2;
     this.fractionNumericQuestion.denominatorAnswer = 3;
+    this.fractionNumericQuestion.nominator = 2;
+    this.fractionNumericQuestion.denominator = 5;
 
   }
 }

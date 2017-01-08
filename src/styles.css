@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-.control-text{ padding-top: 7px; }
+.control-text{ padding-top: 7px !important; }
 
-.no-padding { padding: 0; }
+.no-padding { padding: 0 !important; }
+
+.big-slash {
+  font-size: 18pt;
+}
