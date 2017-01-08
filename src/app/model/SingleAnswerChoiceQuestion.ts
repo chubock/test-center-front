@@ -4,12 +4,18 @@ import {ChoiceQuestion} from "./ChoiceQuestion";
  */
 
 export class SingleAnswerChoiceQuestion extends ChoiceQuestion {
-  
+
   selected: number;
   answer: number;
-  
+
   constructor(text: string = "", numberOfChoices: number = 3) {
     super(text, numberOfChoices);
   }
-  
+
+  copy(question: SingleAnswerChoiceQuestion) :void  {
+    super.copy(question);
+    question.selected = this.selected;
+    question.answer = this.answer;
+  }
+
 }

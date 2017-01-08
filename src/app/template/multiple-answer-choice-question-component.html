@@ -1,4 +1,10 @@
 <div class="form-horizontal well well-sm">
+  <div class="text-right">
+    <a class="btn no-padding" *ngIf="mode == 'VIEW'"><span class="glyphicon glyphicon-trash"></span></a>
+    <a class="btn no-padding" *ngIf="mode == 'VIEW'" (click)="edit()"><span class="glyphicon glyphicon-pencil"></span></a>
+    <a class="btn no-padding" *ngIf="mode == 'EDIT'" (click)="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
+    <a class="btn no-padding" *ngIf="mode == 'EDIT'"><span class="glyphicon glyphicon-ok"></span></a>
+  </div>
   <div class="form-group">
     <label for="questionText" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-xs-1': mode == 'ANSWER' || mode == 'ANSWERED'}">{{mode == 'EDIT' || mode == 'VIEW' ? 'Question :' : number + '-'}}</label>
     <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-xs-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode != 'EDIT'">
@@ -7,30 +13,22 @@
     </div>
   </div>
   <div class="form-group">
-    <label *ngIf="mode == 'EDIT' || mode == 'VIEW'" class="control-label col-xs-3">Choices :</label>
-    <div class="col-xs-9" *ngIf="mode == 'EDIT' && dynamicChoices">
+    <label *ngIf="mode == 'EDIT' || mode == 'VIEW'" class="control-label col-sm-3">Choices :</label>
+    <div class="col-sm-9" *ngIf="mode == 'EDIT' && dynamicChoices">
       <button type="button" class="btn btn-default" (click)="question.pushChoice()"><span class="glyphicon glyphicon-plus"></span></button>
       <button type="button" class="btn btn-default" (click)="question.popChoice()" style="float: right;" [disabled]="question.choices.length < 3"><span class="glyphicon glyphicon-minus"></span></button>
     </div>
   </div>
   <div class="form-group" *ngFor="let choice of question.choices; let i = index;">
-    <div class="text-right" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-1': mode == 'ANSWER' || mode == 'ANSWERED'}">
+    <div class="text-right col-xs-1" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW'}">
       <p-checkbox *ngIf="mode == 'EDIT' || mode == 'VIEW'" name="answers" value="{{i}}" [(ngModel)]="question.answers" [disabled]="mode == 'VIEW'"></p-checkbox>
       <p-checkbox *ngIf="mode == 'ANSWER' || mode == 'ANSWERED'" name="selects" value="{{i}}" [(ngModel)]="question.selects" [disabled]="mode == 'ANSWERED'"></p-checkbox>
     </div>
-    <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}">
+    <div class="col-xs-11" [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW'}">
       <input *ngIf="mode == 'EDIT'" type="text" class="form-control" [(ngModel)]="question.choices[i].text">
       <span [ngClass]="{'text-success': mode == 'ANSWERED' && question.isAnswer(i), 'text-danger': mode == 'ANSWERED' && question.isSelected(i) && !question.isAnswer(i)}" *ngIf="mode != 'EDIT'">{{question.choices[i].text}}</span>
     </div>
   </div>
 </div>
 
-<span style="display: block;">{{question.text}}</span>
-<span *ngFor="let choice of question.choices; let i = index" style="display: block;">{{question.choices[i].text}}</span>
-<div>
-  <span style="display: block;" *ngFor="let answer of question.answers;">{{answer}}</span>
-</div>
-<div>
-  <span style="display: block;" *ngFor="let select of question.selects;">{{select}}</span>
-</div>
 

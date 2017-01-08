@@ -7,12 +7,17 @@ import { AppComponent } from './app.component';
 import {RadioButtonModule, CheckboxModule} from "primeng/primeng";
 import {SingleAnswerChoiceQuestionComponent} from "./component/SingleAnswerChoiceQuestionComponent";
 import {MultipleAnswerChoiceQuestionComponent} from "./component/MultipleAnswerChoiceQuestionComponent";
+import {WritingQuestionComponent} from "./component/WritingQuestionComponent";
+import {NumericQuestion} from "./model/NumericQuestion";
+import {NumericQuestionComponent} from "./component/NumericQuestionComponent";
 
 @NgModule({
   declarations: [
     AppComponent,
     SingleAnswerChoiceQuestionComponent,
-    MultipleAnswerChoiceQuestionComponent
+    MultipleAnswerChoiceQuestionComponent,
+    WritingQuestionComponent,
+    NumericQuestionComponent
   ],
   imports: [
     BrowserModule,

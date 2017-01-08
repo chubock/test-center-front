@@ -3,4 +3,8 @@
  */
 export class Choice {
   constructor(public text:string = "") {}
+
+  copy(choice: Choice):void {
+    choice.text = this.text;
+  }
 }

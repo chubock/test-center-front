@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {ChoiceQuestion} from "../model/ChoiceQuestion";
-import {Choice} from "../model/Choice";
-import {SingleAnswerChoiceQuestion} from "../model/SingleAnswerChoiceQuestion";
+import {Component, Input} from "@angular/core";
 import {MultipleAnswerChoiceQuestion} from "../model/MultipleAnswerChoiceQuestion";
+import {QuestionComponent} from "./QuestionComponent";
+import {Question} from "../model/Question";
+import {ChoiceQuestionComponent} from "./ChoiceQuestionComponent";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -10,15 +10,20 @@ import {MultipleAnswerChoiceQuestion} from "../model/MultipleAnswerChoiceQuestio
 
 @Component({
   selector: "multiple-answer-choice-question",
-  templateUrl: "../template/multiple-answer-choice-question-component.html",
-  styles: [`.control-text{padding-top: 7px;}`]
+  templateUrl: "../template/multiple-answer-choice-question-component.html"
 })
-export class MultipleAnswerChoiceQuestionComponent {
+export class MultipleAnswerChoiceQuestionComponent extends ChoiceQuestionComponent{
+
   @Input() question: MultipleAnswerChoiceQuestion = new MultipleAnswerChoiceQuestion();
-  @Input() number: number = 1;
-  @Input() dynamicChoices: boolean = false;
-  @Input() mode:string = "EDIT";
+  backup: MultipleAnswerChoiceQuestion = new MultipleAnswerChoiceQuestion();
 
-  constructor() {}
+  constructor() {super()}
 
+  getQuestion(): Question {
+    return this.question;
+  }
+
+  getBackup(): Question {
+    return this.backup;
+  }
 }

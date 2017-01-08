@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {ChoiceQuestion} from "../model/ChoiceQuestion";
-import {Choice} from "../model/Choice";
 import {SingleAnswerChoiceQuestion} from "../model/SingleAnswerChoiceQuestion";
+import {QuestionComponent} from "./QuestionComponent";
+import {Question} from "../model/Question";
+import {ChoiceQuestionComponent} from "./ChoiceQuestionComponent";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -9,15 +10,20 @@ import {SingleAnswerChoiceQuestion} from "../model/SingleAnswerChoiceQuestion";
 
 @Component({
   selector: "single-answer-choice-question",
-  templateUrl: "../template/single-answer-choice-question-component.html",
-  styles: [`.control-text{padding-top: 7px;}`]
+  templateUrl: "../template/single-answer-choice-question-component.html"
 })
-export class SingleAnswerChoiceQuestionComponent {
+export class SingleAnswerChoiceQuestionComponent extends ChoiceQuestionComponent{
+
   @Input() question: SingleAnswerChoiceQuestion = new SingleAnswerChoiceQuestion();
-  @Input() number: number = 1;
-  @Input() dynamicChoices: boolean = false;
-  @Input() mode:string = "EDIT";
+  backup: SingleAnswerChoiceQuestion = new SingleAnswerChoiceQuestion();
 
-  constructor() {}
+  constructor() {super();}
 
+  getQuestion(): Question {
+    return this.question;
+  }
+
+  getBackup(): Question {
+    return this.backup;
+  }
 }

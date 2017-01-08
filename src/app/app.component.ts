@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {Choice} from "./model/Choice";
 import {SingleAnswerChoiceQuestion} from "./model/SingleAnswerChoiceQuestion";
 import {MultipleAnswerChoiceQuestion} from "./model/MultipleAnswerChoiceQuestion";
+import {WritingQuestion} from "./model/WritingQuestion";
+import {NumericQuestion} from "./model/NumericQuestion";
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,9 @@ import {MultipleAnswerChoiceQuestion} from "./model/MultipleAnswerChoiceQuestion
 export class AppComponent {
   singleAnswerChoiceQuestion: SingleAnswerChoiceQuestion;
   multipleAnswerChoiceQuestion: MultipleAnswerChoiceQuestion;
+  writingQuestion: WritingQuestion;
+  numericQuestion: NumericQuestion;
+  fractionNumericQuestion: NumericQuestion;
 
   constructor() {
     this.singleAnswerChoiceQuestion = new SingleAnswerChoiceQuestion("This is a sample Question Choice");
@@ -26,5 +31,14 @@ export class AppComponent {
     this.multipleAnswerChoiceQuestion.choices[2].text = "This is third choice";
     this.multipleAnswerChoiceQuestion.answers = [1, 2];
     this.multipleAnswerChoiceQuestion.selects = [0, 1];
+
+    this.writingQuestion = new WritingQuestion("This is a sample Question Choice");
+
+    this.numericQuestion = new NumericQuestion("This is a sample Question Choice");
+    this.numericQuestion.nominatorAnswer = 10;
+    this.fractionNumericQuestion = new NumericQuestion("This is a sample Question Choice", true);
+    this.fractionNumericQuestion.nominatorAnswer = 2;
+    this.fractionNumericQuestion.denominatorAnswer = 3;
+
   }
 }

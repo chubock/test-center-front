@@ -3,15 +3,9 @@
  */
 
 export class Question {
-  
-  constructor(private _text:string = "") {}
-  
-  get text(): string{
-    return this._text
+  constructor(public text:string = "") {}
+
+  copy(question: Question): void {
+    question.text = this.text;
   }
-  
-  set text(text: string) {
-    this._text = text
-  }
-  
 }

@@ -28,4 +28,14 @@ export class ChoiceQuestion extends Question{
     this._choices.splice(-1, 1);
     return ret;
   }
+
+  copy(question: ChoiceQuestion): void {
+    super.copy(question)
+    question.choices.length = 0;
+    for (var i=0; i< this.choices.length; i++) {
+      var c = new Choice();
+      this.choices[i].copy(c);
+      question.pushChoice(c);
+    }
+  }
 }
