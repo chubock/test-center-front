@@ -4,6 +4,7 @@ import {SingleAnswerChoiceQuestion} from "./model/SingleAnswerChoiceQuestion";
 import {MultipleAnswerChoiceQuestion} from "./model/MultipleAnswerChoiceQuestion";
 import {WritingQuestion} from "./model/WritingQuestion";
 import {NumericQuestion} from "./model/NumericQuestion";
+import {SelectInPassageQuestion} from "./model/SelectInPassageQuestion";
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,12 @@ export class AppComponent {
   writingQuestion: WritingQuestion;
   numericQuestion: NumericQuestion;
   fractionNumericQuestion: NumericQuestion;
+  selectInPassageQuestion: SelectInPassageQuestion;
 
   constructor() {
+
+    this.selectInPassageQuestion = new SelectInPassageQuestion("This is a sample Question");
+
     this.singleAnswerChoiceQuestion = new SingleAnswerChoiceQuestion("This is a sample Question Choice");
     this.singleAnswerChoiceQuestion.choices[0].text = "This is first choice";
     this.singleAnswerChoiceQuestion.choices[1].text = "This is second choice";

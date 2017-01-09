@@ -8,8 +8,9 @@ import {RadioButtonModule, CheckboxModule} from "primeng/primeng";
 import {SingleAnswerChoiceQuestionComponent} from "./component/SingleAnswerChoiceQuestionComponent";
 import {MultipleAnswerChoiceQuestionComponent} from "./component/MultipleAnswerChoiceQuestionComponent";
 import {WritingQuestionComponent} from "./component/WritingQuestionComponent";
-import {NumericQuestion} from "./model/NumericQuestion";
 import {NumericQuestionComponent} from "./component/NumericQuestionComponent";
+import {EditorModule, SharedModule} from "primeng/primeng";
+import {SelectInPassageQuestionComponent} from "./component/SelectInPassageQuestionComponent";
 
 @NgModule({
   declarations: [
@@ -17,14 +18,17 @@ import {NumericQuestionComponent} from "./component/NumericQuestionComponent";
     SingleAnswerChoiceQuestionComponent,
     MultipleAnswerChoiceQuestionComponent,
     WritingQuestionComponent,
-    NumericQuestionComponent
+    NumericQuestionComponent,
+    SelectInPassageQuestionComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RadioButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    EditorModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

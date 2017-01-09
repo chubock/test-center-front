@@ -4,7 +4,7 @@ import {Choice} from "./Choice";
  * Created by Yubar on 1/5/2017.
  */
 
-export class ChoiceQuestion extends Question{
+export abstract class ChoiceQuestion extends Question{
   private _choices: Choice[] = [];
 
   constructor(text:string = "", numberOfChoices: number = 3) {
@@ -15,6 +15,10 @@ export class ChoiceQuestion extends Question{
 
   get choices(): Choice[] {
     return this._choices;
+  }
+
+  get multipleChoice(): boolean {
+    return false;
   }
 
   pushChoice(choice:Choice = new Choice()): void {

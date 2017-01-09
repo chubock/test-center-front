@@ -10,7 +10,7 @@ import {ChoiceQuestionComponent} from "./ChoiceQuestionComponent";
 
 @Component({
   selector: "multiple-answer-choice-question",
-  templateUrl: "../template/multiple-answer-choice-question-component.html"
+  templateUrl: "../template/choice-question-component.html"
 })
 export class MultipleAnswerChoiceQuestionComponent extends ChoiceQuestionComponent{
 

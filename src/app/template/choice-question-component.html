@@ -21,12 +21,15 @@
   </div>
   <div class="form-group" *ngFor="let choice of question.choices; let i = index;">
     <div class="text-right col-xs-1" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW'}">
-      <p-checkbox *ngIf="mode == 'EDIT' || mode == 'VIEW'" name="answers" value="{{i}}" [(ngModel)]="question.answers" [disabled]="mode == 'VIEW'"></p-checkbox>
-      <p-checkbox *ngIf="mode == 'ANSWER' || mode == 'ANSWERED'" name="selects" value="{{i}}" [(ngModel)]="question.selects" [disabled]="mode == 'ANSWERED'"></p-checkbox>
+      <p-checkbox *ngIf="question.multipleChoice && (mode == 'EDIT' || mode == 'VIEW')" name="answers" value="{{i}}" [(ngModel)]="question.answers" [disabled]="mode == 'VIEW'"></p-checkbox>
+      <p-checkbox *ngIf="question.multipleChoice && (mode == 'ANSWER' || mode == 'ANSWERED')" name="selects" value="{{i}}" [(ngModel)]="question.selects" [disabled]="mode == 'ANSWERED'"></p-checkbox>
+      <p-radioButton *ngIf="!question.multipleChoice && (mode == 'EDIT' || mode == 'VIEW')" name="key" value="{{i}}" [(ngModel)]="question.answer" [disabled]="mode == 'VIEW'"></p-radioButton>
+      <p-radioButton *ngIf="!question.multipleChoice && (mode == 'ANSWER' || mode == 'ANSWERED')" name="selected" value="{{i}}" [(ngModel)]="question.selected" [disabled]="mode == 'ANSWERED'"></p-radioButton>
     </div>
     <div class="col-xs-11" [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW'}">
       <input *ngIf="mode == 'EDIT'" type="text" class="form-control" [(ngModel)]="question.choices[i].text">
-      <span [ngClass]="{'text-success': mode == 'ANSWERED' && question.isAnswer(i), 'text-danger': mode == 'ANSWERED' && question.isSelected(i) && !question.isAnswer(i)}" *ngIf="mode != 'EDIT'">{{question.choices[i].text}}</span>
+      <span [ngClass]="{'text-success': mode == 'ANSWERED' && question.isAnswer(i), 'text-danger': mode == 'ANSWERED' && question.isSelected(i) && !question.isAnswer(i)}" *ngIf="question.multipleChoice && mode != 'EDIT'">{{question.choices[i].text}}</span>
+      <span [ngClass]="{'text-success': mode == 'ANSWERED' && question.answer == i, 'text-danger': mode == 'ANSWERED' && question.selected == i && !question.answer == i}" *ngIf="!question.multipleChoice && mode != 'EDIT'">{{question.choices[i].text}}</span>
     </div>
   </div>
 </div>

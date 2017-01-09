@@ -12,6 +12,10 @@ export class MultipleAnswerChoiceQuestion extends ChoiceQuestion{
     super(text, numberOfChoices);
   }
 
+  get multipleChoice(): boolean {
+    return true;
+  }
+
   isSelected(key:number): boolean {
     return this.selects.indexOf(key) != -1;
   }
@@ -19,5 +23,5 @@ export class MultipleAnswerChoiceQuestion extends ChoiceQuestion{
   isAnswer(key:number): boolean {
     return this.answers.indexOf(key) != -1;
   }
-  
+
 }

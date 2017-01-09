@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {SingleAnswerChoiceQuestion} from "../model/SingleAnswerChoiceQuestion";
-import {QuestionComponent} from "./QuestionComponent";
 import {Question} from "../model/Question";
 import {ChoiceQuestionComponent} from "./ChoiceQuestionComponent";
 /**
@@ -10,7 +9,7 @@ import {ChoiceQuestionComponent} from "./ChoiceQuestionComponent";
 
 @Component({
   selector: "single-answer-choice-question",
-  templateUrl: "../template/single-answer-choice-question-component.html"
+  templateUrl: "../template/choice-question-component.html"
 })
 export class SingleAnswerChoiceQuestionComponent extends ChoiceQuestionComponent{
 
