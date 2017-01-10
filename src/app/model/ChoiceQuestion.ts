@@ -34,7 +34,7 @@ export abstract class ChoiceQuestion extends Question{
   }
 
   copy(question: ChoiceQuestion): void {
-    super.copy(question)
+    super.copy(question);
     question.choices.length = 0;
     for (var i=0; i< this.choices.length; i++) {
       var c = new Choice();

@@ -8,18 +8,23 @@
   <div class="form-group">
     <label for="questionText" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-1': mode == 'ANSWER' || mode == 'ANSWERED'}">{{mode == 'EDIT' || mode == 'VIEW' ? 'Question :' : number + '-'}}</label>
     <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode != 'EDIT'">
-      <!--<textarea name="questionText" [(ngModel)]="question.text" class="form-control" *ngIf="mode == 'EDIT'"></textarea>-->
-
-      <!--<p-editor [(ngModel)]="question.text" [style]="{'height':'320px'}" *ngIf="mode == 'EDIT'"></p-editor>-->
-      <p-editor name="questionText" [(ngModel)]="question.text" *ngIf="mode == 'EDIT'">
+      <p-editor name="questionText" [(ngModel)]="question.text" (onTextChange)="questionTextChangedListener($event.htmlValue)" *ngIf="mode == 'EDIT'">
         <header>
         <span class="ql-formats">
-            <button class="ql-bold"></button>
             <button class="ql-underline"></button>
         </span>
         </header>
       </p-editor>
-      <span>{{question.shapedText}}</span>
+      <p *ngFor="let paragraph of paragraphs; let i = index;">
+        <span *ngFor="let textFraction of paragraph.textFractions; let j = index;">
+          <a class="choice-text" [ngClass]="{'text-success': mode == 'EDIT' && question.answer == textFraction.number, 'choice-text-selected': mode == 'ANSWERED' && question.selected == textFraction.number}" (click)="mode == 'EDIT' ? question.answer = textFraction.number : question.selected = textFraction.number" *ngIf="(mode == 'EDIT' || mode == 'ANSWER') && textFraction.number != -1">{{textFraction.text}}</a>
+          <span [ngClass]="{'text-primary': question.answer != textFraction.number, 'text-success': question.answer == textFraction.number, 'text-danger': mode == 'ANSWERED' && question.selected == textFraction.number && question.selected != question.answer}" *ngIf="(mode == 'VIEW' || mode == 'ANSWERED') && textFraction.number != -1">{{textFraction.text}}</span>
+          <template [ngIf]="textFraction.text != '<br>' && textFraction.number == -1">
+            {{textFraction.text}}
+          </template>
+          <br *ngIf="textFraction.text == '<br>'">
+        </span>
+      </p>
     </div>
   </div>
 

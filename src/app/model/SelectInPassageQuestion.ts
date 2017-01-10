@@ -12,8 +12,10 @@ export class SelectInPassageQuestion extends Question {
     super(text);
   }
 
-  get shapedText():string {
-    return this.text.replace(/<strong>(.*?)<\/strong>/g, "<naghi>$1</naghi>");
+  copy(question: SelectInPassageQuestion): void {
+    super.copy(question);
+    question.answer = this.answer;
+    question.selected = this.selected;
   }
 
 }

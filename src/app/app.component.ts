@@ -20,7 +20,9 @@ export class AppComponent {
 
   constructor() {
 
-    this.selectInPassageQuestion = new SelectInPassageQuestion("This is a sample Question");
+    this.selectInPassageQuestion = new SelectInPassageQuestion("<p><u>This</u> is a <u>sample Question</u></p>");
+    this.selectInPassageQuestion.answer = 1;
+    this.selectInPassageQuestion.selected = 0;
 
     this.singleAnswerChoiceQuestion = new SingleAnswerChoiceQuestion("This is a sample Question Choice");
     this.singleAnswerChoiceQuestion.choices[0].text = "This is first choice";

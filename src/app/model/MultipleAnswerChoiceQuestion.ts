@@ -24,4 +24,12 @@ export class MultipleAnswerChoiceQuestion extends ChoiceQuestion{
     return this.answers.indexOf(key) != -1;
   }
 
+  copy(question: MultipleAnswerChoiceQuestion): void {
+    super.copy(question);
+    question.answers.length = 0;
+    question.selects.length = 0;
+    this.answers.forEach(answer => question.answers.push(answer));
+    this.selects.forEach(selected => question.selects.push(selected));
+  }
+
 }
