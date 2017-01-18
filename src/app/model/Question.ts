@@ -3,6 +3,9 @@
  */
 
 export class Question {
+
+  fileId:number = 1;
+
   constructor(public text:string = "") {}
 
   copy(question: Question): void {

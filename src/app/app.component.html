@@ -1,8 +1,23 @@
 <div class="container">
-    <select-in-passage-question [question]="selectInPassageQuestion"></select-in-passage-question>
-    <single-answer-choice-question [question]="singleAnswerChoiceQuestion" [mode]="'ANSWER'"></single-answer-choice-question>
-    <multiple-answer-choice-question [question]="multipleAnswerChoiceQuestion"></multiple-answer-choice-question>
-    <writing-question [question]="writingQuestion"></writing-question>
-    <numeric-question [question]="numericQuestion" [mode]="'ANSWER'"></numeric-question>
-    <numeric-question [question]="fractionNumericQuestion"></numeric-question>
+  <quantitative-comparison-question [question]="quantitativeComparisonQuestion"></quantitative-comparison-question>
+  <quantitative-single-answer-question [question]="quantitativeSingleAnswerQuestion"></quantitative-single-answer-question>
+  <quantitative-multiple-answer-question [question]="quantitativeMultipleAnswerQuestion"></quantitative-multiple-answer-question>
+  <numeric-question [question]="numericQuestion"></numeric-question>
+
+  <br/>
+  <br/>
+  <reading-comprehension-single-answer-question [question]="readingComprehensionSingleAnswerQuestion"></reading-comprehension-single-answer-question>
+  <reading-comprehension-multiple-answer-question [question]="readingComprehensionMultipleAnswerQuestion"></reading-comprehension-multiple-answer-question>
+  <select-in-passage-question [question]="selectInPassageQuestion"></select-in-passage-question>
+  <text-completion-question [question]="textCompletionQuestion"></text-completion-question>
+  <sentence-equivalence-question [question]="sentenceEquivalenceQuestion"></sentence-equivalence-question>
+
+  <br/>
+  <br/>
+  <writing-question [question]="writingQuestion"></writing-question>
+
+  <br/>
+  <br/>
+  <!--<single-answer-choice-question [question]="singleAnswerChoiceQuestion"></single-answer-choice-question>-->
+  <multiple-answer-choice-question [question]="multipleAnswerChoiceQuestion" [mode]="'ANSWER'"></multiple-answer-choice-question>
 </div>

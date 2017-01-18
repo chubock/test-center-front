@@ -1,35 +1,37 @@
 import {ChoiceQuestion} from "./ChoiceQuestion";
+import {ChangeDetectorRef, ApplicationRef, NgZone} from "@angular/core";
+import {log} from "util";
 /**
  * Created by Yubar on 1/7/2017.
  */
 
 export class MultipleAnswerChoiceQuestion extends ChoiceQuestion{
 
-  answers: number[] = [];
-  selects: number[] = [];
-
-  constructor(text: string = "", numberOfChoices: number = 3) {
+  constructor(text: string = "", numberOfChoices: number = 3, public maxAnswerCount:number = null) {
     super(text, numberOfChoices);
   }
 
-  get multipleChoice(): boolean {
-    return true;
+  get answers(): number[] {
+    var answers = [];
+    this.choices.forEach(choice => {
+      if (choice.answer)
+        answers.push(choice.number);
+    });
+    return answers;
   }
 
-  isSelected(key:number): boolean {
-    return this.selects.indexOf(key) != -1;
-  }
-
-  isAnswer(key:number): boolean {
-    return this.answers.indexOf(key) != -1;
+  get selects(): number[] {
+    var selects = [];
+    this.choices.forEach(choice => {
+      if (choice.selected)
+        selects.push(choice.number);
+    });
+    return selects;
   }
 
   copy(question: MultipleAnswerChoiceQuestion): void {
     super.copy(question);
-    question.answers.length = 0;
-    question.selects.length = 0;
-    this.answers.forEach(answer => question.answers.push(answer));
-    this.selects.forEach(selected => question.selects.push(selected));
+    question.maxAnswerCount = this.maxAnswerCount;
   }
 
 }

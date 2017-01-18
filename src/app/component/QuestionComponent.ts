@@ -7,9 +7,11 @@ import {Input, OnInit} from "@angular/core";
 export abstract class QuestionComponent implements OnInit {
   @Input() mode:string = "VIEW";
   @Input() number: number = 1;
+  @Input() question: Question = new Question();
+  backup: Question = new Question();
 
-  abstract getQuestion(): Question;
-  abstract getBackup(): Question;
+  getQuestion(): Question { return this.question};
+  getBackup(): Question { return this.backup};
 
   ngOnInit():void {
     if (this.mode == 'EDIT')

@@ -18,8 +18,6 @@ export class SelectInPassageQuestionComponent extends QuestionComponent{
   @Input() backup: SelectInPassageQuestion = new SelectInPassageQuestion();
   paragraphs:PassageParagraph[]= [];
 
-  constructor() { super(); }
-
   ngOnInit(): void {
     super.ngOnInit();
     this.questionTextChangedListener(this.question.text);
@@ -38,14 +36,6 @@ export class SelectInPassageQuestionComponent extends QuestionComponent{
     }
     if (index <= this.question.answer)
       this.question.answer = null;
-  }
-
-  getQuestion(): Question {
-    return this.question;
-  }
-
-  getBackup(): Question {
-    return this.backup;
   }
 
   cancel():void {

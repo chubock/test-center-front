@@ -16,13 +16,4 @@ export class SingleAnswerChoiceQuestionComponent extends ChoiceQuestionComponent
   @Input() question: SingleAnswerChoiceQuestion = new SingleAnswerChoiceQuestion();
   backup: SingleAnswerChoiceQuestion = new SingleAnswerChoiceQuestion();
 
-  constructor() {super();}
-
-  getQuestion(): Question {
-    return this.question;
-  }
-
-  getBackup(): Question {
-    return this.backup;
-  }
 }

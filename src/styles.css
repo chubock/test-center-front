@@ -6,3 +6,7 @@
 .big-slash {
   font-size: 18pt;
 }
+
+.table-input {
+  width: auto !important;
+}

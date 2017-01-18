@@ -16,15 +16,17 @@ export class NumericQuestion extends Question {
   }
 
   copy(question: NumericQuestion): void {
-    
+
     super.copy(question);
-    
+
     question.nominator = this.nominator;
     question.denominator = this.denominator;
-    
+
+    question.fraction = this.fraction;
+
     question.nominatorAnswer = this.nominatorAnswer;
     question.denominatorAnswer = this.denominatorAnswer;
-    
+
   }
 
 }

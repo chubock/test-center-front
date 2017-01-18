@@ -16,15 +16,4 @@ import {NumericQuestion} from "../model/NumericQuestion";
 export class NumericQuestionComponent extends QuestionComponent{
   @Input() question: NumericQuestion = new NumericQuestion();
   @Input() backup: NumericQuestion = new NumericQuestion();
-
-  constructor() { super(); }
-
-
-  getQuestion(): Question {
-    return this.question;
-  }
-
-  getBackup(): Question {
-    return this.backup;
-  }
 }

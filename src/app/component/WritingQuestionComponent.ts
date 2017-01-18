@@ -15,15 +15,4 @@ import {Question} from "../model/Question";
 export class WritingQuestionComponent extends QuestionComponent{
   @Input() question: WritingQuestion = new WritingQuestion();
   @Input() backup: WritingQuestion = new WritingQuestion();
-
-  constructor() { super(); }
-
-
-  getQuestion(): Question {
-    return this.question;
-  }
-
-  getBackup(): Question {
-    return this.backup;
-  }
 }

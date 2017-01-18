@@ -12,6 +12,12 @@
       <span *ngIf="mode != 'EDIT'">{{question.text}}</span>
     </div>
   </div>
+  <div class="form-group" *ngIf="mode == 'EDIT'">
+    <label for="fraction" class="control-label col-sm-3">Fraction: </label>
+    <div class="col-sm-9">
+      <p-toggleButton [(ngModel)]="question.fraction"></p-toggleButton>
+    </div>
+  </div>
   <div class="form-group">
     <label for="nominator" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-1': mode == 'ANSWER' || mode == 'ANSWERED'}">Answer: </label>
     <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode == 'VIEW' || mode == 'ANSWERED'">

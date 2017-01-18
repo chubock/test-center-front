@@ -7,6 +7,16 @@ export abstract class ChoiceQuestionComponent extends QuestionComponent{
 
   @Input() dynamicChoices: boolean = false;
 
-  constructor() {super();}
+  get multipleChoice(): boolean {
+    return false;
+  }
+
+  get editableChoices(): boolean {
+    return true;
+  }
+
+  get dynamicMaxAnswerCount(): boolean {
+    return false;
+  }
 
 }

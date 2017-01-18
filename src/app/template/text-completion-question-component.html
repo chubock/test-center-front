@@ -1,0 +1,42 @@
+<div class="form-horizontal well well-sm">
+  <div class="text-right">
+    <a class="btn no-padding" *ngIf="mode == 'VIEW'"><span class="glyphicon glyphicon-trash"></span></a>
+    <a class="btn no-padding" *ngIf="mode == 'VIEW'" (click)="edit()"><span class="glyphicon glyphicon-pencil"></span></a>
+    <a class="btn no-padding" *ngIf="mode == 'EDIT'" (click)="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
+    <a class="btn no-padding" *ngIf="mode == 'EDIT'"><span class="glyphicon glyphicon-ok"></span></a>
+  </div>
+  <div class="form-group">
+    <label for="questionText" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-1': mode == 'ANSWER' || mode == 'ANSWERED'}">{{mode == 'EDIT' || mode == 'VIEW' ? 'Question :' : number + '-'}}</label>
+    <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode != 'EDIT'">
+      <textarea name="questionText" [(ngModel)]="question.text" class="form-control" *ngIf="mode == 'EDIT'"></textarea>
+      <span *ngIf="mode != 'EDIT'">{{question.text}}</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label *ngIf="mode == 'EDIT' || mode == 'VIEW'" class="control-label col-sm-3">Choices :</label>
+    <div class="col-sm-9" *ngIf="mode == 'EDIT'">
+      <button type="button" class="btn btn-default" *ngIf="question.questions.length < 3" (click)="question.pushQuestion()"><span class="glyphicon glyphicon-plus"></span></button>
+      <button type="button" class="btn btn-default" *ngIf="question.questions.length > 1" (click)="question.popQuestion()" style="float: right;" [disabled]="question.questions.length < 2"><span class="glyphicon glyphicon-minus"></span></button>
+    </div>
+  </div>
+  <div [ngClass]="{'col-sm-offset-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-offset-1': mode == 'ANSWER' || mode == 'ANSWERED'}">
+    <table class="table">
+      <thead>
+      <tr>
+        <th *ngFor="let q of question.questions; let i = index">BLANK {{i + 1}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let choices of question.matrix; let i = index;">
+        <td *ngFor="let choice of choices; let j = index">
+          <a (click)="editingChoice = choice" class="btn no-padding" *ngIf="mode == 'EDIT' && editingChoice != choice"><span class="glyphicon glyphicon-pencil"></span></a> <a (click)="mode == 'EDIT' ? question.questions[j].answer = i : question.questions[j].selected = i" class="btn no-padding"><span *ngIf="editingChoice != choice && mode == 'EDIT' || mode == 'ANSWER'" [ngClass]="{'text-success': (mode == 'EDIT' && i == question.questions[j].answer) || (mode == 'ANSWER' && i == question.questions[j].selected)}"> {{choice.text}} </span></a>
+          <span *ngIf="mode == 'VIEW' || mode == 'ANSWERED'" [ngClass]="{'text-success': i == question.questions[j].answer, 'text-danger': mode == 'ANSWERED' && i == question.questions[j].selected && question.questions[j].selected != question.questions[j].answer}"> {{choice.text}} </span>
+          <input #choiceText (blur)="editChoice(choiceText.value)" [autoFocus]="editingChoice == choice" class="form-control table-input" value="{{choice.text}}" *ngIf="editingChoice == choice">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

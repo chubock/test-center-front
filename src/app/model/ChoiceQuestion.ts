@@ -10,18 +10,14 @@ export abstract class ChoiceQuestion extends Question{
   constructor(text:string = "", numberOfChoices: number = 3) {
     super(text);
     for (var i=0; i<numberOfChoices; i++)
-      this.pushChoice(new Choice());
+      this.pushChoice(new Choice(i));
   }
 
   get choices(): Choice[] {
     return this._choices;
   }
 
-  get multipleChoice(): boolean {
-    return false;
-  }
-
-  pushChoice(choice:Choice = new Choice()): void {
+  pushChoice(choice:Choice = new Choice(this.choices.length)): void {
     this._choices.push(choice);
   }
 
@@ -37,7 +33,7 @@ export abstract class ChoiceQuestion extends Question{
     super.copy(question);
     question.choices.length = 0;
     for (var i=0; i< this.choices.length; i++) {
-      var c = new Choice();
+      var c = new Choice(i);
       this.choices[i].copy(c);
       question.pushChoice(c);
     }
