@@ -4,7 +4,7 @@
 
 export class Question {
 
-  fileId:number = 1;
+  fileId:number ;
 
   constructor(public text:string = "") {}
 
