@@ -1,0 +1,34 @@
+<div class="form-horizontal well well-sm">
+  <div class="text-right">
+    <a class="btn no-padding" *ngIf="mode == 'VIEW'" (click)="remove()"><span class="glyphicon glyphicon-trash"></span></a>
+    <a class="btn no-padding" *ngIf="mode == 'VIEW'" (click)="edit()"><span class="glyphicon glyphicon-pencil"></span></a>
+    <a class="btn no-padding" *ngIf="mode == 'EDIT'" (click)="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
+    <a class="btn no-padding" *ngIf="mode == 'EDIT'" (click)="save()"><span class="glyphicon glyphicon-ok"></span></a>
+  </div>
+  <div class="form-group">
+    <label for="questionText" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-xs-1': mode == 'ANSWER' || mode == 'ANSWERED'}">{{mode == 'EDIT' || mode == 'VIEW' ? 'Question :' : number + '-'}}</label>
+    <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-xs-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode != 'EDIT'">
+      <textarea name="questionText" [(ngModel)]="question.text" class="form-control" *ngIf="mode == 'EDIT'"></textarea>
+      <span *ngIf="mode != 'EDIT'">{{question.text}}</span>
+    </div>
+  </div>
+
+  <div *ngIf="mode == 'ANSWER' || mode == 'ANSWERED'" class="form-group">
+    <label for="answer" class="col-xs-12">Answer: </label>
+    <div class="col-xs-offset-1 col-xs-11">
+      <textarea name="answer" [(ngModel)]="question.answer" class="form-control" *ngIf="mode == 'ANSWER'"></textarea>
+      <span *ngIf="mode == 'ANSWERED'">{{question.text}}</span>
+    </div>
+  </div>
+  <div class="form-group" *ngIf="mode == 'EDIT'">
+    <label for="fraction" class="control-label col-sm-3">Difficulty: </label>
+    <div class="col-sm-9">
+      <div class="btn-group">
+        <label class="btn btn-default" [(ngModel)]="question.difficulty" btnRadio="EASY">Easy</label>
+        <label class="btn btn-default" [(ngModel)]="question.difficulty" btnRadio="MEDIUM">Medium</label>
+        <label class="btn btn-default" [(ngModel)]="question.difficulty" btnRadio="HARD">Hard</label>
+      </div>
+    </div>
+  </div>
+
+</div>

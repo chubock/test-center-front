@@ -1,0 +1,9 @@
+<sentence-equivalence-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></sentence-equivalence-question>
+<template [ngIf]="!question">
+  <button style="margin: 10px 0;" class="btn btn-primary" (click)="create()">New</button>
+  <sentence-equivalence-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></sentence-equivalence-question>
+  <div class="col-xs-12 text-center">
+    <pagination [totalItems]="page.totalElements" [(ngModel)]="currentPage" [itemsPerPage]="page.size" (pageChanged)="loadQuestions($event.page - 1)"></pagination>
+  </div>
+</template>
+
