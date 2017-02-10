@@ -1,9 +1,0 @@
-<text-completion-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></text-completion-question>
-<template [ngIf]="!question">
-  <button style="margin: 10px 0;" class="btn btn-primary" (click)="create()">New</button>
-  <text-completion-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></text-completion-question>
-  <div class="col-xs-12 text-center">
-    <pagination [totalItems]="page.totalElements" [(ngModel)]="currentPage" [itemsPerPage]="page.size" (pageChanged)="loadQuestions($event.page - 1)"></pagination>
-  </div>
-</template>
-

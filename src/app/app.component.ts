@@ -9,7 +9,7 @@ export class AppComponent {
 
   page:string;
 
-  constructor() {}
-
+  constructor() {
+  }
 
 }

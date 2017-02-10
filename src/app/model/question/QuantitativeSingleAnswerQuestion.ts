@@ -6,6 +6,8 @@ import {Choice} from "./Choice";
 
 export class QuantitativeSingleAnswerQuestion extends SingleAnswerChoiceQuestion {
 
+  number:number;
+
   constructor(text:string = "") {
     super(text, 5);
   }

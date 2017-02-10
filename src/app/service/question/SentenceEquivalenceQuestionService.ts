@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable, Inject} from "@angular/core";
 import {Http} from "@angular/http";
 
 import 'rxjs/add/operator/toPromise';
@@ -14,7 +14,7 @@ import {SentenceEquivalenceQuestion} from "../../model/question/SentenceEquivale
 export class SentenceEquivalenceQuestionService extends AbstractQuestionService<SentenceEquivalenceQuestion>{
 
   protected get url(): string{
-    return "http://localhost:8080/sentenceEquivalenceQuestions";
+    return this.serverUrl + "/sentenceEquivalenceQuestions";
   }
 
   constructor(protected http:Http){

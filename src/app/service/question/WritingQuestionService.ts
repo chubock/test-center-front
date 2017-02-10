@@ -14,7 +14,7 @@ import {WritingQuestion} from "../../model/question/WritingQuestion";
 export class WritingQuestionService extends AbstractQuestionService<WritingQuestion>{
 
   protected get url(): string{
-    return "http://localhost:8080/writingQuestions";
+    return this.serverUrl + "/writingQuestions";
   }
 
   constructor(protected http:Http){

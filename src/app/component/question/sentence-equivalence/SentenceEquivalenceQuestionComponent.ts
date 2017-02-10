@@ -2,6 +2,7 @@ import {Component, Input} from "@angular/core";
 import {MultipleAnswerChoiceQuestionComponent} from "../MultipleAnswerChoiceQuestionComponent";
 import {SentenceEquivalenceQuestion} from "../../../model/question/SentenceEquivalenceQuestion";
 import {SentenceEquivalenceQuestionService} from "../../../service/question/SentenceEquivalenceQuestionService";
+import {FileService} from "../../../service/FileService";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -16,7 +17,7 @@ export class SentenceEquivalenceQuestionComponent extends MultipleAnswerChoiceQu
   @Input() question: SentenceEquivalenceQuestion = new SentenceEquivalenceQuestion();
   backup: SentenceEquivalenceQuestion = new SentenceEquivalenceQuestion();
 
-  constructor(questionService: SentenceEquivalenceQuestionService) {
+  constructor(questionService: SentenceEquivalenceQuestionService, protected fileService: FileService) {
     super();
     this.questionService = questionService;
   }

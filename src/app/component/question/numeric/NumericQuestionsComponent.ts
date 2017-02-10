@@ -9,7 +9,7 @@ import {NumericQuestion} from "../../../model/question/NumericQuestion";
 
 @Component({
   selector: "numeric-questions",
-  templateUrl: "./numeric-questions-component.html"
+  templateUrl: "../questions-component.html"
 })
 export class NumericQuestionsComponent extends QuestionsComponent<NumericQuestion>{
 
@@ -23,6 +23,10 @@ export class NumericQuestionsComponent extends QuestionsComponent<NumericQuestio
 
   create(): void {
     this.question = new NumericQuestion("This is a sample Numeric Question.");
+  }
+
+  get type():string {
+    return "numeric";
   }
 
 }

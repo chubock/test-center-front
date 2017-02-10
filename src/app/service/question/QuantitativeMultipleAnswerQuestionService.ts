@@ -14,7 +14,7 @@ import {QuantitativeMultipleAnswerQuestion} from "../../model/question/Quantitat
 export class QuantitativeMultipleAnswerQuestionService extends AbstractQuestionService<QuantitativeMultipleAnswerQuestion>{
 
   protected get url(): string{
-    return "http://localhost:8080/quantitativeMultipleAnswerQuestions";
+    return this.serverUrl + "/quantitativeMultipleAnswerQuestions";
   }
 
   constructor(protected http:Http){

@@ -14,7 +14,7 @@ import {QuantitativeSingleAnswerQuestion} from "../../model/question/Quantitativ
 export class QuantitativeSingleAnswerQuestionService extends AbstractQuestionService<QuantitativeSingleAnswerQuestion>{
 
   protected get url(): string{
-    return "http://localhost:8080/quantitativeSingleAnswerQuestions";
+    return this.serverUrl + "/quantitativeSingleAnswerQuestions";
   }
 
   constructor(protected http:Http){

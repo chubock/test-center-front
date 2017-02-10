@@ -2,6 +2,7 @@ import {QuestionService} from "./QuestionService";
 import {Headers, Http, URLSearchParams} from "@angular/http";
 import {Page} from "../../model/Page";
 import {Question} from "../../model/question/Question";
+import {apiEndPoint} from "../../app.config";
 /**
  * Created by Yubar on 1/20/2017.
  */
@@ -10,6 +11,7 @@ export abstract class AbstractQuestionService<T extends Question> implements Que
 
   private headers = new Headers({'Content-Type': 'application/json'});
   protected http:Http;
+  protected serverUrl:string = apiEndPoint;
 
   protected abstract get url(): string;
 

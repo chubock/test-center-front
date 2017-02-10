@@ -9,7 +9,7 @@ import {QuantitativeMultipleAnswerQuestion} from "../../../model/question/Quanti
 
 @Component({
   selector: "quantitative-multiple-answer-questions",
-  templateUrl: "./quantitative-multiple-answer-questions-component.html"
+  templateUrl: "../questions-component.html"
 })
 export class QuantitativeMultipleAnswerQuestionsComponent extends QuestionsComponent<QuantitativeMultipleAnswerQuestion>{
 
@@ -26,6 +26,10 @@ export class QuantitativeMultipleAnswerQuestionsComponent extends QuestionsCompo
     this.question.choices[0].text = "First Choice";
     this.question.choices[1].text = "Second Choice";
     this.question.choices[2].text = "Third Choice";
+  }
+
+  get type():string {
+    return "quantitative-multiple-answer";
   }
 
 }

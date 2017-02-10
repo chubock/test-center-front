@@ -12,15 +12,27 @@
     <label for="quantityA" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-1': mode == 'ANSWER' || mode == 'ANSWERED'}">Quantity A :</label>
     <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode != 'EDIT'">
       <input name="quantityA" [(ngModel)]="question.text" class="form-control" *ngIf="mode == 'EDIT'">
-      <span *ngIf="mode != 'EDIT'">{{question.text}}</span>
+      <span [mathJax]="question.text" *ngIf="mode != 'EDIT'"></span>
     </div>
   </div>
   <div class="form-group">
     <label for="quantityB" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-1': mode == 'ANSWER' || mode == 'ANSWERED'}">Quantity B :</label>
     <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode != 'EDIT'">
       <input name="quantityB" [(ngModel)]="question.quantityB" class="form-control" *ngIf="mode == 'EDIT'">
-      <span *ngIf="mode != 'EDIT'">{{question.quantityB}}</span>
+      <span [mathJax]="question.quantityB" *ngIf="mode != 'EDIT'"></span>
     </div>
+  </div>
+  <div class="form-group" *ngIf="mode == 'EDIT'">
+    <label for="image" class="control-label col-sm-3">Image: </label>
+    <div class="col-sm-9">
+      <label class="btn btn-default btn-file">
+        Browse <input type="file" name="image" (change)="uploadFile($event)" style="display: none;">
+      </label>
+      <button class="btn btn-danger" *ngIf="question.image" (click)="question.image = 0">Remove</button>
+    </div>
+  </div>
+  <div [ngClass]="{'col-sm-offset-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-offset-1': mode == 'ANSWER' || mode == 'ANSWERED', 'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}" class="col-sm-offset-3 col-sm-9">
+    <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
   </div>
   <div class="form-group">
     <label *ngIf="mode == 'EDIT' || mode == 'VIEW'" class="control-label col-sm-3">Choices :</label>

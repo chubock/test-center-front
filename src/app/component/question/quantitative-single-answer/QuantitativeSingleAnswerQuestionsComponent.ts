@@ -9,7 +9,7 @@ import {QuantitativeSingleAnswerQuestion} from "../../../model/question/Quantita
 
 @Component({
   selector: "quantitative-single-answer-questions",
-  templateUrl: "./quantitative-single-answer-questions-component.html"
+  templateUrl: "../questions-component.html"
 })
 export class QuantitativeSingleAnswerQuestionsComponent extends QuestionsComponent<QuantitativeSingleAnswerQuestion>{
 
@@ -28,6 +28,10 @@ export class QuantitativeSingleAnswerQuestionsComponent extends QuestionsCompone
     this.question.choices[2].text = "Third Choice";
     this.question.choices[3].text = "Fourth Choice";
     this.question.choices[4].text = "Fifth Choice";
+  }
+
+  get type():string {
+    return "quantitative-single-answer";
   }
 
 }

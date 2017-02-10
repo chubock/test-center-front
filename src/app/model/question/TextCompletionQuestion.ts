@@ -48,8 +48,8 @@ export class TextCompletionQuestion extends Question {
     let ret = this.items[this.items.length - 1];
     this.items.splice(-1, 1);
     if (this.items.length == 1) {
-      this.items[0].pushChoice();
-      this.items[0].pushChoice();
+      this.items[0].pushChoice(new Choice(3, 'Choice ' + 4));
+      this.items[0].pushChoice(new Choice(4, 'Choice ' + 5));
     }
     return ret;
   }
@@ -68,6 +68,12 @@ export class TextCompletionQuestion extends Question {
     let question = super.toJSON();
     question.items = this.items;
     return question;
+  }
+
+  prepare():void {
+    this.items.forEach((item) => {
+      item.prepare();
+    });
   }
 
 }

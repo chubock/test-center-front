@@ -2,7 +2,7 @@ import {Component, Input} from "@angular/core";
 import {MultipleAnswerChoiceQuestion} from "../../../model/question/MultipleAnswerChoiceQuestion";
 import {MultipleAnswerChoiceQuestionComponent} from "../MultipleAnswerChoiceQuestionComponent";
 import {ReadingComprehensionMultipleAnswerQuestion} from "../../../model/question/ReadingComprehensionMultipleAnswerQuestion";
-import {ReadingComprehensionMultipleAnswerQuestionService} from "../../../service/question/ReadingComprehensionMultipleAnswerQuestionService";
+import {FileService} from "../../../service/FileService";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -14,15 +14,17 @@ import {ReadingComprehensionMultipleAnswerQuestionService} from "../../../servic
 })
 export class ReadingComprehensionMultipleAnswerQuestionComponent extends MultipleAnswerChoiceQuestionComponent<ReadingComprehensionMultipleAnswerQuestion>{
 
+  nested:boolean = true;
   @Input() question: MultipleAnswerChoiceQuestion = new MultipleAnswerChoiceQuestion();
   backup: MultipleAnswerChoiceQuestion = new MultipleAnswerChoiceQuestion();
 
-  constructor(questionService: ReadingComprehensionMultipleAnswerQuestionService) {
+  constructor(protected fileService: FileService) {
     super();
-    this.questionService = questionService;
   }
 
-  ngOnInit():void {
-    super.ngOnInit();
+  cancel(): void {
+    if (confirm("Are you sure ? ")) {
+      this.onDelete.emit(this.question);
+    }
   }
 }

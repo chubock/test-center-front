@@ -9,7 +9,7 @@ import {QuantitativeComparisonQuestion} from "../../../model/question/Quantitati
 
 @Component({
   selector: "quantitative-comparison-questions",
-  templateUrl: "./quantitative-comparison-questions-component.html"
+  templateUrl: "../questions-component.html"
 })
 export class QuantitativeComparisonQuestionsComponent extends QuestionsComponent<QuantitativeComparisonQuestion>{
 
@@ -23,6 +23,10 @@ export class QuantitativeComparisonQuestionsComponent extends QuestionsComponent
 
   create(): void {
     this.question = new QuantitativeComparisonQuestion("X + 2", "X * 2");
+  }
+
+  get type():string {
+    return "quantitative-comparison";
   }
 
 }

@@ -1,19 +1,28 @@
 <div class="form-horizontal well well-sm">
   <div class="text-right">
-    <a class="btn no-padding" *ngIf="mode == 'VIEW'" (click)="remove()"><span class="glyphicon glyphicon-trash"></span></a>
-    <a class="btn no-padding" *ngIf="mode == 'VIEW'" (click)="edit()"><span class="glyphicon glyphicon-pencil"></span></a>
+    <a class="btn no-padding" *ngIf="!nested && mode == 'VIEW'" (click)="remove()"><span class="glyphicon glyphicon-trash"></span></a>
+    <a class="btn no-padding" *ngIf="!nested && mode == 'VIEW'" (click)="edit()"><span class="glyphicon glyphicon-pencil"></span></a>
     <a class="btn no-padding" *ngIf="mode == 'EDIT'" (click)="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
-    <a class="btn no-padding" *ngIf="mode == 'EDIT'" (click)="save()"><span class="glyphicon glyphicon-ok"></span></a>
+    <a class="btn no-padding" *ngIf="!nested && mode == 'EDIT'" (click)="save()"><span class="glyphicon glyphicon-ok"></span></a>
   </div>
   <div class="form-group">
     <label for="questionText" class="control-label" [ngClass]="{'col-sm-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-1': mode == 'ANSWER' || mode == 'ANSWERED'}">{{mode == 'EDIT' || mode == 'VIEW' ? 'Question :' : number + '-'}}</label>
     <div [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}" [class.control-text]="mode != 'EDIT'">
       <textarea name="questionText" [(ngModel)]="question.text" class="form-control" *ngIf="mode == 'EDIT'"></textarea>
-      <span *ngIf="mode != 'EDIT'">{{question.text}}</span>
+      <span [mathJax]="question.text" *ngIf="mode != 'EDIT'"></span>
     </div>
   </div>
-  <div class="text-center" [ngClass]="{'col-sm-offset-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-offset-1': mode == 'ANSWER' || mode == 'ANSWERED', 'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}" *ngIf="question.fileId">
-    <img width="300" height="200" src="http://localhost:8080/files/{{question.fileId}}">
+  <div class="form-group" *ngIf="mode == 'EDIT'">
+    <label for="image" class="control-label col-sm-3">Image: </label>
+    <div class="col-sm-9">
+      <label class="btn btn-default btn-file">
+        Browse <input type="file" name="image" (change)="uploadFile($event)" style="display: none;">
+      </label>
+      <button class="btn btn-danger" *ngIf="question.image" (click)="question.image = 0">Remove</button>
+    </div>
+  </div>
+  <div [ngClass]="{'col-sm-offset-3': mode == 'EDIT' || mode == 'VIEW', 'col-sm-offset-1': mode == 'ANSWER' || mode == 'ANSWERED', 'col-sm-9': mode == 'EDIT' || mode == 'VIEW', 'col-sm-11': mode == 'ANSWER' || mode == 'ANSWERED'}" class="col-sm-offset-3 col-sm-9">
+    <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
   </div>
   <div class="form-group">
     <label *ngIf="mode == 'EDIT' || mode == 'VIEW'" class="control-label col-sm-3">Choices :</label>
@@ -31,8 +40,8 @@
     </div>
     <div class="col-xs-11" [ngClass]="{'col-sm-9': mode == 'EDIT' || mode == 'VIEW'}">
       <input *ngIf="mode == 'EDIT' && !staticChoices" type="text" class="form-control" [(ngModel)]="question.choices[i].text">
-      <span [ngClass]="{'text-success': mode == 'ANSWERED' && question.isAnswer(i), 'text-danger': mode == 'ANSWERED' && question.isSelected(i) && !question.isAnswer(i)}" *ngIf="multipleChoice && (mode != 'EDIT' || !!staticChoices)">{{question.choices[i].text}}</span>
-      <span [ngClass]="{'text-success': mode == 'ANSWERED' && question.answer == i, 'text-danger': mode == 'ANSWERED' && question.selected == i && !question.answer == i}" *ngIf="!multipleChoice && (mode != 'EDIT' || !!staticChoices)">{{question.choices[i].text}}</span>
+      <span [mathJax]="question.choices[i].text" [ngClass]="{'text-success': mode == 'ANSWERED' && question.isAnswer(i), 'text-danger': mode == 'ANSWERED' && question.isSelected(i) && !question.isAnswer(i)}" *ngIf="multipleChoice && (mode != 'EDIT' || !!staticChoices)"></span>
+      <span [mathJax]="question.choices[i].text" [ngClass]="{'text-success': mode == 'ANSWERED' && question.answer == i, 'text-danger': mode == 'ANSWERED' && question.selected == i && !question.answer == i}" *ngIf="!multipleChoice && (mode != 'EDIT' || !!staticChoices)"></span>
     </div>
   </div>
   <div class="form-group" *ngIf="dynamicMaxAnswerCount && (mode == 'EDIT' || (mode == 'VIEW' && question.maxAnswerCount))">

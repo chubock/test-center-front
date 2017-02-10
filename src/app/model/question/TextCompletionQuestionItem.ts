@@ -11,7 +11,7 @@ export class TextCompletionQuestionItem {
 
   constructor(numberOfChoices:number) {
     for (var i=0; i<numberOfChoices; i++)
-      this.pushChoice(new Choice(i, i + ''));
+      this.pushChoice(new Choice(i, 'Choice ' + (i + 1) ));
   }
 
   pushChoice(choice:Choice = new Choice(this.choices.length)): void {

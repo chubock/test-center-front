@@ -14,7 +14,7 @@ import {TextCompletionQuestion} from "../../model/question/TextCompletionQuestio
 export class TextCompletionQuestionService extends AbstractQuestionService<TextCompletionQuestion>{
 
   protected get url(): string{
-    return "http://localhost:8080/textCompletionQuestions";
+    return this.serverUrl + "/textCompletionQuestions";
   }
 
   constructor(protected http:Http){

@@ -2,6 +2,7 @@ import {Component, Input} from "@angular/core";
 import {MultipleAnswerChoiceQuestionComponent} from "../MultipleAnswerChoiceQuestionComponent";
 import {QuantitativeMultipleAnswerQuestion} from "../../../model/question/QuantitativeMultipleAnswerQuestion";
 import {QuantitativeMultipleAnswerQuestionService} from "../../../service/question/QuantitativeMultipleAnswerQuestionService";
+import {FileService} from "../../../service/FileService";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -17,7 +18,7 @@ export class QuantitativeMultipleAnswerQuestionComponent extends MultipleAnswerC
   backup: QuantitativeMultipleAnswerQuestion = new QuantitativeMultipleAnswerQuestion();
   dynamicMaxAnswerCount:boolean = true;
 
-  constructor(questionService: QuantitativeMultipleAnswerQuestionService) {
+  constructor(questionService: QuantitativeMultipleAnswerQuestionService, protected fileService: FileService) {
     super();
     this.questionService = questionService;
   }

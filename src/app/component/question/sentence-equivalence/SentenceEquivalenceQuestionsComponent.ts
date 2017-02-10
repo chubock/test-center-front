@@ -9,7 +9,7 @@ import {QuestionsComponent} from "../QuestionsComponent";
 
 @Component({
   selector: "sentence-equivalence-questions",
-  templateUrl: "./sentence-equivalence-questions-component.html"
+  templateUrl: "../questions-component.html"
 })
 export class SentenceEquivalenceQuestionsComponent extends QuestionsComponent<SentenceEquivalenceQuestion>{
 
@@ -30,6 +30,10 @@ export class SentenceEquivalenceQuestionsComponent extends QuestionsComponent<Se
     question.choices[4].text = "Fifth";
     question.choices[5].text = "sixth";
     this.question = question;
+  }
+
+  get type():string {
+    return "sentence-equivalence";
   }
 
 }

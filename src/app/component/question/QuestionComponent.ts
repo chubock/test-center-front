@@ -1,11 +1,16 @@
 import {Question} from "../../model/question/Question";
 import {Input, OnInit, Output, EventEmitter} from "@angular/core";
 import {QuestionService} from "../../service/question/QuestionService";
+import {FileService} from "../../service/FileService";
+import {apiEndPoint} from "../../app.config";
+import {AlertsService} from "../../service/AlertsService";
+import {Alert} from "../../model/Alert";
 /**
  * Created by yubar on 1/8/17.
  */
 
 export abstract class QuestionComponent<T extends Question> implements OnInit {
+  nested:boolean = false;
   @Input() mode:string = "VIEW";
   @Input() number: number = 1;
   @Input() question: T;
@@ -15,6 +20,9 @@ export abstract class QuestionComponent<T extends Question> implements OnInit {
   @Output() onEdit: EventEmitter<T> = new EventEmitter();
   backup: T;
   protected questionService: QuestionService<T>;
+  protected fileService: FileService;
+  protected serverUrl:string = apiEndPoint;
+  protected alertsService:AlertsService;
 
   getQuestion(): T { return this.question};
   getBackup(): T { return this.backup};
@@ -45,12 +53,22 @@ export abstract class QuestionComponent<T extends Question> implements OnInit {
       this.backup = question;
       this.cancel();
       this.onSave.emit(question);
+      this.alertsService.newAlert(new Alert("Question saved successfully."));
     });
   }
 
   remove(): void {
     if (confirm("Are you sure ? ")) {
-      this.questionService.remove(this.question.id).then(() => this.onDelete.emit(this.question));
+      this.questionService.remove(this.question.id).then(() => {
+        this.onDelete.emit(this.question);
+        this.alertsService.newAlert(new Alert("Question removed successfully."));
+      });
     }
+  }
+
+  uploadFile(event):void {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0)
+      this.fileService.upload(fileList[0]).then(fileId => this.question.image = fileId);
   }
 }

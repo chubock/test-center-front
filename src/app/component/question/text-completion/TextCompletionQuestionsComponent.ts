@@ -3,13 +3,14 @@ import {Component} from "@angular/core";
 import {Page} from "../../../model/Page";
 import {QuestionsComponent} from "../QuestionsComponent";
 import {TextCompletionQuestion} from "../../../model/question/TextCompletionQuestion";
+import {FileService} from "../../../service/FileService";
 /**
  * Created by Yubar on 1/20/2017.
  */
 
 @Component({
   selector: "text-completion-questions",
-  templateUrl: "./text-completion-questions-component.html"
+  templateUrl: "../questions-component.html"
 })
 export class TextCompletionQuestionsComponent extends QuestionsComponent<TextCompletionQuestion>{
 
@@ -17,18 +18,22 @@ export class TextCompletionQuestionsComponent extends QuestionsComponent<TextCom
   currentPage:number;
   question:TextCompletionQuestion;
 
-  constructor(protected questionService: TextCompletionQuestionService) {
+  constructor(protected questionService: TextCompletionQuestionService, protected fileService: FileService) {
     super();
   }
 
   create(): void {
     this.question = new TextCompletionQuestion("Sample Text Completion Question");
-    this.question.questions[0].choices[0].text = "First";
-    this.question.questions[0].choices[1].text = "Second";
-    this.question.questions[0].choices[2].text = "Third";
-    this.question.questions[0].choices[3].text = "Fourth";
-    this.question.questions[0].choices[4].text = "Fifth";
-    this.question.questions[0].answer = 0;
+    this.question.items[0].choices[0].text = "First";
+    this.question.items[0].choices[1].text = "Second";
+    this.question.items[0].choices[2].text = "Third";
+    this.question.items[0].choices[3].text = "Fourth";
+    this.question.items[0].choices[4].text = "Fifth";
+    this.question.items[0].answer = 0;
+  }
+
+  get type():string {
+    return "text-completion";
   }
 
 }

@@ -3,6 +3,7 @@ import {QuestionComponent} from "../QuestionComponent";
 import {TextCompletionQuestion} from "../../../model/question/TextCompletionQuestion";
 import {Choice} from "../../../model/question/Choice";
 import {TextCompletionQuestionService} from "../../../service/question/TextCompletionQuestionService";
+import {FileService} from "../../../service/FileService";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -18,7 +19,7 @@ export class TextCompletionQuestionComponent extends QuestionComponent<TextCompl
   backup: TextCompletionQuestion = new TextCompletionQuestion();
   editingChoice: Choice;
 
-  constructor(questionService: TextCompletionQuestionService) {
+  constructor(questionService: TextCompletionQuestionService, protected fileService: FileService) {
     super();
     this.questionService = questionService;
   }
@@ -31,5 +32,14 @@ export class TextCompletionQuestionComponent extends QuestionComponent<TextCompl
   editChoice(text:string) {
     this.editingChoice.text = text;
     this.editingChoice = null;
+  }
+
+  save(): void {
+    this.questionService.save(this.question).then((question) => {
+      question.prepare();
+      this.backup = question;
+      this.cancel();
+      this.onSave.emit(question);
+    });
   }
 }

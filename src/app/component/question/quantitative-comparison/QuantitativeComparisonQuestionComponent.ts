@@ -1,8 +1,8 @@
 import {Component, Input} from "@angular/core";
-import {SingleAnswerChoiceQuestionComponent} from "../SingleAnswerChoiceQuestionComponent";
 import {QuantitativeComparisonQuestion} from "../../../model/question/QuantitativeComparisonQuestion";
 import {QuantitativeComparisonQuestionService} from "../../../service/question/QuantitativeComparisonQuestionService";
 import {QuestionComponent} from "../QuestionComponent";
+import {FileService} from "../../../service/FileService";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -17,7 +17,7 @@ export class QuantitativeComparisonQuestionComponent extends QuestionComponent<Q
   @Input() question: QuantitativeComparisonQuestion = new QuantitativeComparisonQuestion();
   backup: QuantitativeComparisonQuestion = new QuantitativeComparisonQuestion();
 
-  constructor(questionService: QuantitativeComparisonQuestionService) {
+  constructor(questionService: QuantitativeComparisonQuestionService, protected fileService: FileService) {
     super();
     this.questionService = questionService;
   }

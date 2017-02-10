@@ -30,7 +30,7 @@ export class NumericQuestion extends Question {
   }
 
   toJSON():any {
-    var ret = super.toJSON();
+    let ret = super.toJSON();
     ret.nominator = this.nominator;
     ret.nominatorAnswer = this.nominatorAnswer;
     ret.fraction = this.fraction;

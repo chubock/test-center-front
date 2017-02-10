@@ -1,7 +1,7 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Inject} from "@angular/core";
 import {SingleAnswerChoiceQuestionComponent} from "../SingleAnswerChoiceQuestionComponent";
 import {ReadingComprehensionSingleAnswerQuestion} from "../../../model/question/ReadingComprehensionSingleAnswerQuestion";
-import {ReadingComprehensionSingleAnswerQuestionService} from "../../../service/question/ReadingComprehensionSingleAnswerQuestionService";
+import {FileService} from "../../../service/FileService";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -13,15 +13,17 @@ import {ReadingComprehensionSingleAnswerQuestionService} from "../../../service/
 })
 export class ReadingComprehensionSingleAnswerQuestionComponent extends SingleAnswerChoiceQuestionComponent<ReadingComprehensionSingleAnswerQuestion>{
 
+  nested:boolean = true;
   @Input() question: ReadingComprehensionSingleAnswerQuestion = new ReadingComprehensionSingleAnswerQuestion();
   backup: ReadingComprehensionSingleAnswerQuestion = new ReadingComprehensionSingleAnswerQuestion();
 
-  constructor(questionService: ReadingComprehensionSingleAnswerQuestionService) {
+  constructor(protected fileService: FileService) {
     super();
-    this.questionService = questionService;
   }
 
-  ngOnInit():void {
-    super.ngOnInit();
+  cancel(): void {
+    if (confirm("Are you sure ? ")) {
+      this.onDelete.emit(this.question);
+    }
   }
 }

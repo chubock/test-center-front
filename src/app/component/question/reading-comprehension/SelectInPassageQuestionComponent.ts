@@ -1,7 +1,7 @@
 import {Component, Input} from "@angular/core";
 import {QuestionComponent} from "../QuestionComponent";
 import {SelectInPassageQuestion} from "../../../model/question/SelectInPassageQuestion";
-import {SelectInPassageQuestionService} from "../../../service/question/SelectInPassageQuestionService";
+import {FileService} from "../../../service/FileService";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -14,13 +14,13 @@ import {SelectInPassageQuestionService} from "../../../service/question/SelectIn
 })
 export class SelectInPassageQuestionComponent extends QuestionComponent<SelectInPassageQuestion>{
 
+  nested:boolean = true;
   @Input() question: SelectInPassageQuestion = new SelectInPassageQuestion();
   @Input() backup: SelectInPassageQuestion = new SelectInPassageQuestion();
   paragraphs:PassageParagraph[]= [];
 
-  constructor(questionService: SelectInPassageQuestionService) {
+  constructor(protected fileService: FileService) {
     super();
-    this.questionService = questionService;
   }
 
   ngOnInit(): void {
@@ -43,9 +43,10 @@ export class SelectInPassageQuestionComponent extends QuestionComponent<SelectIn
       this.question.answer = null;
   }
 
-  cancel():void {
-    super.cancel();
-    this.questionTextChangedListener(this.question.text);
+  cancel(): void {
+    if (confirm("Are you sure ? ")) {
+      this.onDelete.emit(this.question);
+    }
   }
 
 }

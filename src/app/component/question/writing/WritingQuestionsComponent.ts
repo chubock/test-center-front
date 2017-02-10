@@ -9,7 +9,7 @@ import {WritingQuestion} from "../../../model/question/WritingQuestion";
 
 @Component({
   selector: "writing-questions",
-  templateUrl: "./writing-questions-component.html"
+  templateUrl: "../questions-component.html"
 })
 export class WritingQuestionsComponent extends QuestionsComponent<WritingQuestion>{
 
@@ -23,6 +23,10 @@ export class WritingQuestionsComponent extends QuestionsComponent<WritingQuestio
 
   create(): void {
     this.question = new WritingQuestion("This is a sample Writing Question.");
+  }
+
+  get type():string {
+    return "writing";
   }
 
 }

@@ -2,6 +2,7 @@ import {Component, Input} from "@angular/core";
 import {SingleAnswerChoiceQuestionComponent} from "../SingleAnswerChoiceQuestionComponent";
 import {QuantitativeSingleAnswerQuestion} from "../../../model/question/QuantitativeSingleAnswerQuestion";
 import {QuantitativeSingleAnswerQuestionService} from "../../../service/question/QuantitativeSingleAnswerQuestionService";
+import {FileService} from "../../../service/FileService";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -16,7 +17,7 @@ export class QuantitativeSingleAnswerQuestionComponent extends SingleAnswerChoic
   @Input() question: QuantitativeSingleAnswerQuestion = new QuantitativeSingleAnswerQuestion();
   backup: QuantitativeSingleAnswerQuestion = new QuantitativeSingleAnswerQuestion();
 
-  constructor(questionService: QuantitativeSingleAnswerQuestionService) {
+  constructor(questionService: QuantitativeSingleAnswerQuestionService, protected fileService: FileService) {
     super();
     this.questionService = questionService;
   }

@@ -5,6 +5,8 @@ import {MultipleAnswerChoiceQuestion} from "./MultipleAnswerChoiceQuestion";
 
 export class QuantitativeMultipleAnswerQuestion extends MultipleAnswerChoiceQuestion {
 
+  number:number;
+
   constructor(text:string = "") {
     super(text, 3);
   }
