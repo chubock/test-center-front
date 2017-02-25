@@ -1,0 +1,29 @@
+
+import {BrowserModule} from "@angular/platform-browser";
+import {FormsModule} from "@angular/forms";
+import {HttpModule} from "@angular/http";
+import {NgModule} from "@angular/core";
+import {SharedModule} from "../shared-module/SharedModule";
+import {FileService} from "../shared-module/service/FileService";
+import {AlertsService} from "../shared-module/service/AlertsService";
+import {AppComponent} from "./component/AppComponent";
+import {appRouting} from "./app.routing";
+
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    SharedModule,
+    appRouting
+  ],
+  providers: [
+    FileService,
+    AlertsService
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

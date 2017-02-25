@@ -1,0 +1,36 @@
+<div class="col-lg-3 visible-lg">
+  <ul class="nav nav-pills nav-stacked">
+    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['numeric']">Numeric</a></li>
+    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['quantitative-comparison']" >Quantitative Comparison</a></li>
+    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['quantitative-multiple-answer']" >Quantitative Multiple Answer</a></li>
+    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['quantitative-single-answer']" >Quantitative Single Answer</a></li>
+    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['reading-comprehension']" >Reading Comprehension</a></li>
+    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['sentence-equivalence']" >Sentence Equivalence</a></li>
+    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['text-completion']" >Text Completion</a></li>
+    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['writing']" >Writing</a></li>
+    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['data-interpretation-set']" >Data Interpretation Set</a></li>
+  </ul>
+</div>
+<div [ngSwitch]="type" class="col-lg-9">
+  <div class="text-right hidden-lg">
+    <div class="btn-group" dropdown>
+      <button id="split-button" type="button" class="btn btn-default">Questions Type</button>
+      <button type="button" class="btn btn-default dropdown-toggle-split" dropdownToggle>
+        <span class="caret"></span>
+        <span class="sr-only">Split button!</span>
+      </button>
+      <ul class="dropdown-menu-right" dropdownMenu role="menu" aria-labelledby="split-button">
+        <li role="menuitem" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['numeric']">Numeric</a></li>
+        <li role="menuitem" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['quantitative-comparison']" >Quantitative Comparison</a></li>
+        <li role="menuitem" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['quantitative-multiple-answer']" >Quantitative Multiple Answer</a></li>
+        <li role="menuitem" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['quantitative-single-answer']" >Quantitative Single Answer</a></li>
+        <li role="menuitem" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['reading-comprehension']" >Reading Comprehension</a></li>
+        <li role="menuitem" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['sentence-equivalence']" >Sentence Equivalence</a></li>
+        <li role="menuitem" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['text-completion']" >Text Completion</a></li>
+        <li role="menuitem" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['writing']" >Writing</a></li>
+        <li role="menuitem" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['data-interpretation-set']" >Data Interpretation Set</a></li>
+      </ul>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
