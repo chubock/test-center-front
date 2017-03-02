@@ -58,5 +58,17 @@
       </div>
     </div>
   </div>
+  <div class="form-group" *ngIf="mode == 'EDIT'">
+    <label for="fraction" class="control-label col-sm-3">Level: </label>
+    <div class="col-sm-9">
+      <div class="btn-group">
+        <label class="btn btn-default" [(ngModel)]="question.difficultyLevel" btnRadio="LEVEL1">L1</label>
+        <label class="btn btn-default" [(ngModel)]="question.difficultyLevel" btnRadio="LEVEL2">L2</label>
+        <label class="btn btn-default" [(ngModel)]="question.difficultyLevel" btnRadio="LEVEL3">L3</label>
+        <label class="btn btn-default" [(ngModel)]="question.difficultyLevel" btnRadio="LEVEL4">L4</label>
+        <label class="btn btn-default" [(ngModel)]="question.difficultyLevel" btnRadio="LEVEL5">L5</label>
+      </div>
+    </div>
+  </div>
 
 </div>

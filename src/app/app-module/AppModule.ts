@@ -8,10 +8,12 @@ import {FileService} from "../shared-module/service/FileService";
 import {AlertsService} from "../shared-module/service/AlertsService";
 import {AppComponent} from "./component/AppComponent";
 import {appRouting} from "./app.routing";
+import {AppRouteComponent} from "./AppRouteComponent";
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppRouteComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +26,6 @@ import {appRouting} from "./app.routing";
     FileService,
     AlertsService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppRouteComponent]
 })
 export class AppModule { }

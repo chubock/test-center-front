@@ -1,4 +1,5 @@
 import {NgModule} from "@angular/core";
+import {QuestionsRouteComponent} from "./QuestionsRouteComponent"
 import {QuestionsComponent} from "./component/questions-component/QuestionsComponent";
 import {questionsRouting} from "./questions.routing";
 /**
@@ -6,7 +7,10 @@ import {questionsRouting} from "./questions.routing";
  */
 
 @NgModule({
-  declarations: [QuestionsComponent],
+  declarations: [
+    QuestionsRouteComponent,
+    QuestionsComponent
+  ],
   imports: [questionsRouting],
   exports: [QuestionsComponent]
 })

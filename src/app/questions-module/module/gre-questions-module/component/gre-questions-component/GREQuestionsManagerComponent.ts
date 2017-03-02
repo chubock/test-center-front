@@ -5,7 +5,7 @@ import {Component} from "@angular/core";
 
 @Component({
   selector: 'gre-questions-manager',
-  templateUrl: 'gre-questions-component.html',
+  templateUrl: './gre-questions-component.html',
   styles: ['.nav-pills a, .dropdown-menu a {cursor: pointer}']
 })
 export class GREQuestionsComponent {

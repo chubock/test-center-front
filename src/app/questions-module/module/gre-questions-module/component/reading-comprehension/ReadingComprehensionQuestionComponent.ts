@@ -12,7 +12,7 @@ import {DataInterpretationSingleAnswerQuestion} from "../../model/DataInterpreta
 
 @Component({
   selector: "reading-comprehension-question",
-  templateUrl: "reading-comprehension-question-component.html",
+  templateUrl: "./reading-comprehension-question-component.html",
   styles: ['.btn-group li a {cursor: pointer}']
 })
 export class ReadingComprehensionQuestionComponent extends AbstractQuestionComponent<ReadingComprehensionQuestion> {

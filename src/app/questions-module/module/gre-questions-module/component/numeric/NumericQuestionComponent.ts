@@ -11,7 +11,7 @@ import {AlertsService} from "../../../../../shared-module/service/AlertsService"
 
 @Component({
   selector: "numeric-question",
-  templateUrl: "numeric-question-component.html"
+  templateUrl: "./numeric-question-component.html"
 })
 export class NumericQuestionComponent extends AbstractQuestionComponent<NumericQuestion>{
   @Input() question: NumericQuestion = new NumericQuestion();

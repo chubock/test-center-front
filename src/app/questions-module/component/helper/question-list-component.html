@@ -23,7 +23,7 @@
     <div *ngSwitchCase="'data-interpretation-set'"><data-interpretation-set-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></data-interpretation-set-question></div>
   </div>
   <div class="col-xs-12 text-center">
-    <pagination [totalItems]="page.totalElements" [(ngModel)]="currentPage" [itemsPerPage]="page.size" (pageChanged)="loadQuestions($event.page - 1)"></pagination>
+    <pagination [totalItems]="page.totalElements" [(ngModel)]="currentPage" [itemsPerPage]="page.size" [maxSize]="paginationLinksCount" (pageChanged)="loadQuestions($event.page - 1)"></pagination>
   </div>
 </div>
 

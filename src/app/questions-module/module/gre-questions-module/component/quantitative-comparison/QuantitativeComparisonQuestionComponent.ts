@@ -10,7 +10,7 @@ import {FileService} from "../../../../../shared-module/service/FileService";
 
 @Component({
   selector: "quantitative-comparison-question",
-  templateUrl: "quantitative-comparison-question-component.html"
+  templateUrl: "./quantitative-comparison-question-component.html"
 })
 export class QuantitativeComparisonQuestionComponent extends AbstractQuestionComponent<QuantitativeComparisonQuestion>{
 

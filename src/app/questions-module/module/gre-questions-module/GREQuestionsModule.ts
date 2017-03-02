@@ -43,6 +43,7 @@ import {SharedModule as PrimeSharedModule} from "primeng/components/common/share
 import {GREQuestionsComponent} from "./component/gre-questions-component/GREQuestionsManagerComponent";
 import {SharedModule} from "../../../shared-module/SharedModule";
 import {greQuestionsRouting} from "./gre-questions.routing";
+import {GREQuestionsRouteComponent} from "./GREQuestionsRouteComponent";
 /**
  * Created by yubar on 2/18/17.
  */
@@ -50,6 +51,7 @@ import {greQuestionsRouting} from "./gre-questions.routing";
 
 @NgModule({
   declarations: [
+    GREQuestionsRouteComponent,
     QuantitativeComparisonQuestionComponent,
     QuantitativeComparisonQuestionsComponent,
     QuantitativeSingleAnswerQuestionComponent,

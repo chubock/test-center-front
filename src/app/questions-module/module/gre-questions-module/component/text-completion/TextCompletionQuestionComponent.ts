@@ -12,7 +12,7 @@ import {AlertsService} from "../../../../../shared-module/service/AlertsService"
 
 @Component({
   selector: "text-completion-question",
-  templateUrl: "text-completion-question-component.html"
+  templateUrl: "./text-completion-question-component.html"
 })
 export class TextCompletionQuestionComponent extends AbstractQuestionComponent<TextCompletionQuestion>{
 

@@ -9,7 +9,7 @@ import {FileService} from "../../../../../shared-module/service/FileService";
 
 @Component({
   selector: "select-in-passage-question",
-  templateUrl: "select-in-passage-question-component.html",
+  templateUrl: "./select-in-passage-question-component.html",
   styles: ['.choice-text{cursor: pointer}', '.choice-text-selected{font-weight: bolder}']
 })
 export class SelectInPassageQuestionComponent extends AbstractQuestionComponent<SelectInPassageQuestion>{

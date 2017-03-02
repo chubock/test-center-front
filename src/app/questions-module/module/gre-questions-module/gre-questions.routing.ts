@@ -9,12 +9,14 @@ import {SentenceEquivalenceQuestionsComponent} from "./component/sentence-equiva
 import {TextCompletionQuestionsComponent} from "./component/text-completion/TextCompletionQuestionsComponent";
 import {WritingQuestionsComponent} from "./component/writing/WritingQuestionsComponent";
 import {GREQuestionsComponent} from "./component/gre-questions-component/GREQuestionsManagerComponent";
+import {GREQuestionsRouteComponent} from "./GREQuestionsRouteComponent";
 /**
  * Created by yubar on 2/19/17.
  */
 
 export const GRE_QUESTIONS_ROUTES: Route[] = [
-  {path: '', component: GREQuestionsComponent, children: [
+  {path: '', component: GREQuestionsRouteComponent, children: [
+    {path: '', component: GREQuestionsComponent},
     {path: 'numeric', component: NumericQuestionsComponent},
     {path: 'data-interpretation-set', component: DataInterpretationSetQuestionsComponent},
     {path: 'quantitative-comparison', component: QuantitativeComparisonQuestionsComponent},

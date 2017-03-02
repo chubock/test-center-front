@@ -9,6 +9,7 @@ import {SelectInPassageQuestion} from "./SelectInPassageQuestion";
 
 export class ReadingComprehensionQuestion extends Question {
 
+  type:string = "MEDIUM";
   selectInPassageQuestions: SelectInPassageQuestion[] = [];
   multipleAnswerQuestions: ReadingComprehensionMultipleAnswerQuestion[] = [];
   singleAnswerQuestions: ReadingComprehensionSingleAnswerQuestion[] = [];

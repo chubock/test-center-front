@@ -5,3 +5,4 @@
 export var apiEndPoint:string = "http://localhost:8080/";
 export var alertsDismissible:boolean = true;
 export var alertsDismissTimeout:number = 5000;
+export var paginationLinksCount:number = 9;

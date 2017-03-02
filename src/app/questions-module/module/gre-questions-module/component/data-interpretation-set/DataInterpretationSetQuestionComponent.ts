@@ -13,7 +13,7 @@ import {DataInterpretationSingleAnswerQuestion} from "../../model/DataInterpreta
 
 @Component({
   selector: "data-interpretation-set-question",
-  templateUrl: "data-interpretation-set-question-component.html",
+  templateUrl: "./data-interpretation-set-question-component.html",
   styles: ['.btn-group li a {cursor: pointer}']
 })
 export class DataInterpretationSetQuestionComponent extends AbstractQuestionComponent<DataInterpretationSetQuestion> {

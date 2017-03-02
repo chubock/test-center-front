@@ -11,7 +11,7 @@ import {AlertsService} from "../../../../../shared-module/service/AlertsService"
 
 @Component({
   selector: "writing-question",
-  templateUrl: "writing-question-component.html"
+  templateUrl: "./writing-question-component.html"
 })
 export class WritingQuestionComponent extends AbstractQuestionComponent<WritingQuestion>{
   @Input() question: WritingQuestion = new WritingQuestion();
