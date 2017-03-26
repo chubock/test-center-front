@@ -2,7 +2,7 @@ import {Question} from "../../../../questions-module/model/Question";
 import {DataInterpretationNumericQuestion} from "./DataInterpretationNumericQuestion";
 import {DataInterpretationMultipleAnswerQuestion} from "./DataInterpretationMultipleAnswerQuestion";
 import {DataInterpretationSingleAnswerQuestion} from "./DataInterpretationSingleAnswerQuestion";
-import {DataInterpretationSetQuestionItem} from "./DataInterpretationSetQuestionItem";
+import {InnerQuestion} from "./InnerQuestion";
 /**
  * Created by Yubar on 1/27/2017.
  */
@@ -12,9 +12,9 @@ export class DataInterpretationSetQuestion extends Question {
   numericQuestions: DataInterpretationNumericQuestion[] = [];
   multipleAnswerQuestions: DataInterpretationMultipleAnswerQuestion[] = [];
   singleAnswerQuestions: DataInterpretationSingleAnswerQuestion[] = [];
-  items: DataInterpretationSetQuestionItem[] = [];
+  items: InnerQuestion<DataInterpretationSetQuestion>[] = [];
 
-  pushQuestion(question: DataInterpretationSetQuestionItem): void {
+  pushQuestion(question: InnerQuestion<DataInterpretationSetQuestion>): void {
     question.setNumber(this.numericQuestions.length + this.multipleAnswerQuestions.length + this.singleAnswerQuestions.length);
     switch (question.type()) {
       case "numeric-answer":

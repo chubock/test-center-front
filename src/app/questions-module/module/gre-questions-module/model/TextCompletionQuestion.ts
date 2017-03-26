@@ -56,7 +56,7 @@ export class TextCompletionQuestion extends Question {
 
   copy(textCompletionQuestion: TextCompletionQuestion): void {
     super.copy(textCompletionQuestion);
-    this.items.length = 0;
+    this.items = [];
     textCompletionQuestion.items.forEach(item => {
       let i = new TextCompletionQuestionItem(item.choices.length);
       i.copy(item);

@@ -6,7 +6,8 @@ import {AppComponent} from "./component/AppComponent";
 
 const APP_ROUTES: Route[] = [
   {path: '', component: AppComponent},
-  {path:'questions', loadChildren: 'app/questions-module/QuestionsModule#QuestionsModule'}
+  {path:'questions', loadChildren: 'app/questions-module/QuestionsModule#QuestionsModule'},
+  {path:'tests', loadChildren: 'app/tests-module/TestsModule#TestsModule'}
 ];
 
 export const appRouting = RouterModule.forRoot(APP_ROUTES);

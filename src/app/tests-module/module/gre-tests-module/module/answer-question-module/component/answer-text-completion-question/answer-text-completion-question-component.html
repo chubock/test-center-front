@@ -1,0 +1,30 @@
+<div class="form-horizontal well well-sm">
+  <div class="form-group">
+    <label for="questionText" class="control-label col-sm-1">{{question.number + '-'}}</label>
+    <div class="col-sm-11 control-text">
+      <span [mathJax]="question.text"></span>
+    </div>
+  </div>
+  <div class="col-sm-offset-1 col-sm-11">
+    <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
+  </div>
+  <div class="col-sm-offset-1">
+    <table class="table">
+      <thead>
+      <tr>
+        <th *ngFor="let q of question.items; let i = index">BLANK {{i + 1}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let choices of question.matrix; let i = index;">
+        <td *ngFor="let choice of choices; let j = index">
+          <a (click)="question.items[j].selected = i; onAnswerChanged();" class="btn no-padding"><span *ngIf="mode == 'ANSWER'" [ngClass]="{'text-success': i == question.items[j].selected}"> {{choice.text}} </span></a>
+          <span [mathJax]="choice.text" *ngIf="mode == 'ANSWERED'" [ngClass]="{'text-success': i == question.items[j].answer, 'text-danger': i == question.items[j].selected && question.items[j].selected != question.items[j].answer}"></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

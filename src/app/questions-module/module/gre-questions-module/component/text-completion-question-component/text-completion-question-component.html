@@ -1,0 +1,76 @@
+<div class="form-horizontal well well-sm">
+  <div class="text-right">
+    <a class="btn no-padding" *ngIf="mode == 'VIEW'" (click)="remove()"><span class="glyphicon glyphicon-trash"></span></a>
+    <a class="btn no-padding" *ngIf="mode == 'VIEW'" (click)="edit()"><span class="glyphicon glyphicon-pencil"></span></a>
+    <a class="btn no-padding" *ngIf="mode == 'EDIT'" (click)="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
+    <a class="btn no-padding" *ngIf="mode == 'EDIT'" (click)="save()"><span class="glyphicon glyphicon-ok"></span></a>
+  </div>
+  <div class="form-group">
+    <label for="questionText" class="control-label col-sm-3">Question :</label>
+    <div class="col-sm-9" [class.control-text]="mode != 'EDIT'">
+      <textarea name="questionText" [(ngModel)]="question.text" class="form-control" *ngIf="mode == 'EDIT'"></textarea>
+      <span [mathJax]="question.text" *ngIf="mode != 'EDIT'"></span>
+    </div>
+  </div>
+  <div class="form-group" *ngIf="mode == 'EDIT'">
+    <label for="image" class="control-label col-sm-3">Image: </label>
+    <div class="col-sm-9">
+      <label class="btn btn-default btn-file">
+        Browse <input type="file" name="image" (change)="uploadFile($event)" style="display: none;">
+      </label>
+      <button class="btn btn-danger" *ngIf="question.image" (click)="question.image = 0">Remove</button>
+    </div>
+  </div>
+  <div class="col-sm-offset-3 col-sm-9">
+    <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3">Choices :</label>
+    <div class="col-sm-9" *ngIf="mode == 'EDIT'">
+      <button type="button" class="btn btn-default" *ngIf="question.items.length < 3" (click)="question.pushItem()"><span class="glyphicon glyphicon-plus"></span></button>
+      <button type="button" class="btn btn-default" *ngIf="question.items.length > 1" (click)="question.popItem()" style="float: right;" [disabled]="question.items.length < 2"><span class="glyphicon glyphicon-minus"></span></button>
+    </div>
+  </div>
+  <div class="col-sm-offset-3">
+    <table class="table">
+      <thead>
+      <tr>
+        <th *ngFor="let q of question.items; let i = index">BLANK {{i + 1}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let choices of question.matrix; let i = index;">
+        <td *ngFor="let choice of choices; let j = index">
+          <a (click)="editingChoice = choice" class="btn no-padding" *ngIf="mode == 'EDIT' && editingChoice != choice"><span class="glyphicon glyphicon-pencil"></span></a> <a (click)="question.items[j].answer = i" class="btn no-padding"><span *ngIf="editingChoice != choice && mode == 'EDIT'" [ngClass]="{'text-success': mode == 'EDIT' && i == question.items[j].answer}"> {{choice.text}} </span></a>
+          <span [mathJax]="choice.text" *ngIf="mode == 'VIEW'" [ngClass]="{'text-success': i == question.items[j].answer}"></span>
+          <input #choiceText (blur)="editChoice(choiceText.value)" [autoFocus]="editingChoice == choice" class="form-control table-input" value="{{choice.text}}" *ngIf="editingChoice == choice">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="form-group" *ngIf="mode == 'EDIT'">
+    <label for="fraction" class="control-label col-sm-3">Difficulty: </label>
+    <div class="col-sm-9">
+      <div class="btn-group">
+        <label class="btn btn-default" [(ngModel)]="question.difficulty" btnRadio="EASY">Easy</label>
+        <label class="btn btn-default" [(ngModel)]="question.difficulty" btnRadio="MEDIUM">Medium</label>
+        <label class="btn btn-default" [(ngModel)]="question.difficulty" btnRadio="HARD">Hard</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" *ngIf="mode == 'EDIT'">
+    <label for="fraction" class="control-label col-sm-3">Level: </label>
+    <div class="col-sm-9">
+      <div class="btn-group">
+        <label class="btn btn-default" [(ngModel)]="question.difficultyLevel" btnRadio="LEVEL1">L1</label>
+        <label class="btn btn-default" [(ngModel)]="question.difficultyLevel" btnRadio="LEVEL2">L2</label>
+        <label class="btn btn-default" [(ngModel)]="question.difficultyLevel" btnRadio="LEVEL3">L3</label>
+        <label class="btn btn-default" [(ngModel)]="question.difficultyLevel" btnRadio="LEVEL4">L4</label>
+        <label class="btn btn-default" [(ngModel)]="question.difficultyLevel" btnRadio="LEVEL5">L5</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+

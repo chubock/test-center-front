@@ -1,7 +1,10 @@
 import {NgModule} from "@angular/core";
-import {greTestsRouting} from "./gre-tests.routing";
-import {GRETestsRouteComponent} from "./GRETestsRouteComponent";
+import {GRETestsRouteComponent} from "./GRETestsRouteComponent"
 import {GRETestsComponent} from "./component/gre-tests-component/GRETestsComponent";
+import {greTestsRouting} from "./gre-tests.routing";
+import {GRETestService} from "./service/GRETestService";
+import {CommonModule} from "@angular/common";
+
 /**
  * Created by yubar on 2/19/17.
  */
@@ -11,9 +14,11 @@ import {GRETestsComponent} from "./component/gre-tests-component/GRETestsCompone
     GRETestsRouteComponent,
     GRETestsComponent
   ],
-  imports: [greTestsRouting],
-  exports: [GRETestsComponent]
+  imports: [
+    greTestsRouting
+  ],
+  providers: [GRETestService]
 })
-export class TestsModule {
+export class GRETestsModule {
 
 }

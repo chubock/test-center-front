@@ -1,8 +1,8 @@
 import {Question} from "../../../../questions-module/model/Question";
-import {ReadingComprehensionQuestionItem} from "./ReadingComprehensionQuestionItem";
 import {ReadingComprehensionSingleAnswerQuestion} from "./ReadingComprehensionSingleAnswerQuestion";
 import {ReadingComprehensionMultipleAnswerQuestion} from "./ReadingComprehensionMultipleAnswerQuestion";
 import {SelectInPassageQuestion} from "./SelectInPassageQuestion";
+import {InnerQuestion} from "./InnerQuestion";
 /**
  * Created by Yubar on 1/27/2017.
  */
@@ -13,9 +13,9 @@ export class ReadingComprehensionQuestion extends Question {
   selectInPassageQuestions: SelectInPassageQuestion[] = [];
   multipleAnswerQuestions: ReadingComprehensionMultipleAnswerQuestion[] = [];
   singleAnswerQuestions: ReadingComprehensionSingleAnswerQuestion[] = [];
-  items: ReadingComprehensionQuestionItem[] = [];
+  items: InnerQuestion<ReadingComprehensionQuestion>[] = [];
 
-  pushQuestion(question: ReadingComprehensionQuestionItem): void {
+  pushQuestion(question: InnerQuestion<ReadingComprehensionQuestion>): void {
     question.setNumber(this.selectInPassageQuestions.length + this.multipleAnswerQuestions.length + this.singleAnswerQuestions.length);
     switch (question.type()) {
       case "select-in-passage":

@@ -4,7 +4,7 @@ import {Component} from "@angular/core";
  */
 
 @Component({
-  selector: 'tests-manager',
+  selector: 'tests-component',
   templateUrl: './tests-component.html'
 })
 export class TestsComponent {

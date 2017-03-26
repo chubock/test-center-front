@@ -1,0 +1,29 @@
+<div class="form-horizontal well well-sm">
+  <div class="form-group">
+    <div class="col-sm-11 control-text">{{question.parent.text}}</div>
+    <div class="col-sm-offset-1 col-sm-11">
+      <img class="img-responsive img-rounded" *ngIf="question.parent.image" [src]="serverUrl + '/files/' + question.parent.image" style="margin: 0 auto;">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="questionText" class="control-label col-sm-1">{{question.number + '-'}}</label>
+    <div class="col-sm-11 control-text">
+      <p *ngFor="let paragraph of paragraphs; let i = index;">
+        <span *ngFor="let textFraction of paragraph.textFractions; let j = index;">
+          <a class="choice-text" [ngClass]="{'choice-text-selected': question.selected == textFraction.number}" (click)="question.selected = textFraction.number; onAnswerChanged()" *ngIf="mode == 'ANSWER' && textFraction.number != -1" style="cursor: hand">{{textFraction.text}}</a>
+          <span [ngClass]="{'text-primary': question.answer != textFraction.number, 'text-success': question.answer == textFraction.number, 'text-danger': mode == 'ANSWERED' && question.selected == textFraction.number && question.selected != question.answer}" *ngIf="mode == 'ANSWERED' && textFraction.number != -1">{{textFraction.text}}</span>
+          <template [ngIf]="textFraction.text != '<br>' && textFraction.number == -1">
+            <span [mathJax]="textFraction.text"></span>
+          </template>
+          <br *ngIf="textFraction.text == '<br>'">
+        </span>
+      </p>
+    </div>
+  </div>
+  <div class="col-sm-offset-1 col-sm-11">
+    <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
+  </div>
+  <div class="form-group"></div>
+</div>
+
+

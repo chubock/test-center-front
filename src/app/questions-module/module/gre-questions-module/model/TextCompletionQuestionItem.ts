@@ -1,4 +1,5 @@
 import {Choice} from "../../../../questions-module/model/Choice";
+import {isNullOrUndefined} from "util";
 /**
  * Created by Yubar on 1/22/2017.
  */
@@ -53,9 +54,9 @@ export class TextCompletionQuestionItem {
       choice.answer = false;
       choice.selected = false;
     });
-    if (this.answer)
+    if (this.answer != null)
       this.choices[this.answer].answer = true;
-    if (this.selected)
+    if (this.selected != null)
       this.choices[this.selected].selected = true;
     return {choices: this.choices};
   }

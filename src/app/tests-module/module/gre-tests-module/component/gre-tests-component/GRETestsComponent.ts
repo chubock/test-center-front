@@ -1,3 +1,11 @@
+import {Component} from "@angular/core";
 /**
- * Created by Yubar on 3/17/2017.
+ * Created by yubar on 2/19/17.
  */
+
+@Component({
+  selector: 'gre-tests-manager',
+  templateUrl: './gre-tests-component.html'
+})
+export class GRETestsComponent {
+}

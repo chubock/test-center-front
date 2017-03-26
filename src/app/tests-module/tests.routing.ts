@@ -8,7 +8,8 @@ import {TestsRouteComponent} from "./TestsRouteComponent";
 export const TESTS_ROUTES:Route[] = [
   {path:'', component: TestsRouteComponent , children:[
     {path: '', component: TestsComponent},
-    {path:'gre',loadChildren: 'app/tests-module/module/gre-test-module/GRETestModule#GRETestModule'}
+    {path: 'gre', loadChildren: 'app/tests-module/module/gre-tests-module/GRETestsModule#GRETestsModule'},
+    {path: 'gre/new', loadChildren: 'app/tests-module/module/gre-tests-module/module/new-gre-test-module/NewGRETestModule#NewGRETestModule'}
   ]}
 ];
 

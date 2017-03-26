@@ -1,13 +1,13 @@
 import {Route, RouterModule} from "@angular/router";
-import {NumericQuestionsComponent} from "./component/numeric/NumericQuestionsComponent";
-import {DataInterpretationSetQuestionsComponent} from "./component/data-interpretation-set/DataInterpretationSetQuestionsComponent";
-import {QuantitativeComparisonQuestionsComponent} from "./component/quantitative-comparison/QuantitativeComparisonQuestionsComponent";
-import {QuantitativeMultipleAnswerQuestionsComponent} from "./component/quantitative-multiple-answer/QuantitativeMultipleAnswerQuestionsComponent";
-import {QuantitativeSingleAnswerQuestionsComponent} from "./component/quantitative-single-answer/QuantitativeSingleAnswerQuestionsComponent";
-import {ReadingComprehensionQuestionsComponent} from "./component/reading-comprehension/ReadingComprehensionQuestionsComponent";
-import {SentenceEquivalenceQuestionsComponent} from "./component/sentence-equivalence/SentenceEquivalenceQuestionsComponent";
-import {TextCompletionQuestionsComponent} from "./component/text-completion/TextCompletionQuestionsComponent";
-import {WritingQuestionsComponent} from "./component/writing/WritingQuestionsComponent";
+import {NumericQuestionsComponent} from "./component/numeric-question-component/NumericQuestionsComponent";
+import {DataInterpretationSetQuestionsComponent} from "./component/data-interpretation-set-question-component/DataInterpretationSetQuestionsComponent";
+import {QuantitativeComparisonQuestionsComponent} from "./component/quantitative-comparison-question-component/QuantitativeComparisonQuestionsComponent";
+import {QuantitativeMultipleAnswerQuestionsComponent} from "./component/quantitative-multiple-answer-question-component/QuantitativeMultipleAnswerQuestionsComponent";
+import {QuantitativeSingleAnswerQuestionsComponent} from "./component/quantitative-single-answer-question-component/QuantitativeSingleAnswerQuestionsComponent";
+import {ReadingComprehensionQuestionsComponent} from "./component/reading-comprehension-question-component/ReadingComprehensionQuestionsComponent";
+import {SentenceEquivalenceQuestionsComponent} from "./component/sentence-equivalence-question-component/SentenceEquivalenceQuestionsComponent";
+import {TextCompletionQuestionsComponent} from "./component/text-completion-question-component/TextCompletionQuestionsComponent";
+import {WritingQuestionsComponent} from "./component/writing-question-component/WritingQuestionsComponent";
 import {GREQuestionsComponent} from "./component/gre-questions-component/GREQuestionsManagerComponent";
 import {GREQuestionsRouteComponent} from "./GREQuestionsRouteComponent";
 /**

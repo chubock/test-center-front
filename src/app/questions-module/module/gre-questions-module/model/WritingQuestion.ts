@@ -5,7 +5,7 @@ import {Question} from "../../../../questions-module/model/Question";
 
 export class WritingQuestion extends Question {
 
-  taskType:string = "ANALYZE_AND_ISSUE";
+  type:string = "ANALYZE_AND_ISSUE";
 
   constructor(text: string = "", public answer:string = "") {
     super(text);
@@ -13,13 +13,13 @@ export class WritingQuestion extends Question {
 
   copy(question: WritingQuestion): void {
     super.copy(question);
-    this.taskType = question.taskType;
+    this.type = question.type;
   }
 
   toJSON():any {
     let ret = super.toJSON();
     ret.answer = this.answer;
-    ret.taskType = this.taskType;
+    ret.type = this.type;
     return ret;
   }
 

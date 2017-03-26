@@ -11,8 +11,7 @@ import {questionsRouting} from "./questions.routing";
     QuestionsRouteComponent,
     QuestionsComponent
   ],
-  imports: [questionsRouting],
-  exports: [QuestionsComponent]
+  imports: [questionsRouting]
 })
 export class QuestionsModule {
 

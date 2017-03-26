@@ -11,8 +11,7 @@ import {testsRouting} from "./tests.routing";
     TestsRouteComponent,
     TestsComponent
   ],
-  imports: [testsRouting],
-  exports: [TestsComponent]
+  imports: [testsRouting]
 })
 export class TestsModule {
 

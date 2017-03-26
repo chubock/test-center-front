@@ -1,4 +1,4 @@
-import {Input} from "@angular/core";
+ import {Input} from "@angular/core";
 import {SingleAnswerChoiceQuestion} from "../../model/SingleAnswerChoiceQuestion";
 import {AbstractChoiceQuestionComponent} from "./AbstractChoiceQuestionComponent";
 /**

@@ -1,13 +1,15 @@
 import {SingleAnswerChoiceQuestion} from "../../../../questions-module/model/SingleAnswerChoiceQuestion";
 import {Choice} from "../../../../questions-module/model/Choice";
-import {ReadingComprehensionQuestionItem} from "./ReadingComprehensionQuestionItem";
+import {InnerQuestion} from "./InnerQuestion";
+import {ReadingComprehensionQuestion} from "./ReadingComprehensionQuestion";
 /**
  * Created by Yubar on 1/13/2017.
  */
 
-export class ReadingComprehensionSingleAnswerQuestion extends SingleAnswerChoiceQuestion implements ReadingComprehensionQuestionItem{
+export class ReadingComprehensionSingleAnswerQuestion extends SingleAnswerChoiceQuestion implements InnerQuestion<ReadingComprehensionQuestion>{
 
   number:number;
+  private parent: ReadingComprehensionQuestion;
 
   constructor(text:string = "") {
     super(text, 5);
@@ -25,6 +27,14 @@ export class ReadingComprehensionSingleAnswerQuestion extends SingleAnswerChoice
     this.number = number;
   }
 
+  getParent(): ReadingComprehensionQuestion {
+    return this.parent;
+  }
+
+  setParent(parent: ReadingComprehensionQuestion): void {
+    this.parent = parent;
+  }
+
   pushChoice(choice:Choice = new Choice(this.choices.length)): void {
     if (this.choices.length >= 5)
       throw new Error("Operation not valid.");
@@ -39,6 +49,9 @@ export class ReadingComprehensionSingleAnswerQuestion extends SingleAnswerChoice
   copy(question: ReadingComprehensionSingleAnswerQuestion) :void  {
     super.copy(question);
     this.number = question.number;
+    this.parent = new ReadingComprehensionQuestion();
+    if (question.parent)
+      this.parent.copy(question.parent);
   }
 
   toJSON():any {

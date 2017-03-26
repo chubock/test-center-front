@@ -1,0 +1,23 @@
+import {AnswerChoicesQuestionComponent} from "../AnswerChoicesQuestionComponent";
+import {Component} from "@angular/core";
+import {QuantitativeSingleAnswerQuestion} from "../../../../../../../questions-module/module/gre-questions-module/model/QuantitativeSingleAnswerQuestion";
+/**
+ * Created by Yubar on 3/21/2017.
+ */
+
+@Component({
+  selector: "answer-quantitative-single-answer-question",
+  templateUrl: "../answer-choice-question-component.html"
+})
+export class AnswerQuantitativeSingleAnswerQuestionComponent extends AnswerChoicesQuestionComponent<QuantitativeSingleAnswerQuestion> {
+
+  onAnswerChanged(): void {
+    if (this.question.selected != null)
+      this.answerChanged.emit(this.question.selected + "");
+  }
+
+  onSelect(selected: number): void {
+    this.question.selected = selected;
+    this.onAnswerChanged();
+  }
+}

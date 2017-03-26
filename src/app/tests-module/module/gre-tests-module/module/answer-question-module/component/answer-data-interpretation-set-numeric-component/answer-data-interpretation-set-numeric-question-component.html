@@ -1,0 +1,31 @@
+<div class="form-horizontal well well-sm">
+  <div class="form-group">
+    <div class="col-sm-11 control-text">{{question.parent.text}}</div>
+    <div class="col-sm-offset-1 col-sm-11">
+      <img class="img-responsive img-rounded" *ngIf="question.parent.image" [src]="serverUrl + '/files/' + question.parent.image" style="margin: 0 auto;">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="questionText" class="control-label col-sm-1">{{question.number + '-'}}</label>
+    <div class="col-sm-11 control-text">
+      <span [mathJax]="question.text"></span>
+    </div>
+  </div>
+  <div class="col-sm-offset-1 col-sm-11">
+    <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
+  </div>
+  <div class="form-group">
+    <label for="nominator" class="control-label col-sm-1">Answer: </label>
+    <div class="col-sm-11 control-text">
+      <div class="col-xs-2 col-sm-1 no-padding" *ngIf="mode == 'ANSWER'">
+        <input name="nominator" (change)="onAnswerChanged()" [(ngModel)]="question.nominator" class="form-control">
+      </div>
+      <span *ngIf="mode == 'ANSWERED'" [ngClass]="{'text-success': question.nominator == question.nominatorAnswer, 'text-danger': question.nominator != question.nominatorAnswer}"> {{question.nominator}} </span>
+      <span class="text-center" [ngClass]="{'col-xs-1': mode == 'ANSWER', 'big-slash': mode == 'ANSWER'}" *ngIf="question.fraction"> / </span>
+      <div class="col-xs-2 col-sm-1 no-padding" *ngIf="mode == 'ANSWER' && question.fraction">
+        <input name="denominator" (change)="onAnswerChanged()" [(ngModel)]="question.denominator" class="form-control">
+      </div>
+      <span *ngIf="mode == 'ANSWERED' && question.fraction" [ngClass]="{'text-success': question.denominator == question.denominatorAnswer, 'text-danger': question.denominator != question.denominatorAnswer}"> {{question.denominator}} </span>
+    </div>
+  </div>
+</div>
