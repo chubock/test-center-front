@@ -14,6 +14,7 @@ export class WritingQuestion extends Question {
   copy(question: WritingQuestion): void {
     super.copy(question);
     this.type = question.type;
+    this.answer = question.answer;
   }
 
   toJSON():any {

@@ -6,7 +6,8 @@ import {TestSection} from "./TestSection";
 export class Test {
 
   id:number;
-  date: Date;
+  startDate: Date;
+  endDate: Date;
   difficulty:string = "MEDIUM";
   intelligentType:string = "INTELLIGENT";
   testSections:TestSection[] = [];

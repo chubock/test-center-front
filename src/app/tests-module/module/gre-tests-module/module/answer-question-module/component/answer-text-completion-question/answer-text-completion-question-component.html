@@ -1,14 +1,19 @@
+<div *ngIf="direction" class="well well-sm form-horizontal">
+  <label class="col-xs-12">
+    {{direction}}
+  </label>
+  <div class="form-group"></div>
+</div>
+
 <div class="form-horizontal well well-sm">
+  <div class="form-group text-center"><label>{{question.number}}</label></div>
   <div class="form-group">
-    <label for="questionText" class="control-label col-sm-1">{{question.number + '-'}}</label>
-    <div class="col-sm-11 control-text">
-      <span [mathJax]="question.text"></span>
-    </div>
+    <span [mathJax]="question.text" class="col-xs-12"></span>
   </div>
-  <div class="col-sm-offset-1 col-sm-11">
+  <div class="form-group">
     <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
   </div>
-  <div class="col-sm-offset-1">
+  <div>
     <table class="table">
       <thead>
       <tr>
@@ -19,7 +24,7 @@
       <tr *ngFor="let choices of question.matrix; let i = index;">
         <td *ngFor="let choice of choices; let j = index">
           <a (click)="question.items[j].selected = i; onAnswerChanged();" class="btn no-padding"><span *ngIf="mode == 'ANSWER'" [ngClass]="{'text-success': i == question.items[j].selected}"> {{choice.text}} </span></a>
-          <span [mathJax]="choice.text" *ngIf="mode == 'ANSWERED'" [ngClass]="{'text-success': i == question.items[j].answer, 'text-danger': i == question.items[j].selected && question.items[j].selected != question.items[j].answer}"></span>
+          <span *ngIf="mode == 'ANSWERED'" [ngClass]="{'text-success': i == question.items[j].answer, 'text-danger': i == question.items[j].selected && question.items[j].selected != question.items[j].answer}">{{choice.text}}</span>
         </td>
       </tr>
       </tbody>

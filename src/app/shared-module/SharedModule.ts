@@ -10,12 +10,17 @@ import {AlertsComponent} from "./component/alerts-component/AlertsComponent";
 import {FocusDirective} from "./directive/FocusDirective";
 import {MathJaxDirective} from "./directive/MathJaxDirective";
 import {CommonModule} from "@angular/common";
+import {SimpleTimer} from "ng2-simple-timer";
+import {TimerComponent} from "./component/timer-component/TimerComponent";
+import {TimePipe} from "./pipe/TimePipe";
 
 @NgModule({
   declarations: [
     AlertsComponent,
     FocusDirective,
-    MathJaxDirective
+    MathJaxDirective,
+    TimerComponent,
+    TimePipe
   ],
   imports: [
     CommonModule,
@@ -23,6 +28,6 @@ import {CommonModule} from "@angular/common";
     PrimeSharedModule,
     AlertModule.forRoot()
   ],
-  exports: [AlertsComponent, FocusDirective, MathJaxDirective]
+  exports: [AlertsComponent, FocusDirective, MathJaxDirective, TimerComponent]
 })
 export class SharedModule { }

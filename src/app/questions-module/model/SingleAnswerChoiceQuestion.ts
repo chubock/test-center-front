@@ -33,6 +33,7 @@ export class SingleAnswerChoiceQuestion extends ChoiceQuestion {
   }
 
   prepare():void {
+    super.prepare();
     this.choices.forEach((choice, index) => {
       if (choice.answer)
         this.answer = index;

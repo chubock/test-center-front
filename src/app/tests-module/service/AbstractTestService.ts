@@ -26,18 +26,23 @@ export abstract class AbstractTestService implements TestService {
   getTest(id:number):Promise<Test> {
     return this.http.get(this.url + "/" + id)
       .toPromise()
-      .then(response => {
-        let test:Test = response.json() as Test;
-        test.testSections.forEach(testSection => {
-          let questions: Question[] = [];
-          testSection.answeredQuestions.forEach(question => {
-            let q:Question = QuestionFactory.valueOf(question.questionType);
-            q.copy(question);
-            questions.push(q);
-          });
-          testSection.answeredQuestions = questions;
+      .then(response => response.json() as Test);
+  }
+
+  getTestSection(id:number): Promise<TestSection> {
+    return this.http.get(this.url + "/testSections/" + id)
+      .toPromise()
+      .then(resp => {
+        let testSection:TestSection = resp.json();
+        let questions: Question[] = [];
+        testSection.answeredQuestions.forEach(question => {
+          let q:Question = QuestionFactory.valueOf(question.questionType);
+          q.copy(question);
+          q.prepare();
+          questions.push(q);
         });
-        return test;
+        testSection.answeredQuestions = questions;
+        return testSection;
       });
   }
 
@@ -77,6 +82,11 @@ export abstract class AbstractTestService implements TestService {
 
   answerQuestion(id:number, answer:string): Promise<void> {
     return this.http.put(this.url + "/question/" + id + "/answer", answer)
+      .toPromise();
+  }
+
+  finishTest(id:number):Promise<Date> {
+    return this.http.post(this.url + "/" + id + "/finish", null)
       .toPromise();
   }
 

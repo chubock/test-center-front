@@ -23,6 +23,10 @@ export class Question {
     this.questionType = question.questionType;
   }
 
+  prepare():void {
+
+  }
+
   toJSON(): any{
     return {id: this.id, number: this.number, text: this.text, difficulty: this.difficulty, difficultyLevel: this.difficultyLevel, image: this.image, questionType: this.questionType};
   }

@@ -8,7 +8,16 @@
   <div class="form-group">
     <label for="questionText" class="control-label col-sm-3">Question :</label>
     <div class="col-sm-9" [class.control-text]="mode != 'EDIT'">
-      <textarea name="questionText" [(ngModel)]="question.text" class="form-control" *ngIf="mode == 'EDIT'"></textarea>
+      <!--<textarea name="questionText" [(ngModel)]="question.text" class="form-control" *ngIf="mode == 'EDIT'"></textarea>-->
+      <p-editor name="questionText" [(ngModel)]="question.text" *ngIf="mode == 'EDIT'">
+        <header>
+        <span class="ql-formats">
+            <button class="ql-bold"></button>
+            <button class="ql-italic"></button>
+            <button class="ql-underline"></button>
+        </span>
+        </header>
+      </p-editor>
       <span [mathJax]="question.text" *ngIf="mode != 'EDIT'"></span>
     </div>
   </div>

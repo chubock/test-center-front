@@ -9,6 +9,7 @@ import {GRETestService} from "../../service/GRETestService";
 import {AnswerQuestionModule} from "../answer-question-module/AnswerQuestionModule";
 import {SharedModule as PrimeSharedModule} from "primeng/components/common/shared";
 import {ButtonsModule} from "ng2-bootstrap";
+import {SharedModule} from "../../../../../shared-module/SharedModule";
 /**
  * Created by yubar on 2/19/17.
  */
@@ -26,6 +27,7 @@ import {ButtonsModule} from "ng2-bootstrap";
     ButtonsModule.forRoot(),
     PrimeSharedModule,
     AnswerQuestionModule,
+    SharedModule
   ],
   providers: [GRETestService]
 })

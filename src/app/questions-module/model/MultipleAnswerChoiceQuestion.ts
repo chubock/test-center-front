@@ -12,19 +12,19 @@ export class MultipleAnswerChoiceQuestion extends ChoiceQuestion{
   }
 
   get answers(): number[] {
-    var answers = [];
-    this.choices.forEach(choice => {
+    let answers = [];
+    this.choices.forEach((choice, index) => {
       if (choice.answer)
-        answers.push(choice.number);
+        answers.push(index);
     });
     return answers;
   }
 
   get selects(): number[] {
-    var selects = [];
-    this.choices.forEach(choice => {
+    let selects = [];
+    this.choices.forEach((choice, index) => {
       if (choice.selected)
-        selects.push(choice.number);
+        selects.push(index);
     });
     return selects;
   }
@@ -35,7 +35,7 @@ export class MultipleAnswerChoiceQuestion extends ChoiceQuestion{
   }
 
   toJSON():any {
-    var ret = super.toJSON();
+    let ret = super.toJSON();
     ret.maxAnswerCount = this.maxAnswerCount;
     return ret;
   }

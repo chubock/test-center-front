@@ -12,6 +12,7 @@ import {SentenceEquivalenceQuestion} from "../../../../../../../questions-module
 })
 export class AnswerSentenceEquivalenceQuestionComponent extends AnswerChoicesQuestionComponent<SentenceEquivalenceQuestion> {
   multipleAnswer:boolean = true;
+  direction:string = "Directions: Select the two answer choices that, when used to complete the sentence, fit the meaning of the sentence as a whole and produce completed sentences that are alike in meaning.";
 
   onAnswerChanged(): void {
     let answer:string = "";

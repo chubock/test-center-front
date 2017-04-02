@@ -11,6 +11,8 @@ import {QuantitativeSingleAnswerQuestion} from "../../../../../../../questions-m
 })
 export class AnswerQuantitativeSingleAnswerQuestionComponent extends AnswerChoicesQuestionComponent<QuantitativeSingleAnswerQuestion> {
 
+  direction:string = "Directions: Select a single answer choice.";
+
   onAnswerChanged(): void {
     if (this.question.selected != null)
       this.answerChanged.emit(this.question.selected + "");

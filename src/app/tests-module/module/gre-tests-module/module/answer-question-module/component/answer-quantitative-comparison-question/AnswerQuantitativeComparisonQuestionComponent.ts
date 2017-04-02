@@ -12,6 +12,8 @@ import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
 })
 export class AnswerQuantitativeComparisonQuestionComponent extends AnswerQuestionComponent<QuantitativeComparisonQuestion>{
 
+  direction:string = "Directions: Compare Quantity A and Quantity B, using additional information centered above the two quantities if such information is given, and select one of the following four answer choices.";
+
   onAnswerChanged(): void {
     if (this.question.selected != null)
       this.answerChanged.emit(this.question.selected + "");

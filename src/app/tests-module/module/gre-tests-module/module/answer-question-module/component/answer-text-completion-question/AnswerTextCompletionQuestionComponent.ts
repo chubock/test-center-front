@@ -12,6 +12,8 @@ import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
 })
 export class AnswerTextCompletionQuestionComponent extends AnswerQuestionComponent<TextCompletionQuestion> {
 
+  direction:string = "Directions: For each blank select one entry from the corresponding column of choices. Fill all blanks in the way that best completes the text.";
+
   onAnswerChanged(): void {
     let answer:string = "";
     this.question.items.forEach(item => {

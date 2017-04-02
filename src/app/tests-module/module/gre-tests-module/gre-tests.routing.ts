@@ -1,6 +1,7 @@
 import {Route, RouterModule} from "@angular/router";
 import {GRETestsComponent} from "./component/gre-tests-component/GRETestsComponent";
 import {GRETestsRouteComponent} from "./GRETestsRouteComponent";
+import {GRETestComponent} from "./component/gre-test-component/GRETestComponent";
 /**
  * Created by yubar on 2/19/17.
  */
@@ -8,6 +9,7 @@ import {GRETestsRouteComponent} from "./GRETestsRouteComponent";
 export const GRE_TESTS_ROUTES:Route[] = [
   {path:'', component: GRETestsRouteComponent , children:[
     {path: '', component: GRETestsComponent},
+    {path: 'view/:id', component: GRETestComponent},
     {path: 'new', loadChildren: 'app/tests-module/module/gre-tests-module/module/new-gre-test-module/NewGRETestModule#NewGRETestModule'}
   ]}
 ];

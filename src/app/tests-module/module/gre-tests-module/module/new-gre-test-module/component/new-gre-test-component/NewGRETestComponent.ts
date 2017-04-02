@@ -1,8 +1,9 @@
 import {Component} from "@angular/core";
 import {Test} from "../../../../../../model/Test";
 import {GRETestService} from "../../../../service/GRETestService";
-import {TestSection} from "../../../../../../model/TestSection";
+import {TestSection, greSections} from "../../../../../../model/TestSection";
 import {Question} from "../../../../../../../questions-module/model/Question";
+import {Timer} from "../../../../../../../shared-module/model/Timer";
 /**
  * Created by Yubar on 3/19/2017.
  */
@@ -10,7 +11,6 @@ import {Question} from "../../../../../../../questions-module/model/Question";
 @Component({
   selector: 'new-gre-test-component',
   templateUrl: './new-gre-test-component.html'
-  // template: 'New GRE Test Component'
 })
 export class NewGRETestComponent {
 
@@ -18,6 +18,9 @@ export class NewGRETestComponent {
   currentSectionType: string;
   currentSection: TestSection;
   currentQuestion: Question;
+  sectionTimer:Timer;
+  breakTimer:Timer;
+  sectionLabel:string;
 
   constructor(private testService:GRETestService){}
 
@@ -26,8 +29,28 @@ export class NewGRETestComponent {
       this.test = test;
       this.currentSectionType = test.sectionTypes[0];
       this.currentSection = test.testSections[0];
+      this.prepareParents();
+      this.sectionTimer  = new Timer(greSections[this.currentSectionType].time * 60, true);
+      this.sectionLabel = greSections[this.currentSectionType].label;
       this.currentQuestion = this.currentSection.answeredQuestions[0];
     });
+  }
+
+  prepareParents():void {
+    let parent:any = null;
+    let questions:any[] = this.currentSection.answeredQuestions;
+    for (let i=0; i< questions.length; i++) {
+      if (questions[i].parent) {
+        questions[i].parent.number = questions[i].number;
+        questions[i].parent.lastNumber = questions[i].number;
+        if (parent && parent.id == questions[i].parent.id) {
+          questions[i].parent = parent;
+          parent.lastNumber++;
+        } else {
+          parent = questions[i].parent;
+        }
+      }
+    }
   }
 
   answerChanged(answer:string) {
@@ -56,14 +79,33 @@ export class NewGRETestComponent {
       this.currentQuestion = this.currentSection.answeredQuestions[this.currentSection.answeredQuestions.indexOf(this.currentQuestion) - 1];
   }
 
-  nextSection(): void {
+  nextSection(): Promise<void> {
     if (! this.isLastSection())
-      this.testService.createNextSection(this.test.id).then(testSection => {
+      return this.testService.createNextSection(this.test.id).then(testSection => {
         this.test.testSections.push(testSection);
         this.currentSectionType = this.test.sectionTypes[this.test.sectionTypes.indexOf(this.currentSectionType) + 1];
         this.currentSection = this.test.testSections[this.test.testSections.indexOf(this.currentSection) + 1];
+        this.prepareParents();
+        this.sectionTimer  = new Timer(greSections[this.currentSectionType].time * 60, true);
+        this.sectionLabel = greSections[this.currentSectionType].label;
         this.currentQuestion = this.currentSection.answeredQuestions[0];
       });
+  }
+
+  finishTest(): Promise<void> {
+    return this.testService.finishTest(this.test.id).then(endDate => this.test.endDate = endDate);
+  }
+
+  sectionTimeEnded():void {
+    if (this.isLastSection()) {
+      this.finishTest();
+    } else {
+      this.breakTimer  = new Timer(greSections[this.currentSectionType].breakTime * 60, true);
+    }
+  }
+
+  endBreak(): void {
+    this.nextSection().then(e => this.breakTimer = null);
   }
 
 }

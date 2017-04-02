@@ -4,6 +4,9 @@ import {GRETestsComponent} from "./component/gre-tests-component/GRETestsCompone
 import {greTestsRouting} from "./gre-tests.routing";
 import {GRETestService} from "./service/GRETestService";
 import {CommonModule} from "@angular/common";
+import {GRETestComponent} from "./component/gre-test-component/GRETestComponent";
+import {AnswerQuestionModule} from "./module/answer-question-module/AnswerQuestionModule";
+import {SharedModule} from "../../../shared-module/SharedModule";
 
 /**
  * Created by yubar on 2/19/17.
@@ -12,9 +15,12 @@ import {CommonModule} from "@angular/common";
 @NgModule({
   declarations: [
     GRETestsRouteComponent,
-    GRETestsComponent
+    GRETestsComponent,
+    GRETestComponent
   ],
   imports: [
+    CommonModule,
+    AnswerQuestionModule,
     greTestsRouting
   ],
   providers: [GRETestService]

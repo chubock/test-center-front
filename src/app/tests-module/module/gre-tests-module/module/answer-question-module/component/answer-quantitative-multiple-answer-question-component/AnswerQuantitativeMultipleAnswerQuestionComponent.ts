@@ -12,6 +12,7 @@ import {QuantitativeMultipleAnswerQuestion} from "../../../../../../../questions
 export class AnswerQuantitativeMultipleAnswerQuestionComponent extends AnswerChoicesQuestionComponent<QuantitativeMultipleAnswerQuestion> {
 
   multipleAnswer:boolean = true;
+  directions:string = "Directions: Select one or more answer choices according to the specific question directions.";
 
   onAnswerChanged(): void {
     let answer:string = "";

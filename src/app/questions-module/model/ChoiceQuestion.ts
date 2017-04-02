@@ -20,7 +20,7 @@ export abstract class ChoiceQuestion extends Question{
   popChoice(): Choice {
     if (this.choices.length == 0)
       return null;
-    var ret = this.choices[this.choices.length - 1];
+    let ret = this.choices[this.choices.length - 1];
     this.choices.splice(-1, 1);
     return ret;
   }
@@ -29,8 +29,8 @@ export abstract class ChoiceQuestion extends Question{
     super.copy(question);
     this.choices.length = 0;
     if (question.choices) {
-      for (var i=0; i< question.choices.length; i++) {
-        var c = new Choice(i);
+      for (let i=0; i< question.choices.length; i++) {
+        let c = new Choice(i);
         c.copy(question.choices[i]);
         this.pushChoice(c);
       }
@@ -38,7 +38,7 @@ export abstract class ChoiceQuestion extends Question{
   }
 
   toJSON():any {
-    var ret = super.toJSON();
+    let ret = super.toJSON();
     ret.choices = this.choices;
     return ret;
   }

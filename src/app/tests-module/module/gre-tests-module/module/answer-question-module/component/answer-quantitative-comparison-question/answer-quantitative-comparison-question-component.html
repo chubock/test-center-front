@@ -1,21 +1,18 @@
+<div *ngIf="direction" class="well well-sm form-horizontal">
+  <label class="col-xs-12">
+    {{direction}}
+  </label>
+  <div class="form-group"></div>
+</div>
+
 <div class="form-horizontal well well-sm">
+  <div class="form-group text-center"><label>{{question.number}}</label></div>
   <div class="form-group">
-    <label class="control-label col-sm-1">{{question.number + '-'}}</label>
-  </div>
-  <div class="form-group">
-    <label for="quantityA" class="control-label" class="col-sm-1">Quantity A :</label>
-    <div class="col-sm-11 controle-text">
-      <span [mathJax]="question.text"></span>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="quantityB" class="control-label" class="col-sm-1">Quantity B :</label>
-    <div class="col-sm-11 control-text">
-      <span [mathJax]="question.quantityB"></span>
-    </div>
-  </div>
-  <div class="col-sm-offset-1 col-sm-11">
     <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
+  </div>
+  <div class="form-group">
+    <div class="col-sm-6 text-center">A : <span [mathJax]="question.text"></span></div>
+    <div class="col-sm-6 text-center">B : <span [mathJax]="question.quantityB"></span></div>
   </div>
   <div class="form-group">
     <div class="text-right col-xs-1">

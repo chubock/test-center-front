@@ -12,6 +12,8 @@ import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
 })
 export class AnswerNumericQuestionComponent extends AnswerQuestionComponent<NumericQuestion>{
 
+  direction:string = "Directions: Enter your answer as an integer or a decimal if there is a single answer box OR as a fraction if there are two separate boxes — one for the numerator and one for the denominator.";
+
   onAnswerChanged(): void {
     if (this.question.fraction)
       this.answerChanged.emit(this.question.nominator + "-" + this.question.denominator);

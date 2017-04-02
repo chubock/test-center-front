@@ -8,7 +8,16 @@
   <div class="form-group">
     <label for="questionText" class="control-label col-sm-3">Question :</label>
     <div class="col-sm-9" [class.control-text]="mode != 'EDIT'">
-      <textarea name="questionText" [(ngModel)]="question.text" class="form-control" *ngIf="mode == 'EDIT'"></textarea>
+      <!--<textarea name="questionText" [(ngModel)]="question.text" class="form-control" *ngIf="mode == 'EDIT'"></textarea>-->
+      <p-editor name="questionText" [(ngModel)]="question.text" *ngIf="mode == 'EDIT'">
+        <header>
+        <span class="ql-formats">
+            <button class="ql-bold"></button>
+            <button class="ql-italic"></button>
+            <button class="ql-underline"></button>
+        </span>
+        </header>
+      </p-editor>
       <span [mathJax]="question.text" *ngIf="mode != 'EDIT'"></span>
     </div>
   </div>
@@ -42,7 +51,7 @@
       <tr *ngFor="let choices of question.matrix; let i = index;">
         <td *ngFor="let choice of choices; let j = index">
           <a (click)="editingChoice = choice" class="btn no-padding" *ngIf="mode == 'EDIT' && editingChoice != choice"><span class="glyphicon glyphicon-pencil"></span></a> <a (click)="question.items[j].answer = i" class="btn no-padding"><span *ngIf="editingChoice != choice && mode == 'EDIT'" [ngClass]="{'text-success': mode == 'EDIT' && i == question.items[j].answer}"> {{choice.text}} </span></a>
-          <span [mathJax]="choice.text" *ngIf="mode == 'VIEW'" [ngClass]="{'text-success': i == question.items[j].answer}"></span>
+          <span *ngIf="mode == 'VIEW'" [ngClass]="{'text-success': i == question.items[j].answer}">{{choice.text}}</span>
           <input #choiceText (blur)="editChoice(choiceText.value)" [autoFocus]="editingChoice == choice" class="form-control table-input" value="{{choice.text}}" *ngIf="editingChoice == choice">
         </td>
       </tr>
