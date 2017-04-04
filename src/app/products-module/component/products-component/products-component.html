@@ -1,0 +1,7 @@
+<div class="col-sm-12 visible-lg">
+  <ul class="nav nav-pills nav-stacked">
+    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['/']">Back</a></li>
+    <li role="presentation" routerLinkActive="active" ><a [routerLink]="['new']">NEW</a></li>
+    <li *ngFor="let product of products.content" role="presentation" routerLinkActive="active" ><a [routerLink]="[product.id]">{{product.name}}</a></li>
+  </ul>
+</div>

@@ -9,7 +9,7 @@ export const TESTS_ROUTES:Route[] = [
   {path:'', component: TestsRouteComponent , children:[
     {path: '', component: TestsComponent},
     {path: 'gre', loadChildren: 'app/tests-module/module/gre-tests-module/GRETestsModule#GRETestsModule'},
-    {path: 'gre/new', loadChildren: 'app/tests-module/module/gre-tests-module/module/new-gre-test-module/NewGRETestModule#NewGRETestModule'}
+    // {path: 'gre/new', loadChildren: 'app/tests-module/module/gre-tests-module/module/new-gre-test-module/NewGRETestModule#NewGRETestModule'}
   ]}
 ];
 
