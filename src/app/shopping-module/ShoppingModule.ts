@@ -1,9 +1,7 @@
 import {NgModule} from "@angular/core";
-import {ProductsRouteComponent} from "./ProductsRouteComponent"
-import {ProductsComponent} from "./component/products-component/ProductsComponent";
-import {productsRouting} from "./products.routing";
-import {ProductComponent} from "./component/product-component/ProductComponent";
-import {ProductService} from "./service/ProductService";
+import {ShoppingRouteComponent} from "./ShoppingRouteComponent"
+import {ShoppingComponent} from "./component/shopping-component/ShoppingComponent";
+import {shoppingRouting} from "./shopping.routing";
 import {CommonModule} from "@angular/common";
 import {HttpModule} from "@angular/http";
 import {ButtonsModule} from "ng2-bootstrap";
@@ -17,9 +15,8 @@ import {EditorModule} from "primeng/components/editor/editor";
 
 @NgModule({
   declarations: [
-    ProductsRouteComponent,
-    ProductsComponent,
-    ProductComponent
+    ShoppingRouteComponent,
+    ShoppingComponent
   ],
   imports: [
     CommonModule,
@@ -29,10 +26,10 @@ import {EditorModule} from "primeng/components/editor/editor";
     PrimeSharedModule,
     EditorModule,
     SharedModule,
-    productsRouting
+    shoppingRouting
   ],
-  providers: [ProductService]
+  providers: []
 })
-export class ProductsModule {
+export class ShoppingModule {
 
 }

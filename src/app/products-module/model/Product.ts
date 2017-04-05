@@ -9,5 +9,6 @@ export class Product {
   description:string;
   count:number;
   price:number;
+  discount:number = 0;
   state:string;
 }
