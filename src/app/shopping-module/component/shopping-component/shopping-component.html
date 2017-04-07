@@ -1,1 +1,9 @@
-Shopping Component
+<div *ngIf="products" class="container">
+  <div *ngFor="let product of products" class="well well-sm form-horizontal">
+    <label class="col-xs-10 text-left">
+      {{product.name}}
+    </label>
+    <label class="col-xs-2 text-right">{{product.price}}</label>
+    <div class="form-group"></div>
+  </div>
+</div>

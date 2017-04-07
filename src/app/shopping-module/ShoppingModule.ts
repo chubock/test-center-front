@@ -9,6 +9,7 @@ import {FormsModule} from "@angular/forms";
 import {SharedModule} from "../shared-module/SharedModule";
 import {SharedModule as PrimeSharedModule} from "primeng/components/common/shared";
 import {EditorModule} from "primeng/components/editor/editor";
+import {OrderService} from "./service/OrderService";
 /**
  * Created by yubar on 2/19/17.
  */
@@ -28,7 +29,7 @@ import {EditorModule} from "primeng/components/editor/editor";
     SharedModule,
     shoppingRouting
   ],
-  providers: []
+  providers: [OrderService]
 })
 export class ShoppingModule {
 
