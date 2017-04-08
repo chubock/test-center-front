@@ -1,0 +1,14 @@
+<div *ngIf="product" class="container">
+  <div class="well well-sm form-horizontal">
+    <label class="col-xs-10 text-left">
+      {{product.name}}
+    </label>
+    <label class="col-xs-2 text-right">{{product.price}}</label>
+    <br/>
+    <label class="col-xs-12">{{product.description}}</label>
+    <div class="form-group text-center">
+      <button class="btn btn-primary" (click)="addProduct()">Add to Card</button>
+      <button class="btn btn-default" [routerLink]="['..']">Back</button>
+    </div>
+  </div>
+</div>

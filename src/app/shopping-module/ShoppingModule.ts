@@ -10,6 +10,8 @@ import {SharedModule} from "../shared-module/SharedModule";
 import {SharedModule as PrimeSharedModule} from "primeng/components/common/shared";
 import {EditorModule} from "primeng/components/editor/editor";
 import {OrderService} from "./service/OrderService";
+import {ProductComponent} from "./component/product-component/ProductComponent";
+import {ShoppingCardComponent} from "./component/shopping-card-component/ShoppingCardComponent";
 /**
  * Created by yubar on 2/19/17.
  */
@@ -17,7 +19,9 @@ import {OrderService} from "./service/OrderService";
 @NgModule({
   declarations: [
     ShoppingRouteComponent,
-    ShoppingComponent
+    ShoppingComponent,
+    ShoppingCardComponent,
+    ProductComponent
   ],
   imports: [
     CommonModule,

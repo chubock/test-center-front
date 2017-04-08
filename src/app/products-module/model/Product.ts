@@ -5,7 +5,7 @@
 export class Product {
   id:number;
   name:string;
-  productType:string;
+  type:string;
   description:string;
   count:number;
   price:number;

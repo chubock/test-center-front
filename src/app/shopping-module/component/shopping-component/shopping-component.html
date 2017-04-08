@@ -1,9 +1,9 @@
 <div *ngIf="products" class="container">
   <div *ngFor="let product of products" class="well well-sm form-horizontal">
-    <label class="col-xs-10 text-left">
+    <a [routerLink]="[product.id]" class="col-xs-10 text-left">
       {{product.name}}
-    </label>
-    <label class="col-xs-2 text-right">{{product.price}}</label>
-    <div class="form-group"></div>
+    </a>
+    <div class="col-xs-2 text-right"><button class="btn btn-default" (click)="addProduct(product)">Add to Card</button></div>
+    <div class="form-group"><label class="col-xs-12 text-center">{{product.price}}</label></div>
   </div>
 </div>
