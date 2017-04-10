@@ -9,7 +9,8 @@ const APP_ROUTES: Route[] = [
   {path:'questions', loadChildren: 'app/questions-module/QuestionsModule#QuestionsModule'},
   {path:'tests', loadChildren: 'app/tests-module/TestsModule#TestsModule'},
   {path:'products', loadChildren: 'app/products-module/ProductsModule#ProductsModule'},
-  {path:'shopping', loadChildren: 'app/shopping-module/ShoppingModule#ShoppingModule'}
+  {path:'shopping', loadChildren: 'app/shopping-module/ShoppingModule#ShoppingModule'},
+  {path:'registration', loadChildren: 'app/registration-module/RegistrationModule#RegistrationModule'}
 ];
 
 export const appRouting = RouterModule.forRoot(APP_ROUTES);
