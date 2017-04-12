@@ -71,24 +71,27 @@ export class ReadingComprehensionQuestion extends Question {
     this.selectInPassageQuestions = [];
     this.multipleAnswerQuestions = [];
     this.singleAnswerQuestions = [];
-    question.selectInPassageQuestions.forEach(selectInPassageQuestion => {
-      let q = new SelectInPassageQuestion();
-      q.copy(selectInPassageQuestion);
-      this.selectInPassageQuestions.push(q);
-      this.items.push(q);
-    });
-    question.multipleAnswerQuestions.forEach(multipleAnswerQuestion => {
-      let q = new ReadingComprehensionMultipleAnswerQuestion();
-      q.copy(multipleAnswerQuestion);
-      this.multipleAnswerQuestions.push(q);
-      this.items.push(q);
-    });
-    question.singleAnswerQuestions.forEach(singleAnswerQuestion => {
-      let q = new ReadingComprehensionSingleAnswerQuestion();
-      q.copy(singleAnswerQuestion);
-      this.singleAnswerQuestions.push(q);
-      this.items.push(q);
-    });
+    if (question.selectInPassageQuestions)
+      question.selectInPassageQuestions.forEach(selectInPassageQuestion => {
+        let q = new SelectInPassageQuestion();
+        q.copy(selectInPassageQuestion);
+        this.selectInPassageQuestions.push(q);
+        this.items.push(q);
+      });
+    if (question.multipleAnswerQuestions)
+      question.multipleAnswerQuestions.forEach(multipleAnswerQuestion => {
+        let q = new ReadingComprehensionMultipleAnswerQuestion();
+        q.copy(multipleAnswerQuestion);
+        this.multipleAnswerQuestions.push(q);
+        this.items.push(q);
+      });
+    if (question.singleAnswerQuestions)
+      question.singleAnswerQuestions.forEach(singleAnswerQuestion => {
+        let q = new ReadingComprehensionSingleAnswerQuestion();
+        q.copy(singleAnswerQuestion);
+        this.singleAnswerQuestions.push(q);
+        this.items.push(q);
+      });
     this.items.sort((a, b) => {
       return a.getNumber() - b.getNumber();
     });

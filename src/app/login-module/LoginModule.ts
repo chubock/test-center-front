@@ -11,6 +11,7 @@ import {SharedModule as PrimeSharedModule} from "primeng/components/common/share
 import {EditorModule} from "primeng/components/editor/editor";
 import {LoginService} from "./service/LoginService";
 import {Base64Service} from "./service/Base64Service";
+import {ReCaptchaModule} from "angular2-recaptcha";
 /**
  * Created by yubar on 2/19/17.
  */
@@ -27,6 +28,7 @@ import {Base64Service} from "./service/Base64Service";
     ButtonsModule.forRoot(),
     PrimeSharedModule,
     EditorModule,
+    ReCaptchaModule,
     SharedModule,
     loginRouting
   ],

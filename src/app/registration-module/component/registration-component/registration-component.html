@@ -40,7 +40,12 @@
     </div>
     <div class="form-group">
       <div class="col-sm-offset-4 col-sm-8">
-        <button (click)="register()" [disabled]="!registrationForm.valid || user.password != confirmPassword" class="btn btn-primary">Register</button>
+        <re-captcha (captchaResponse)="handleCorrectCaptcha()" site_key="6LcPrBwUAAAAAOE-qTzl-UHrSgUAU1Sq1RhO_oPm"></re-captcha>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-4 col-sm-8">
+        <button (click)="register()" [disabled]="!registrationForm.valid || user.password != confirmPassword || ! captchaValid" class="btn btn-primary">Register</button>
       </div>
     </div>
   </form>

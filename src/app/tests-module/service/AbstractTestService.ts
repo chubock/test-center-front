@@ -63,8 +63,28 @@ export abstract class AbstractTestService implements TestService {
       });
   }
 
-  createNextSection(id:number): Promise<TestSection> {
-    return this.http.post(this.url + "/" + id + "/testSections", null, {withCredentials: true})
+  getCurrentTest():Promise<Test> {
+    return this.http.get(this.url + "/current", {withCredentials: true})
+      .toPromise()
+      .then(response => {
+        let test:Test = response.json() as Test;
+        if (test && test.testSections) {
+          test.testSections.forEach(testSection => {
+            let questions: Question[] = [];
+            testSection.answeredQuestions.forEach(question => {
+              let q:Question = QuestionFactory.valueOf(question.questionType);
+              q.copy(question);
+              questions.push(q);
+            });
+            testSection.answeredQuestions = questions;
+          });
+        }
+        return test;
+      });
+  }
+
+  createNextSection(id:number, answers:any): Promise<TestSection> {
+    return this.http.post(this.url + "/" + id + "/testSections", answers, {withCredentials: true})
       .toPromise()
       .then(response => {
         let testSection:TestSection = response.json() as TestSection;
@@ -84,8 +104,8 @@ export abstract class AbstractTestService implements TestService {
       .toPromise();
   }
 
-  finishTest(id:number):Promise<Date> {
-    return this.http.post(this.url + "/" + id + "/finish", null, {withCredentials: true})
+  finishTest(id:number, answers:any):Promise<Date> {
+    return this.http.post(this.url + "/" + id + "/finish", answers, {withCredentials: true})
       .toPromise();
   }
 

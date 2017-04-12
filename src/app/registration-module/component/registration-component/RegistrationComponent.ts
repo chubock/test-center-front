@@ -14,6 +14,7 @@ export class RegistrationComponent {
   user:User = new User();
   uniqueUsername:boolean = true;
   confirmPassword:string;
+  captchaValid:boolean = false;
 
   constructor(private registrationService:RegistrationService) {}
 
@@ -21,6 +22,10 @@ export class RegistrationComponent {
     this.registrationService.isUsernameUnique(this.user.username).then(unique => {
       this.uniqueUsername = unique;
     });
+  }
+
+  handleCorrectCaptcha(token:string):void {
+    this.captchaValid = true;
   }
 
   register():void {

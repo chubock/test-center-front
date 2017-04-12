@@ -21,8 +21,21 @@ export class NewGRETestComponent {
   sectionTimer:Timer;
   breakTimer:Timer;
   sectionLabel:string;
+  answers = {};
 
-  constructor(private testService:GRETestService){}
+  constructor(private testService:GRETestService){
+    testService.getCurrentTest().then(test => {
+      if (test) {
+        this.test = test;
+        this.currentSectionType = test.sectionTypes[test.testSections.length - 1];
+        this.currentSection = test.testSections[test.testSections.length - 1];
+        this.prepareParents();
+        this.sectionTimer  = new Timer(greSections[this.currentSectionType].time * 60, true);
+        this.sectionLabel = greSections[this.currentSectionType].label;
+        this.currentQuestion = this.currentSection.answeredQuestions[0];
+      }
+    })
+  }
 
   start():void {
     this.testService.createTest(this.test).then(test => {
@@ -54,6 +67,7 @@ export class NewGRETestComponent {
   }
 
   answerChanged(answer:string) {
+    this.answers[this.currentQuestion.id] = answer;
     this.testService.answerQuestion(this.currentQuestion.id, answer);
   }
 
@@ -81,7 +95,8 @@ export class NewGRETestComponent {
 
   nextSection(): Promise<void> {
     if (! this.isLastSection())
-      return this.testService.createNextSection(this.test.id).then(testSection => {
+      return this.testService.createNextSection(this.test.id, this.answers).then(testSection => {
+        this.answers = {};
         this.test.testSections.push(testSection);
         this.currentSectionType = this.test.sectionTypes[this.test.sectionTypes.indexOf(this.currentSectionType) + 1];
         this.currentSection = this.test.testSections[this.test.testSections.indexOf(this.currentSection) + 1];
@@ -93,7 +108,7 @@ export class NewGRETestComponent {
   }
 
   finishTest(): Promise<void> {
-    return this.testService.finishTest(this.test.id).then(endDate => this.test.endDate = endDate);
+    return this.testService.finishTest(this.test.id, this.answers).then(endDate => this.test.endDate = endDate);
   }
 
   sectionTimeEnded():void {

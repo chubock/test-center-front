@@ -70,24 +70,27 @@ export class DataInterpretationSetQuestion extends Question {
     this.numericQuestions = [];
     this.multipleAnswerQuestions = [];
     this.singleAnswerQuestions = [];
-    question.numericQuestions.forEach(numericQuestion => {
-      let q = new DataInterpretationNumericQuestion();
-      q.copy(numericQuestion);
-      this.numericQuestions.push(q);
-      this.items.push(q);
-    });
-    question.multipleAnswerQuestions.forEach(multipleAnswerQuestion => {
-      let q = new DataInterpretationMultipleAnswerQuestion();
-      q.copy(multipleAnswerQuestion);
-      this.multipleAnswerQuestions.push(q);
-      this.items.push(q);
-    });
-    question.singleAnswerQuestions.forEach(singleAnswerQuestion => {
-      let q = new DataInterpretationSingleAnswerQuestion();
-      q.copy(singleAnswerQuestion);
-      this.singleAnswerQuestions.push(q);
-      this.items.push(q);
-    });
+    if (question.numericQuestions)
+      question.numericQuestions.forEach(numericQuestion => {
+        let q = new DataInterpretationNumericQuestion();
+        q.copy(numericQuestion);
+        this.numericQuestions.push(q);
+        this.items.push(q);
+      });
+    if (question.multipleAnswerQuestions)
+      question.multipleAnswerQuestions.forEach(multipleAnswerQuestion => {
+        let q = new DataInterpretationMultipleAnswerQuestion();
+        q.copy(multipleAnswerQuestion);
+        this.multipleAnswerQuestions.push(q);
+        this.items.push(q);
+      });
+    if (question.singleAnswerQuestions)
+      question.singleAnswerQuestions.forEach(singleAnswerQuestion => {
+        let q = new DataInterpretationSingleAnswerQuestion();
+        q.copy(singleAnswerQuestion);
+        this.singleAnswerQuestions.push(q);
+        this.items.push(q);
+      });
     this.items.sort((a, b) => {
       return a.getNumber() - b.getNumber();
     });

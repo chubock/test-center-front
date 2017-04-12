@@ -17,12 +17,17 @@ export class LoginComponent implements OnInit{
   user:User;
   username:string;
   password:string;
+  captchaValid:boolean = false;
 
   constructor(private router:Router, private loginService:LoginService, private alertsService:AlertsService) {
   }
 
   ngOnInit():void {
     this.user = this.loginService.user;
+  }
+
+  handleCorrectCaptcha(token:string):void {
+    this.captchaValid = true;
   }
 
   login():void {
