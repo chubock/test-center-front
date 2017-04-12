@@ -11,14 +11,13 @@ import {Question} from "../../questions-module/model/Question";
 
 export abstract class AbstractTestService implements TestService {
 
-  private headers = new Headers({'Content-Type': 'application/json'});
   protected http:Http;
   protected serverUrl:string = apiEndPoint;
 
   protected abstract get url(): string;
 
   getTests():Promise<Test[]> {
-    return this.http.get(this.url)
+    return this.http.get(this.url, {withCredentials: true})
       .toPromise()
       .then(response => response.json() as Test[]);
   }
@@ -30,7 +29,7 @@ export abstract class AbstractTestService implements TestService {
   }
 
   getTestSection(id:number): Promise<TestSection> {
-    return this.http.get(this.url + "/testSections/" + id)
+    return this.http.get(this.url + "/testSections/" + id, {withCredentials: true})
       .toPromise()
       .then(resp => {
         let testSection:TestSection = resp.json();
@@ -47,7 +46,7 @@ export abstract class AbstractTestService implements TestService {
   }
 
   createTest(test:Test): Promise<Test> {
-    return this.http.post(this.url, test)
+    return this.http.post(this.url, test, {withCredentials: true})
       .toPromise()
       .then(response => {
         let test:Test = response.json() as Test;
@@ -65,7 +64,7 @@ export abstract class AbstractTestService implements TestService {
   }
 
   createNextSection(id:number): Promise<TestSection> {
-    return this.http.post(this.url + "/" + id + "/testSections", null)
+    return this.http.post(this.url + "/" + id + "/testSections", null, {withCredentials: true})
       .toPromise()
       .then(response => {
         let testSection:TestSection = response.json() as TestSection;
@@ -81,12 +80,12 @@ export abstract class AbstractTestService implements TestService {
   }
 
   answerQuestion(id:number, answer:string): Promise<void> {
-    return this.http.put(this.url + "/question/" + id + "/answer", answer)
+    return this.http.put(this.url + "/question/" + id + "/answer", answer, {withCredentials: true})
       .toPromise();
   }
 
   finishTest(id:number):Promise<Date> {
-    return this.http.post(this.url + "/" + id + "/finish", null)
+    return this.http.post(this.url + "/" + id + "/finish", null, {withCredentials: true})
       .toPromise();
   }
 

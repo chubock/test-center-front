@@ -20,7 +20,7 @@ export class FileService {
     formData.append('file', file, file.name);
     let headers = new Headers();
     headers.append('Accept', 'application/json');
-    let options = new RequestOptions({headers: headers});
+    let options = new RequestOptions({headers: headers, withCredentials: true});
     return this.http.post(this.url, formData, options)
       .toPromise()
       .then(response => {

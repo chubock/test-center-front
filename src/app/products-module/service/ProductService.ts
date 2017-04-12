@@ -21,17 +21,17 @@ export class ProductService {
     params.set("page", page.toString());
     params.set("size", size.toString());
 
-    return this.http.get(this.serverUrl + this.url, {search: params})
+    return this.http.get(this.serverUrl + this.url, {search: params, withCredentials: true})
       .toPromise().then(resp => resp.json() as Page<Product>)
   }
 
   getProduct(id:number):Promise<Product> {
-    return this.http.get(this.serverUrl + this.url + "/" + id)
+    return this.http.get(this.serverUrl + this.url + "/" + id, {withCredentials: true})
       .toPromise().then(resp => resp.json() as Product);
   }
 
   saveProduct(product:Product):Promise<Product> {
-    return this.http.post(this.serverUrl + this.url, product)
+    return this.http.post(this.serverUrl + this.url, product, {withCredentials: true})
       .toPromise().then(resp => resp.json() as Product);
   }
 

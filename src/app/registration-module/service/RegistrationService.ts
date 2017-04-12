@@ -18,7 +18,7 @@ export class RegistrationService {
     let params:URLSearchParams = new URLSearchParams();
     params.set("username", username);
     return this.http.get(this.serverUrl + this.url + "/isUsernameUnique", {search: params})
-      .toPromise();
+      .toPromise().then(resp => resp.text() == "true");
   }
 
   register(user:User): Promise<User> {

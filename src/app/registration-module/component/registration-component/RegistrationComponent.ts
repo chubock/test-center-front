@@ -18,7 +18,13 @@ export class RegistrationComponent {
   constructor(private registrationService:RegistrationService) {}
 
   checkUsername():void {
-    this.registrationService.isUsernameUnique(this.user.username).then(unique => this.uniqueUsername = unique);
+    this.registrationService.isUsernameUnique(this.user.username).then(unique => {
+      this.uniqueUsername = unique;
+    });
+  }
+
+  register():void {
+    this.registrationService.register(this.user).then(user => this.user = user);
   }
 
 }

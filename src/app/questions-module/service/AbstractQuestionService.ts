@@ -9,7 +9,6 @@ import {apiEndPoint} from "../../AppConfig";
 
 export abstract class AbstractQuestionService<T extends Question> implements QuestionService<T>{
 
-  private headers = new Headers({'Content-Type': 'application/json'});
   protected http:Http;
   protected serverUrl:string = apiEndPoint;
 
@@ -24,7 +23,7 @@ export abstract class AbstractQuestionService<T extends Question> implements Que
     params.set("size", size.toString());
 
     return this.http
-      .get(this.url, {search: params})
+      .get(this.url, {search: params, withCredentials: true})
       .toPromise()
       .then(response => {
         let page:Page<T> = response.json() as Page<T>;
@@ -41,7 +40,7 @@ export abstract class AbstractQuestionService<T extends Question> implements Que
 
   save(question: T): Promise<T> {
     return this.http
-      .put(this.url, question, this.headers)
+      .put(this.url, question, {withCredentials: true})
       .toPromise()
       .then(response => {
         var ret = this.newInstance();
@@ -51,7 +50,7 @@ export abstract class AbstractQuestionService<T extends Question> implements Que
   }
 
   remove(id:number):Promise<any> {
-    return this.http.delete(this.url + "/" + id)
+    return this.http.delete(this.url + "/" + id, {withCredentials: true})
       .toPromise();
   }
 }
