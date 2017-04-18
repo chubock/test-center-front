@@ -1,4 +1,112 @@
 <div class="container">
+
+  <div *ngIf="! test.id" class="form-horizontal well well-sm">
+    <div class="form-group">
+      <label for="questionText" class="control-label col-sm-6">Difficulty</label>
+      <div class="col-sm-6">
+        <div class="btn-group">
+          <label class="btn btn-default" [(ngModel)]="test.difficulty" btnRadio="EASY">Easy</label>
+          <label class="btn btn-default" [(ngModel)]="test.difficulty" btnRadio="MEDIUM">Medium</label>
+          <label class="btn btn-default" [(ngModel)]="test.difficulty" btnRadio="HARD">Hard</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="questionText" class="control-label col-sm-6">Intelligent Type</label>
+      <div class="col-sm-6">
+        <div class="btn-group">
+          <label class="btn btn-default" [(ngModel)]="test.intelligentType" btnRadio="NORMAL">Normal</label>
+          <label class="btn btn-default" [(ngModel)]="test.intelligentType" btnRadio="INTELLIGENT">Intelligent</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <button class="btn btn-primary" (click)="start()">Start</button>
+    </div>
+  </div>
+  <div *ngIf="test.id">
+    <div *ngIf="! test.endDate">
+      <div *ngIf="! breakTimer">
+
+        <div class="col-xs-12 text-right">
+          <button class="btn btn-default">Help</button>
+          <button class="btn btn-default">Next</button>
+        </div>
+        <div class="col-xs-12">
+          <div class="col-sm-offset-4 col-sm-4 text-center">
+            Question 1 of 2
+          </div>
+          <div class="col-sm-4 text-right">
+            <button class="btn btn-default">Hide Time</button>
+            <timer-component [timer]="sectionTimer" (timeEnded)="sectionTimeEnded()"></timer-component>
+          </div>
+        </div>
+
+        <div [ngSwitch]="currentQuestion.questionType">
+          <div *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_SINGLE_ANSWER'"><answer-data-interpretation-set-single-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-data-interpretation-set-single-answer-question></div>
+          <div *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_MULTIPLE_ANSWER'"><answer-data-interpretation-set-multiple-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-data-interpretation-set-multiple-answer-question></div>
+          <div *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_NUMERIC'"><answer-data-interpretation-set-numeric-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-data-interpretation-set-numeric-question></div>
+          <div *ngSwitchCase="'GRE_NUMERIC'"><answer-numeric-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-numeric-question></div>
+          <div *ngSwitchCase="'GRE_NUMERIC_FRACTION'"><answer-numeric-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-numeric-question></div>
+          <div *ngSwitchCase="'GRE_QUANTITATIVE_COMPARISON'"><answer-quantitative-comparison-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-quantitative-comparison-question></div>
+          <div *ngSwitchCase="'GRE_QUANTITATIVE_SINGLE_ANSWER'"><answer-quantitative-single-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-quantitative-single-answer-question></div>
+          <div *ngSwitchCase="'GRE_QUANTITATIVE_MULTIPLE_ANSWER'"><answer-quantitative-multiple-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-quantitative-multiple-answer-question></div>
+          <div *ngSwitchCase="'GRE_READING_COMPREHENSION_SINGLE_ANSWER'"><answer-reading-comprehension-single-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-reading-comprehension-single-answer-question></div>
+          <div *ngSwitchCase="'GRE_READING_COMPREHENSION_MULTIPLE_ANSWER'"><answer-reading-comprehension-multiple-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-reading-comprehension-multiple-answer-question></div>
+          <div *ngSwitchCase="'GRE_READING_COMPREHENSION_SELECT_IN_PASSAGE'"><answer-select-in-passage-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-select-in-passage-question></div>
+          <div *ngSwitchCase="'GRE_SENTENCE_EQUIVALENCE'"><answer-sentence-equivalence-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-sentence-equivalence-question></div>
+          <div *ngSwitchCase="'GRE_TEXT_COMPLETION_ONE_BLANK'"><answer-text-completion-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-text-completion-question></div>
+          <div *ngSwitchCase="'GRE_TEXT_COMPLETION_TWO_BLANK'"><answer-text-completion-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-text-completion-question></div>
+          <div *ngSwitchCase="'GRE_TEXT_COMPLETION_THREE_BLANK'"><answer-text-completion-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-text-completion-question></div>
+          <div *ngSwitchCase="'GRE_WRITING_ISSUE'"><answer-writing-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-writing-question></div>
+          <div *ngSwitchCase="'GRE_WRITING_ARGUMENT'"><answer-writing-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-writing-question></div>
+        </div>
+        <div class="form-group col-xs-4 text-left">
+          <button *ngIf="! isFirstQuestion()" class="btn btn-default" (click)="previousQuestion()"><span class="glyphicon glyphicon-chevron-left"></span></button>
+        </div>
+        <div class="form-group col-xs-4 text-center">
+          <button *ngIf="! isLastSection()" class="btn btn-primary" (click)="nextSection()">Next Section</button>
+          <button *ngIf="isLastSection()" class="btn btn-primary" (click)="finishTest()">End Test</button>
+        </div>
+        <div class="form-group col-xs-4 text-right">
+          <button *ngIf="! isLastQuestion()" class="btn btn-default" (click)="nextQuestion()"><span class="glyphicon glyphicon-chevron-right"></span></button>
+        </div>
+      </div>
+
+
+
+
+      <div *ngIf="breakTimer">
+        <div class="well well-sm form-horizontal">
+          <label class="col-xs-6 col-sm-offset-4 col-sm-4 text-center">
+            Break Time
+          </label>
+          <div class="col-xs-6 col-sm-4 text-right">
+            <timer-component [timer]="breakTimer" (timeEnded)="endBreak()"></timer-component>
+          </div>
+          <div class="form-group"></div>
+        </div>
+        <div class="form-group col-xs-offset-4 col-xs-4 text-center">
+          <button class="btn btn-primary" (click)="endBreak()">Next Section</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="test.endDate">
+      <div class="well well-sm form-horizontal">
+        <label class="col-xs-12 text-center">
+          This has been finished.
+        </label>
+        <div class="form-group"></div>
+      </div>
+      <div class="form-group text-center control-text">
+        <button class="btn btn-primary" [routerLink]="['/tests/gre']">Back</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="container" *ngIf="false">
   <div *ngIf="! test.id" class="form-horizontal well well-sm">
     <div class="form-group">
       <label for="questionText" class="control-label col-sm-6">Difficulty</label>

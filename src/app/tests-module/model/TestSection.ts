@@ -10,6 +10,8 @@ export class TestSection {
   number:number;
   answeredQuestions: Question[] = [];
   test:Test;
+  remainingSeconds:number;
+  lastQuestionNumber:number;
 
 }
 

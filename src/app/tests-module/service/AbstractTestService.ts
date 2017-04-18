@@ -74,6 +74,7 @@ export abstract class AbstractTestService implements TestService {
             testSection.answeredQuestions.forEach(question => {
               let q:Question = QuestionFactory.valueOf(question.questionType);
               q.copy(question);
+              q.prepare();
               questions.push(q);
             });
             testSection.answeredQuestions = questions;

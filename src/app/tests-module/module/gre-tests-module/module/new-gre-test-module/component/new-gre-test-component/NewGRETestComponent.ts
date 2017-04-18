@@ -30,9 +30,9 @@ export class NewGRETestComponent {
         this.currentSectionType = test.sectionTypes[test.testSections.length - 1];
         this.currentSection = test.testSections[test.testSections.length - 1];
         this.prepareParents();
-        this.sectionTimer  = new Timer(greSections[this.currentSectionType].time * 60, true);
+        this.sectionTimer  = new Timer(this.currentSection.remainingSeconds, true);
         this.sectionLabel = greSections[this.currentSectionType].label;
-        this.currentQuestion = this.currentSection.answeredQuestions[0];
+        this.currentQuestion = this.currentSection.answeredQuestions[this.currentSection.lastQuestionNumber - 1];
       }
     })
   }
