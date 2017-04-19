@@ -33,6 +33,8 @@ export class NewGRETestComponent {
         this.sectionTimer  = new Timer(this.currentSection.remainingSeconds, true);
         this.sectionLabel = greSections[this.currentSectionType].label;
         this.currentQuestion = this.currentSection.answeredQuestions[this.currentSection.lastQuestionNumber - 1];
+      } else {
+        this.start();
       }
     })
   }

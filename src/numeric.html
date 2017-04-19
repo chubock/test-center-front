@@ -28,44 +28,55 @@
     .bold {
       font-weight: bold;
     }
+
+    .radio-btn {
+      width: 30px;
+      height: 20px;
+      border: solid black 1px;
+      border-radius: 42px;
+      margin: 1px 10px;
+    }
+
+    .radio-btn:hover {
+      background-color: black;
+    }
+
+    .radio-btn.selected {
+      background-color: black;
+    }
+
   </style>
 
 </head>
 <body>
 <div class="container" style="height: 800px">
   <div class="row" style="background-color: #D2E4F0">
-    <div class="col-sm-6 bold">GRE Practice Test 1 Section 1 of 5</div>
+    <div class="col-sm-6 bold">GRE Practice Test 1 Section 2 of 5</div>
     <div class="col-sm-6 text-right">
       <button class="test-btn test-btn-square bold">Quit w/Save</button>
+      <button class="test-btn test-btn-square bold">Exit Section</button>
+      <button class="test-btn test-btn-square bold">Review</button>
+      <button class="test-btn test-btn-square bold">Mark</button>
       <button class="test-btn test-btn-square bold">Help</button>
+      <button class="test-btn test-btn-square bold">Back</button>
       <button class="test-btn test-btn-square bold">Next</button>
     </div>
   </div>
   <div class="row" style="background-color: #D2E4F0; padding: 5px 0;">
     <div class="col-sm-4"></div>
-    <div class="col-sm-4 text-center bold">Question 1 of 2</div>
+    <div class="col-sm-4 text-center bold">Question 1 of 20</div>
     <div class="col-sm-4 text-right">
       <button class="test-btn bold">Hide Time</button>
       <span class="bold">00 : 29 : 20</span>
     </div>
   </div>
   <div class="row test-border" style="height: 700px">
-    <div class="col-sm-5 test-border" style="padding: 2px; height: 100%">
-      <p class="test-border" style="padding: 15px">
-        A nation should require all of its students to study the same national curriculum untill they enter college.
-      </p>
-      <p style="padding: 15px">
-        Write a response in which you discuss the extent to which you agree or disagree with the recomendation and explain your reasoning for the position you take. In developing and supporting your position, describe specific circumstances in which adopting the recomendation would or would not be advantageous and explain how these examples shape your position.
-      </p>
-    </div>
-    <div class="col-sm-7 test-border" style="padding: 0; height: 100%">
-      <div class="col-xs-12" style="padding: 2px; background-color: #C2C1BF">
-        <button style="background-color: #C4C6C8">Cut</button>
-        <button style="background-color: #C4C6C8">Paste</button>
-        <button style="background-color: #C4C6C8">Undo</button>
-        <button style="background-color: #C4C6C8">Redo</button>
-      </div>
-      <textarea style="width: 100%; height: 668px; padding: 2px "></textarea>
+    <div class="test-border" style="padding: 100px; margin: 2px; height: 694px">
+
+      <div style="margin: 10px 100px 50px 100px; text-align: center">If x and y are the tens digit and the units digit, respectively, of the product 725,278 * 79,066, what is the value of x + y ?</div>
+
+      <div class="text-center"><input style="width: 150px; text-align: right"> years</div>
+
     </div>
   </div>
 </div>
