@@ -8,7 +8,8 @@ import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
 
 @Component({
   selector: "answer-quantitative-comparison-question",
-  templateUrl: "./answer-quantitative-comparison-question-component.html"
+  templateUrl: "./answer-quantitative-comparison-question-component.html",
+  styleUrls: ['./style.css']
 })
 export class AnswerQuantitativeComparisonQuestionComponent extends AnswerQuestionComponent<QuantitativeComparisonQuestion>{
 
@@ -20,7 +21,7 @@ export class AnswerQuantitativeComparisonQuestionComponent extends AnswerQuestio
   }
 
   onSelect(selected: number): void {
-    this.question.selected = selected;
+    this.question.selected == selected ? this.question.selected = null : this.question.selected = selected;
     this.onAnswerChanged();
   }
 

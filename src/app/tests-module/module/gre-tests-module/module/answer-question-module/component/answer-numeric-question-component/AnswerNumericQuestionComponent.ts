@@ -8,7 +8,8 @@ import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
 
 @Component({
   selector: "answer-numeric-question",
-  templateUrl: "./answer-numeric-question-component.html"
+  templateUrl: "./answer-numeric-question-component.html",
+  styleUrls: ['./style.css']
 })
 export class AnswerNumericQuestionComponent extends AnswerQuestionComponent<NumericQuestion>{
 

@@ -1,0 +1,23 @@
+.test-border {
+  border: solid 1px black;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.radio-btn {
+  width: 30px;
+  height: 20px;
+  border: solid black 1px;
+  border-radius: 42px;
+  margin: 1px 10px;
+}
+
+.radio-btn:hover {
+  background-color: black;
+}
+
+.radio-btn.selected {
+  background-color: black;
+}

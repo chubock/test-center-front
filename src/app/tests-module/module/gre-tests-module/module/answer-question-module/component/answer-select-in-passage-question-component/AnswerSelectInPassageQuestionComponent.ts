@@ -12,7 +12,7 @@ import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
 @Component({
   selector: "answer-select-in-passage-question",
   templateUrl: "./answer-select-in-passage-question-component.html",
-  styles: ['.choice-text{cursor: pointer}', '.choice-text-selected{font-weight: bolder}']
+  styleUrls: ['./style.css']
 })
 export class AnswerSelectInPassageQuestionComponent extends AnswerQuestionComponent<SelectInPassageQuestion> implements OnInit{
 

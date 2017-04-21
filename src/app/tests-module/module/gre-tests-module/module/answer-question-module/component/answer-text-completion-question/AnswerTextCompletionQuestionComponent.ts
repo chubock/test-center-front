@@ -1,6 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {TextCompletionQuestion} from "../../../../../../../questions-module/module/gre-questions-module/model/TextCompletionQuestion";
 import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
+import {TextCompletionQuestionItem} from "../../../../../../../questions-module/module/gre-questions-module/model/TextCompletionQuestionItem";
+import {Choice} from "../../../../../../../questions-module/model/Choice";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -8,7 +10,8 @@ import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
 
 @Component({
   selector: "answer-text-completion-question",
-  templateUrl: "./answer-text-completion-question-component.html"
+  templateUrl: "./answer-text-completion-question-component.html",
+  styleUrls: ['./style.css']
 })
 export class AnswerTextCompletionQuestionComponent extends AnswerQuestionComponent<TextCompletionQuestion> {
 
@@ -20,5 +23,10 @@ export class AnswerTextCompletionQuestionComponent extends AnswerQuestionCompone
       item.selected == null ? answer += "N" : answer += item.selected;
     });
     this.answerChanged.emit(answer);
+  }
+
+  answer(item:TextCompletionQuestionItem, choice:number):void {
+    item.selected == choice ? item.selected = null : item.selected = choice;
+    this.onAnswerChanged();
   }
 }

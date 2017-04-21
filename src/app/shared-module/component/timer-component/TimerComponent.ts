@@ -7,7 +7,7 @@ import {Timer} from "../../model/Timer";
 
 @Component({
   selector: 'timer-component',
-  template: '{{timer.seconds | time}}',
+  template: '{{timer.hidden ? "" : timer.seconds | time}}',
   providers: [SimpleTimer]
 })
 export class TimerComponent implements OnInit, OnChanges{

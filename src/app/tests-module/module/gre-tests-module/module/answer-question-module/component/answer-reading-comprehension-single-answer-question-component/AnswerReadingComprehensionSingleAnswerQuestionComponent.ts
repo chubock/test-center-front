@@ -8,7 +8,8 @@ import {ReadingComprehensionSingleAnswerQuestion} from "../../../../../../../que
 
 @Component({
   selector: "answer-reading-comprehension-single-answer-question",
-  templateUrl: "../answer-inner-choice-question-component.html"
+  templateUrl: "./answer-reading-comprehension-single-answer-question-component.html",
+  styleUrls: ['./style.css']
 })
 export class AnswerReadingComprehensionSingleAnswerQuestionComponent extends AnswerChoicesQuestionComponent<ReadingComprehensionSingleAnswerQuestion>{
 
@@ -18,7 +19,7 @@ export class AnswerReadingComprehensionSingleAnswerQuestionComponent extends Ans
   }
 
   onSelect(selected: number): void {
-    this.question.selected = selected;
+    this.question.selected == selected ? this.question.selected = null : this.question.selected = selected;
     this.onAnswerChanged();
   }
 

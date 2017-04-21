@@ -1,13 +1,15 @@
 import {AnswerChoicesQuestionComponent} from "../AnswerChoicesQuestionComponent";
 import {Component, OnInit} from "@angular/core";
 import {QuantitativeMultipleAnswerQuestion} from "../../../../../../../questions-module/module/gre-questions-module/model/QuantitativeMultipleAnswerQuestion";
+import {Choice} from "../../../../../../../questions-module/model/Choice";
 /**
  * Created by Yubar on 3/21/2017.
  */
 
 @Component({
   selector: "answer-quantitative-multiple-answer-question",
-  templateUrl: "../answer-choice-question-component.html"
+  templateUrl: "./answer-quantitative-multiple-answer-question-component.html",
+  styleUrls: ['./style.css']
 })
 export class AnswerQuantitativeMultipleAnswerQuestionComponent extends AnswerChoicesQuestionComponent<QuantitativeMultipleAnswerQuestion> {
 
@@ -25,6 +27,11 @@ export class AnswerQuantitativeMultipleAnswerQuestionComponent extends AnswerCho
 
   onChange(state:boolean, number:number) {
     this.question.choices[number].selected = state;
+    this.onAnswerChanged();
+  }
+
+  answer(choice:Choice):void {
+    choice.selected = ! choice.selected;
     this.onAnswerChanged();
   }
 

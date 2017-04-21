@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {AnswerChoicesQuestionComponent} from "../AnswerChoicesQuestionComponent";
 import {SentenceEquivalenceQuestion} from "../../../../../../../questions-module/module/gre-questions-module/model/SentenceEquivalenceQuestion";
+import {Choice} from "../../../../../../../questions-module/model/Choice";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -8,7 +9,8 @@ import {SentenceEquivalenceQuestion} from "../../../../../../../questions-module
 
 @Component({
   selector: "answer-sentence-equivalence-question",
-  templateUrl: "../answer-choice-question-component.html"
+  templateUrl: "./answer-sentence-equivalence-question-component.html",
+  styleUrls: ['./style.css']
 })
 export class AnswerSentenceEquivalenceQuestionComponent extends AnswerChoicesQuestionComponent<SentenceEquivalenceQuestion> {
   multipleAnswer:boolean = true;
@@ -25,6 +27,11 @@ export class AnswerSentenceEquivalenceQuestionComponent extends AnswerChoicesQue
 
   onChange(state:boolean, number:number) {
     this.question.choices[number].selected = state;
+    this.onAnswerChanged();
+  }
+
+  answer(choice:Choice):void {
+    choice.selected = ! choice.selected;
     this.onAnswerChanged();
   }
 }

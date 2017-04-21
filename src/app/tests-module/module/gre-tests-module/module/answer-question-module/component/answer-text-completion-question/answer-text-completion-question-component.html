@@ -1,34 +1,59 @@
-<div *ngIf="direction" class="well well-sm form-horizontal">
-  <label class="col-xs-12">
-    {{direction}}
-  </label>
-  <div class="form-group"></div>
+<div class="row" style="border: solid 1px black;">
+  <div class="text-center" style="padding: 20px; margin: 2px; height: 100px; border: solid 1px black;">
+    Select one entry for the blank in the way that best completes the text.
+  </div>
+  <div style="padding: 100px; margin: 2px; border: solid 1px black;">
+    {{question.text}}
+
+    <div class="text-center" style="padding: 50px">
+      <table *ngFor="let q of question.items; let i = index" class="text-center" style="width: 200px; display: inline-table">
+        <thead *ngIf="question.items.length > 1">
+        <tr>
+          <td class="text-center" style="padding: 5px">Blank ({{i + 1}})</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let choice of q.choices; let i = index;"><td (click)="answer(q, i);" class="col-option" [ngClass]="{'col-selected': q.selected == i}" style="border: 1px solid black">{{choice.text}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
-<div class="form-horizontal well well-sm">
-  <div class="form-group text-center"><label>{{question.number}}</label></div>
-  <div class="form-group">
-    <span [mathJax]="question.text" class="col-xs-12"></span>
+
+<div *ngIf="false">
+  <div *ngIf="direction" class="well well-sm form-horizontal">
+    <label class="col-xs-12">
+      {{direction}}
+    </label>
+    <div class="form-group"></div>
   </div>
-  <div class="form-group">
-    <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
-  </div>
-  <div>
-    <table class="table">
-      <thead>
-      <tr>
-        <th *ngFor="let q of question.items; let i = index">BLANK {{i + 1}}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let choices of question.matrix; let i = index;">
-        <td *ngFor="let choice of choices; let j = index">
-          <a (click)="question.items[j].selected = i; onAnswerChanged();" class="btn no-padding"><span *ngIf="mode == 'ANSWER'" [ngClass]="{'text-success': i == question.items[j].selected}"> {{choice.text}} </span></a>
-          <span *ngIf="mode == 'ANSWERED'" [ngClass]="{'text-success': i == question.items[j].answer, 'text-danger': i == question.items[j].selected && question.items[j].selected != question.items[j].answer}">{{choice.text}}</span>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+
+  <div class="form-horizontal well well-sm">
+    <div class="form-group text-center"><label>{{question.number}}</label></div>
+    <div class="form-group">
+      <span [mathJax]="question.text" class="col-xs-12"></span>
+    </div>
+    <div class="form-group">
+      <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
+    </div>
+    <div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th *ngFor="let q of question.items; let i = index">BLANK {{i + 1}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let choices of question.matrix; let i = index;">
+          <td *ngFor="let choice of choices; let j = index">
+            <a (click)="question.items[j].selected = i; onAnswerChanged();" class="btn no-padding"><span *ngIf="mode == 'ANSWER'" [ngClass]="{'text-success': i == question.items[j].selected}"> {{choice.text}} </span></a>
+            <span *ngIf="mode == 'ANSWERED'" [ngClass]="{'text-success': i == question.items[j].answer, 'text-danger': i == question.items[j].selected && question.items[j].selected != question.items[j].answer}">{{choice.text}}</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 

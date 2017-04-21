@@ -1,0 +1,9 @@
+.test-border {
+  border: solid 1px black;
+}
+
+.col-selected, .col-option:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}

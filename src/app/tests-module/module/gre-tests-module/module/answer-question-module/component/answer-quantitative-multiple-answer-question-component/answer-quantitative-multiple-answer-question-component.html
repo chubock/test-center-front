@@ -1,0 +1,47 @@
+<div class="row test-border" style="height: 700px">
+  <div class="test-border" style="padding: 100px; margin: 2px; height: 694px">
+
+    <img *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto; display: block">
+
+    <div style="margin: 10px 100px 50px 100px; text-align: center">
+      <span [mathJax]="question.text"></span>
+    </div>
+
+    <table style="width: 100%; margin: 30px auto">
+      <tr *ngFor="let choice of question.choices; let i = index">
+        <td style="width: 50%; vertical-align: top; text-align: right"><div (click)="answer(choice)" [ngClass]="{'selected': choice.selected}" class="test-checkbox" style="display: inline-block"></div></td>
+        <td style="padding-bottom: 20px"><span [mathJax]="choice.text"></span></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="false">
+  <div *ngIf="direction" class="well well-sm form-horizontal">
+    <label class="col-xs-12">
+      {{direction}}
+    </label>
+    <div class="form-group"></div>
+  </div>
+
+  <div class="form-horizontal well well-sm">
+    <div class="form-group text-center"><label>{{question.number}}</label></div>
+    <div class="form-group">
+      <span [mathJax]="question.text" class="col-xs-12"></span>
+    </div>
+    <div class="form-group">
+      <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
+    </div>
+    <div class="form-group" *ngFor="let choice of question.choices; let i = index;">
+      <div class="text-right col-xs-1">
+        <p-checkbox *ngIf="multipleAnswer && (mode == 'ANSWER' || mode == 'ANSWERED')" (onChange)="onChange($event, i)" [(ngModel)]="choice.selected" [binary]="true" [disabled]="mode == 'ANSWERED' || (question.maxAnswerCount && question.maxAnswerCount == question.selects.length && !choice.selected)"></p-checkbox>
+        <p-radioButton *ngIf="!multipleAnswer && (mode == 'ANSWER' || mode == 'ANSWERED')" (onClick)="onSelect(i)" value="{{i}}" [(ngModel)]="question.selected" [disabled]="mode == 'ANSWERED'"></p-radioButton>
+      </div>
+      <div class="col-xs-11">
+        <span [mathJax]="question.choices[i].text" [ngClass]="{'text-success': mode == 'ANSWERED' && question.answers.indexOf(i) != -1, 'text-danger': mode == 'ANSWERED' && question.selects.indexOf(i) != -1 && question.answers.indexOf(i) == -1}" *ngIf="multipleAnswer"></span>
+        <span [mathJax]="question.choices[i].text" [ngClass]="{'text-success': mode == 'ANSWERED' && question.answer == i, 'text-danger': mode == 'ANSWERED' && question.selected == i && question.answer != i}" *ngIf="!multipleAnswer"></span>
+      </div>
+    </div>
+  </div>
+</div>
+

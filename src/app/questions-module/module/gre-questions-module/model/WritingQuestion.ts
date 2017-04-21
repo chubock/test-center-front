@@ -6,6 +6,7 @@ import {Question} from "../../../../questions-module/model/Question";
 export class WritingQuestion extends Question {
 
   type:string = "ANALYZE_AND_ISSUE";
+  description:string;
 
   constructor(text: string = "", public answer:string = "") {
     super(text);
@@ -14,6 +15,7 @@ export class WritingQuestion extends Question {
   copy(question: WritingQuestion): void {
     super.copy(question);
     this.type = question.type;
+    this.description = question.description;
     this.answer = question.answer;
   }
 
@@ -21,6 +23,7 @@ export class WritingQuestion extends Question {
     let ret = super.toJSON();
     ret.answer = this.answer;
     ret.type = this.type;
+    ret.description = this.description;
     return ret;
   }
 

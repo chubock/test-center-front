@@ -67,6 +67,8 @@ export abstract class AbstractTestService implements TestService {
     return this.http.get(this.url + "/current", {withCredentials: true})
       .toPromise()
       .then(response => {
+        if (! response.text())
+          return null;
         let test:Test = response.json() as Test;
         if (test && test.testSections) {
           test.testSections.forEach(testSection => {

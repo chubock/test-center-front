@@ -10,7 +10,8 @@ import {Timer} from "../../../../../../../shared-module/model/Timer";
 
 @Component({
   selector: 'new-gre-test-component',
-  templateUrl: './new-gre-test-component.html'
+  templateUrl: './new-gre-test-component.html',
+  styleUrls: ['./style.css']
 })
 export class NewGRETestComponent {
 
@@ -30,9 +31,11 @@ export class NewGRETestComponent {
         this.currentSectionType = test.sectionTypes[test.testSections.length - 1];
         this.currentSection = test.testSections[test.testSections.length - 1];
         this.prepareParents();
-        this.sectionTimer  = new Timer(this.currentSection.remainingSeconds, true);
+        // this.sectionTimer  = new Timer(this.currentSection.remainingSeconds, true);
+        this.sectionTimer  = new Timer(greSections[this.currentSectionType].time * 60, true);
         this.sectionLabel = greSections[this.currentSectionType].label;
-        this.currentQuestion = this.currentSection.answeredQuestions[this.currentSection.lastQuestionNumber - 1];
+        // this.currentQuestion = this.currentSection.answeredQuestions[this.currentSection.lastQuestionNumber - 1];
+        this.currentQuestion = this.currentSection.answeredQuestions[0];
       } else {
         this.start();
       }

@@ -1,0 +1,18 @@
+.test-border {
+  border: solid 1px black;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.passage-text a.choice-text {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+}
+
+.passage-text a.choice-text:hover, .passage-text a.choice-text-selected {
+  background-color: black;
+  color: white;
+}

@@ -11,6 +11,9 @@ export class NumericQuestion extends Question {
   nominator: number;
   denominator: number;
 
+  prefix:string;
+  postfix:string;
+
   constructor(text: string = "", public fraction:boolean = false) {
     super(text);
   }
@@ -27,6 +30,9 @@ export class NumericQuestion extends Question {
     this.nominatorAnswer = question.nominatorAnswer;
     this.denominatorAnswer = question.denominatorAnswer;
 
+    this.prefix = question.prefix;
+    this.postfix = question.postfix;
+
   }
 
   toJSON():any {
@@ -36,6 +42,8 @@ export class NumericQuestion extends Question {
     ret.fraction = this.fraction;
     ret.denominator = this.denominator;
     ret.denominatorAnswer = this.denominatorAnswer;
+    ret.prefix = this.prefix;
+    ret.postfix = this.postfix;
     return ret;
   }
 

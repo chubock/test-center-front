@@ -1,0 +1,19 @@
+.test-border {
+  border: solid 1px black;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.test-checkbox {
+  width: 20px;
+  height: 20px;
+  border: solid black 1px;
+  display: inline-block;
+}
+
+.test-checkbox:hover, .test-checkbox.selected {
+  background-image: url('cross.png');
+  background-size: contain
+}

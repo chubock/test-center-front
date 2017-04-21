@@ -22,7 +22,7 @@ export class QuantitativeComparisonQuestionsComponent extends AbstractQuestionLi
   }
 
   create(): void {
-    this.question = new QuantitativeComparisonQuestion("X + 2", "X * 2");
+    this.question = new QuantitativeComparisonQuestion("", "X + 2", "X * 2");
   }
 
   get type():string {

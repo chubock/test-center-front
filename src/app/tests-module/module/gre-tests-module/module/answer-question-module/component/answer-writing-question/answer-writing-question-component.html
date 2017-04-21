@@ -1,4 +1,25 @@
-<div class="form-horizontal well well-sm">
+<div class="row" style="height: 700px; border: solid 1px black;">
+  <div class="col-sm-5" style="padding: 2px; height: 100%; border: solid 1px black;">
+    <div style="padding: 15px; border: solid 1px black;">
+      <span [mathJax]="question.text"></span>
+    </div>
+    <div style="padding: 15px;">
+      <span [mathJax]="question.description"></span>
+    </div>
+  </div>
+  <div class="col-sm-7" style="padding: 0; height: 100%; border: solid 1px black;">
+    <div class="col-xs-12" style="padding: 2px; background-color: #C2C1BF">
+      <button style="background-color: #C4C6C8">Cut</button>
+      <button style="background-color: #C4C6C8">Paste</button>
+      <button style="background-color: #C4C6C8">Undo</button>
+      <button style="background-color: #C4C6C8">Redo</button>
+    </div>
+    <textarea [disabled]="mode == 'ANSWERED'" [(ngModel)]="question.answer" (change)="onAnswerChanged()" style="width: 100%; height: 668px; padding: 2px "></textarea>
+  </div>
+</div>
+
+
+<div *ngIf="false" class="form-horizontal well well-sm">
   <div class="form-group">
     <span [mathJax]="question.text" class="col-xs-12"></span>
   </div>

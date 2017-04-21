@@ -21,6 +21,21 @@
       <span [mathJax]="question.text" *ngIf="mode != 'EDIT'"></span>
     </div>
   </div>
+  <div class="form-group">
+    <label for="description" class="control-label col-sm-3">Description :</label>
+    <div class="col-sm-9" [class.control-text]="mode != 'EDIT'">
+      <p-editor name="description" [(ngModel)]="question.description" *ngIf="mode == 'EDIT'">
+        <header>
+        <span class="ql-formats">
+            <button class="ql-bold"></button>
+            <button class="ql-italic"></button>
+            <button class="ql-underline"></button>
+        </span>
+        </header>
+      </p-editor>
+      <span [mathJax]="question.description" *ngIf="mode != 'EDIT'"></span>
+    </div>
+  </div>
   <div class="form-group" *ngIf="mode == 'EDIT'">
     <label for="image" class="control-label col-sm-3">Image: </label>
     <div class="col-sm-9">

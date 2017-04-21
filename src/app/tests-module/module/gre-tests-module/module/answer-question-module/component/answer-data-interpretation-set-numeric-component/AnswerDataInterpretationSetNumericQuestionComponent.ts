@@ -8,7 +8,8 @@ import {DataInterpretationNumericQuestion} from "../../../../../../../questions-
 
 @Component({
   selector: "answer-data-interpretation-set-numeric-question",
-  templateUrl: "./answer-data-interpretation-set-numeric-question-component.html"
+  templateUrl: "./answer-data-interpretation-set-numeric-question-component.html",
+  styleUrls: ['./style.css']
 })
 export class AnswerDataInterpretationSetNumericQuestionComponent extends AnswerChoicesQuestionComponent<DataInterpretationNumericQuestion>{
 

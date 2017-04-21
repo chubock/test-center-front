@@ -7,7 +7,8 @@ import {QuantitativeSingleAnswerQuestion} from "../../../../../../../questions-m
 
 @Component({
   selector: "answer-quantitative-single-answer-question",
-  templateUrl: "../answer-choice-question-component.html"
+  templateUrl: "./answer-quantitative-single-answer-question-component.html",
+  styleUrls: ['./style.css']
 })
 export class AnswerQuantitativeSingleAnswerQuestionComponent extends AnswerChoicesQuestionComponent<QuantitativeSingleAnswerQuestion> {
 
@@ -19,7 +20,7 @@ export class AnswerQuantitativeSingleAnswerQuestionComponent extends AnswerChoic
   }
 
   onSelect(selected: number): void {
-    this.question.selected = selected;
+    this.question.selected == selected ? this.question.selected = null : this.question.selected = selected;
     this.onAnswerChanged();
   }
 }
