@@ -10,8 +10,16 @@ export class Question {
   difficultyLevel:string = "LEVEL3";
   image:number;
   questionType:string;
+  seen:boolean = false;
+  marked:boolean = false;
 
   constructor(public text:string = "") {}
+
+  getState():string {
+    if (! this.seen)
+      return "Not Answered";
+    else return "Answered";
+  }
 
   copy(question: Question): void {
     this.id = question.id;
@@ -21,6 +29,8 @@ export class Question {
     this.difficultyLevel = question.difficultyLevel;
     this.image = question.image;
     this.questionType = question.questionType;
+    this.seen = question.seen;
+    this.marked = question.marked;
   }
 
   prepare():void {
@@ -28,6 +38,6 @@ export class Question {
   }
 
   toJSON(): any{
-    return {id: this.id, number: this.number, text: this.text, difficulty: this.difficulty, difficultyLevel: this.difficultyLevel, image: this.image, questionType: this.questionType};
+    return {id: this.id, number: this.number, text: this.text, difficulty: this.difficulty, difficultyLevel: this.difficultyLevel, image: this.image, questionType: this.questionType, seen: this.seen, marked: this.marked};
   }
 }

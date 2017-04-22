@@ -19,3 +19,7 @@
 .hidden {
   visibility: hidden;
 }
+
+.selected-question {
+  background-color: lightblue;
+}

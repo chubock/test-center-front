@@ -11,6 +11,16 @@ export class MultipleAnswerChoiceQuestion extends ChoiceQuestion{
     super(text, numberOfChoices);
   }
 
+  getState():string {
+    if (this.maxAnswerCount) {
+      if (this.selects.length && this.selects.length != this.maxAnswerCount)
+        return "Incomplete";
+    } else if (this.selects.length)
+      return "Answered";
+    else
+      return super.getState();
+  }
+
   get answers(): number[] {
     let answers = [];
     this.choices.forEach((choice, index) => {

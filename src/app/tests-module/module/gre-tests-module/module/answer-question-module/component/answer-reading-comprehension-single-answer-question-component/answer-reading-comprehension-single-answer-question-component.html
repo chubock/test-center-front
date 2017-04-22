@@ -6,9 +6,12 @@
     <div *ngIf="question.parent.number == question.parent.lastNumber" style="background-color: blue; color: white; font-weight: bold; padding: 2px">
       Question {{question.parent.number}} is based on this passage.
     </div>
-    <p style="padding: 15px; padding-top: 30px">
-      Write a response in which you discuss the extent to which you agree or disagree with the recomendation and explain your reasoning for the position you take. In developing and supporting your position, describe specific circumstances in which adopting the recomendation would or would not be advantageous and explain how these examples shape your position.
-    </p>
+    <div style="padding: 15px; padding-top: 30px">
+      <span [mathJax]="question.parent.text"></span>
+    </div>
+
+    <img *ngIf="question.parent.image" [src]="serverUrl + '/files/' + question.parent.image" style="margin: 0 auto; display: block">
+
   </div>
   <div class="col-sm-6 test-border" style="padding: 20px; height: 100%">
     <div style="margin-bottom: 20px;">

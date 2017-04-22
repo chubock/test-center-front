@@ -1,5 +1,4 @@
 import {Question} from "../../../../questions-module/model/Question";
-import {SingleAnswerChoiceQuestion} from "../../../../questions-module/model/SingleAnswerChoiceQuestion";
 import {Choice} from "../../../../questions-module/model/Choice";
 import {TextCompletionQuestionItem} from "./TextCompletionQuestionItem";
 /**
@@ -13,6 +12,20 @@ export class TextCompletionQuestion extends Question {
   constructor(text:string = "") {
     super(text);
     this.pushItem(new TextCompletionQuestionItem(5));
+  }
+
+  getState():string {
+    let selects:number = 0;
+    this.items.forEach(item => {
+      if (item.selected != null)
+        selects++;
+    });
+    if (selects == 0)
+      return "Not Answered";
+    else if (selects == this.items.length)
+      return "Answered";
+    else
+      return "Incomplete";
   }
 
   get matrix():Choice[][] {
