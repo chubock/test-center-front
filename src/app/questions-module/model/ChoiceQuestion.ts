@@ -9,7 +9,7 @@ export abstract class ChoiceQuestion extends Question{
 
   constructor(text:string = "", numberOfChoices: number = 3) {
     super(text);
-    for (var i=0; i<numberOfChoices; i++)
+    for (let i=0; i<numberOfChoices; i++)
       this.pushChoice(new Choice(i));
   }
 

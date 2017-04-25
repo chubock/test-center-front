@@ -2,11 +2,15 @@
   <div class="row" style="background-color: #D2E4F0">
     <div class="col-sm-6 bold">GRE Practice Test Section {{currentSection.number}} of {{test.sectionTypes.length}}</div>
     <div class="col-sm-6 text-right">
-      <button *ngIf="! isLastSection()" (click)="nextSection()" class="test-btn test-btn-square bold">Continue</button>
-      <button class="test-btn test-btn-square bold">Quit w/Save</button>
-      <button class="test-btn test-btn-square bold">Help</button>
-      <button *ngIf="! isLastQuestion()" (click)="nextQuestion()" class="test-btn test-btn-square bold">Next</button>
-      <button *ngIf="! isFirstQuestion()" (click)="previousQuestion()" class="test-btn test-btn-square bold">Back</button>
+      <button *ngIf="view == 'MAIN' && ! isLastSection()" (click)="nextSection()" class="test-btn test-btn-square bold">Exit Section</button>
+      <button *ngIf="view == 'MAIN'" class="test-btn test-btn-square bold">Quit w/Save</button>
+      <button *ngIf="view == 'MAIN'" class="test-btn test-btn-square bold">Help</button>
+      <button *ngIf="view == 'MAIN'" (click)="toggleMark()" class="test-btn test-btn-square bold">{{currentQuestion.marked ? 'UnMark': 'Mark'}}</button>
+      <button *ngIf="view == 'MAIN' && currentSection.answeredQuestions.length > 1" (click)="view = 'REVIEW'" class="test-btn test-btn-square bold">Review</button>
+      <button *ngIf="view == 'REVIEW'" (click)="view = 'MAIN'" class="test-btn test-btn-square bold">Return</button>
+      <button *ngIf="view == 'REVIEW'" (click)="goToSelectedQuestion()" class="test-btn test-btn-square bold">Go To Question</button>
+      <button *ngIf="view == 'MAIN' && ! isFirstQuestion()" (click)="previousQuestion()" class="test-btn test-btn-square bold">Back</button>
+      <button *ngIf="view == 'MAIN' && ! isLastQuestion()" (click)="nextQuestion()" class="test-btn test-btn-square bold">Next</button>
     </div>
   </div>
   <div class="row" style="background-color: #D2E4F0; padding: 5px 0;">
@@ -18,7 +22,7 @@
     </div>
   </div>
 
-  <div [ngSwitch]="currentQuestion.questionType">
+  <div *ngIf="view == 'MAIN'" [ngSwitch]="currentQuestion.questionType">
     <div *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_SINGLE_ANSWER'"><answer-data-interpretation-set-single-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-data-interpretation-set-single-answer-question></div>
     <div *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_MULTIPLE_ANSWER'"><answer-data-interpretation-set-multiple-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-data-interpretation-set-multiple-answer-question></div>
     <div *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_NUMERIC'"><answer-data-interpretation-set-numeric-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-data-interpretation-set-numeric-question></div>
@@ -36,6 +40,53 @@
     <div *ngSwitchCase="'GRE_TEXT_COMPLETION_THREE_BLANK'"><answer-text-completion-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-text-completion-question></div>
     <div *ngSwitchCase="'GRE_WRITING_ISSUE'"><answer-writing-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-writing-question></div>
     <div *ngSwitchCase="'GRE_WRITING_ARGUMENT'"><answer-writing-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-writing-question></div>
+  </div>
+
+  <div *ngIf="view == 'REVIEW'">
+    <p style="padding: 10px 15px">Below is the list of questions in the current section. The question you were on is highlighted. Questions you have seen are labeld <b>Answered</b>, <b>Incomplete</b>, or <b>Not Answered</b>. A question is labeled Incomplete if the question requires to select a certain number of answer choices and you have selected more or fewer than that number. Questions you have marked are indicated with a .</p>
+    <p style="padding: 10px 15px">To return to the question you were on, click Return</p>
+    <p style="padding: 10px 15px">To go to a different question, click on that question to highlight it, then click <b>Go To Question</b></p>
+
+    <div>
+      <div class="col-sm-6">
+        <table class="text-center" style="width: 100%">
+          <thead>
+          <tr>
+            <th class="col-xs-4 text-center" style="border: 1px solid lightblue; background-color: lightblue">Question Number</th>
+            <th class="col-xs-4 text-center" style="border: 1px solid lightblue; background-color: lightblue">Status</th>
+            <th class="col-xs-4 text-center" style="border: 1px solid lightblue; background-color: lightblue">Marked</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let question of currentSection.answeredQuestions.slice(0, 10)" (click)="selectedQuestion = question">
+            <td [ngClass]="{'selected-question': question == selectedQuestion}" style="border: 1px solid lightblue;">{{question.number}}</td>
+            <td [ngClass]="{'selected-question': question == selectedQuestion}" style="border: 1px solid lightblue;">{{question.getState()}}</td>
+            <td [ngClass]="{'selected-question': question == selectedQuestion}" style="border: 1px solid lightblue;"><img *ngIf="question.marked" src="images/checkmark.png" style="width: 16px; height: 16px"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin: 10px">
+        <div class="col-sm-6">
+          <table class="text-center" style="width: 100%">
+            <thead>
+            <tr>
+              <th class="col-xs-4 text-center" style="background-color: lightblue">Question Number</th>
+              <th class="col-xs-4 text-center" style="background-color: lightblue">Status</th>
+              <th class="col-xs-4 text-center" style="background-color: lightblue">Marked</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let question of currentSection.answeredQuestions.slice(10, 20)" (click)="selectedQuestion = question">
+              <td [ngClass]="{'selected-question': question == selectedQuestion}" style="border: 1px solid lightblue;">{{question.number}}</td>
+              <td [ngClass]="{'selected-question': question == selectedQuestion}" style="border: 1px solid lightblue;">{{question.getState()}}</td>
+              <td [ngClass]="{'selected-question': question == selectedQuestion}" style="border: 1px solid lightblue;"><img *ngIf="question.marked" src="images/checkmark.png" style="width: 16px; height: 16px"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>

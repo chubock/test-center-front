@@ -8,7 +8,8 @@ import {DataInterpretationSingleAnswerQuestion} from "../../../../../../../quest
 
 @Component({
   selector: "answer-data-interpretation-set-single-answer-question",
-  templateUrl: "../answer-inner-choice-question-component.html"
+  templateUrl: "./answer-data-interpretation-set-single-answer-question-component.html",
+  styleUrls: ['./style.css']
 })
 export class AnswerDataInterpretationSetSingleAnswerQuestionComponent extends AnswerChoicesQuestionComponent<DataInterpretationSingleAnswerQuestion>{
 
@@ -18,7 +19,7 @@ export class AnswerDataInterpretationSetSingleAnswerQuestionComponent extends An
   }
 
   onSelect(selected: number): void {
-    this.question.selected = selected;
+    this.question.selected == selected ? this.question.selected = null : this.question.selected = selected;
     this.onAnswerChanged();
   }
 }

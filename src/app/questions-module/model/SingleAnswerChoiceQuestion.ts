@@ -12,6 +12,12 @@ export class SingleAnswerChoiceQuestion extends ChoiceQuestion {
     super(text, numberOfChoices);
   }
 
+  getState():string {
+    if (this.selected)
+      return "Answered";
+    return "Not Answered";
+  }
+
   copy(question: SingleAnswerChoiceQuestion) :void  {
     super.copy(question);
     this.selected = question.selected;

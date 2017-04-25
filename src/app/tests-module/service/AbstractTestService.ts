@@ -102,8 +102,23 @@ export abstract class AbstractTestService implements TestService {
       });
   }
 
+  seeQuestion(id:number):Promise<void> {
+    return this.http.put(this.url + "/question/" + id + "/see", null, {withCredentials: true})
+      .toPromise();
+  }
+
   answerQuestion(id:number, answer:string): Promise<void> {
     return this.http.put(this.url + "/question/" + id + "/answer", answer, {withCredentials: true})
+      .toPromise();
+  }
+
+  markQuestion(id:number):Promise<void> {
+    return this.http.put(this.url + "/question/" + id + "/mark", null, {withCredentials: true})
+      .toPromise();
+  }
+
+  unMarkQuestion(id:number):Promise<void> {
+    return this.http.put(this.url + "/question/" + id + "/unMark", null, {withCredentials: true})
       .toPromise();
   }
 
