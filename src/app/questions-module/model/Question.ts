@@ -12,6 +12,7 @@ export class Question {
   questionType:string;
   seen:boolean = false;
   marked:boolean = false;
+  free:boolean = false;
 
   constructor(public text:string = "") {}
 
@@ -29,6 +30,7 @@ export class Question {
     this.difficultyLevel = question.difficultyLevel;
     this.image = question.image;
     this.questionType = question.questionType;
+    this.free = question.free;
     this.seen = question.seen;
     this.marked = question.marked;
   }
@@ -38,6 +40,6 @@ export class Question {
   }
 
   toJSON(): any{
-    return {id: this.id, number: this.number, text: this.text, difficulty: this.difficulty, difficultyLevel: this.difficultyLevel, image: this.image, questionType: this.questionType, seen: this.seen, marked: this.marked};
+    return {id: this.id, number: this.number, text: this.text, difficulty: this.difficulty, difficultyLevel: this.difficultyLevel, image: this.image, questionType: this.questionType, seen: this.seen, marked: this.marked, free: this.free};
   }
 }
