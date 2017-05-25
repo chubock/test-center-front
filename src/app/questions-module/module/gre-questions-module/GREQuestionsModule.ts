@@ -18,7 +18,7 @@ import {SentenceEquivalenceQuestionComponent} from "./component/sentence-equival
 import {SentenceEquivalenceQuestionsComponent} from "./component/sentence-equivalence-question-component/SentenceEquivalenceQuestionsComponent";
 import {WritingQuestionComponent} from "./component/writing-question-component/WritingQuestionComponent";
 import {WritingQuestionsComponent} from "./component/writing-question-component/WritingQuestionsComponent";
-import {DropdownModule, ButtonsModule, PaginationModule} from "ng2-bootstrap";
+import {ButtonsModule, PaginationModule} from "ng2-bootstrap";
 import {EditorModule} from "primeng/components/editor/editor";
 import {CheckboxModule} from "primeng/components/checkbox/checkbox";
 import {RadioButtonModule} from "primeng/components/radiobutton/radiobutton";
@@ -89,7 +89,7 @@ import {GREQuestionsRouteComponent} from "./GREQuestionsRouteComponent";
     PrimeSharedModule,
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
-    DropdownModule.forRoot(),
+    // DropdownModule.forRoot(),
     greQuestionsRouting
   ],
   providers: [
