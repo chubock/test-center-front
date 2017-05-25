@@ -50,17 +50,31 @@ export abstract class AbstractTestService implements TestService {
       .toPromise()
       .then(response => {
         let test:Test = response.json() as Test;
-        test.testSections.forEach(testSection => {
-          let questions: Question[] = [];
-          testSection.answeredQuestions.forEach(question => {
-            let q:Question = QuestionFactory.valueOf(question.questionType);
-            q.copy(question);
-            questions.push(q);
-          });
-          testSection.answeredQuestions = questions;
-        });
+        this.prepareNewTest(test);
         return test;
       });
+  }
+
+  createFreeTest(test:Test): Promise<Test> {
+    return this.http.post(this.url + "/free", test, {withCredentials: true})
+      .toPromise()
+      .then(response => {
+        let test:Test = response.json() as Test;
+        this.prepareNewTest(test);
+        return test;
+      });
+  }
+
+  private prepareNewTest(test:Test):void {
+    test.testSections.forEach(testSection => {
+      let questions: Question[] = [];
+      testSection.answeredQuestions.forEach(question => {
+        let q:Question = QuestionFactory.valueOf(question.questionType);
+        q.copy(question);
+        questions.push(q);
+      });
+      testSection.answeredQuestions = questions;
+    });
   }
 
   getCurrentTest():Promise<Test> {

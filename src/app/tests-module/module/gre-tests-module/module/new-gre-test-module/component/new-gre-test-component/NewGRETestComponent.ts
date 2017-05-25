@@ -4,6 +4,7 @@ import {GRETestService} from "../../../../service/GRETestService";
 import {TestSection, greSections} from "../../../../../../model/TestSection";
 import {Question} from "../../../../../../../questions-module/model/Question";
 import {Timer} from "../../../../../../../shared-module/model/Timer";
+import {ActivatedRoute} from "@angular/router";
 /**
  * Created by Yubar on 3/19/2017.
  */
@@ -26,7 +27,7 @@ export class NewGRETestComponent {
   view:string = "MAIN";
   selectedQuestion:Question;
 
-  constructor(private testService:GRETestService){
+  constructor(private testService:GRETestService, private activatedRoute:ActivatedRoute){
     testService.getCurrentTest().then(test => {
       if (test) {
         this.test = test;
@@ -44,16 +45,27 @@ export class NewGRETestComponent {
   }
 
   start():void {
-    this.testService.createTest(this.test).then(test => {
-      this.test = test;
-      this.currentSectionType = test.sectionTypes[0];
-      this.currentSection = test.testSections[0];
-      this.prepareParents();
-      this.sectionTimer  = new Timer(greSections[this.currentSectionType].time * 60, true);
-      this.sectionLabel = greSections[this.currentSectionType].label;
-      this.currentQuestion = this.currentSection.answeredQuestions[0];
-      this.seeQuestion();
-    });
+    if (this.activatedRoute.snapshot.queryParams['free']) {
+      this.testService.createFreeTest(this.test).then(test => {
+        this.test = test;
+        this.initNewTest();
+      })
+    } else {
+      this.testService.createTest(this.test).then(test => {
+        this.test = test;
+        this.initNewTest();
+      });
+    }
+  }
+
+  initNewTest():void {
+    this.currentSectionType = this.test.sectionTypes[0];
+    this.currentSection = this.test.testSections[0];
+    this.prepareParents();
+    this.sectionTimer  = new Timer(greSections[this.currentSectionType].time * 60, true);
+    this.sectionLabel = greSections[this.currentSectionType].label;
+    this.currentQuestion = this.currentSection.answeredQuestions[0];
+    this.seeQuestion();
   }
 
   prepareParents():void {

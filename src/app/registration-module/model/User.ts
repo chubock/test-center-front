@@ -12,4 +12,6 @@ export class User {
   accountExpired:boolean = false;
   credentialExpired:boolean = false;
   locked:boolean = false;
+  freeGreTestCount:number = 0;
+  greTestCount:number = 0;
 }

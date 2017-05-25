@@ -10,6 +10,7 @@ export interface TestService {
   getTest(id:number): Promise<Test>;
   getTestSection(id:number): Promise<TestSection>;
   createTest(test:Test): Promise<Test>;
+  createFreeTest(test:Test): Promise<Test>;
   getCurrentTest():Promise<Test>;
   createNextSection(id:number, answers:any): Promise<TestSection>;
   seeQuestion(id:number):Promise<void>;
