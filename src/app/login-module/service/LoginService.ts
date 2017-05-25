@@ -16,8 +16,8 @@ export class LoginService implements OnInit{
   user:User = null ;
 
   constructor(private http:Http, private base64Service:Base64Service) {
-    if (localStorage.getItem("user"))
-      this.user = JSON.parse(localStorage.getItem("user")) as User;
+    if (sessionStorage.getItem("user"))
+      this.user = JSON.parse(sessionStorage.getItem("user")) as User;
   }
 
   ngOnInit():void {
@@ -30,14 +30,14 @@ export class LoginService implements OnInit{
     return this.http.get(this.serverUrl + this.url, {headers: headers, withCredentials: true})
       .toPromise()
       .then(resp => {
-        localStorage.setItem("user", resp.text());
+        sessionStorage.setItem("user", resp.text());
         this.user =  resp.json() as User;
         return this.user;
       });
   }
 
   logout():void {
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     this.user = null;
   }
 
