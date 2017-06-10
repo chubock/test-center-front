@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {AnswerChoicesQuestionComponent} from "../AnswerChoicesQuestionComponent";
 import {ReadingComprehensionMultipleAnswerQuestion} from "../../../../../../../questions-module/module/gre-questions-module/model/ReadingComprehensionMultipleAnswerQuestion";
 import {Choice} from "../../../../../../../questions-module/model/Choice";
+import {DomSanitizer} from "@angular/platform-browser";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -14,6 +15,10 @@ import {Choice} from "../../../../../../../questions-module/model/Choice";
 })
 export class AnswerReadingComprehensionMultipleAnswerQuestionComponent extends AnswerChoicesQuestionComponent<ReadingComprehensionMultipleAnswerQuestion> {
   multipleAnswer:boolean = true;
+
+  constructor(sanitizer:DomSanitizer){
+    super(sanitizer);
+  }
 
   onAnswerChanged(): void {
     let answer:string = "";
@@ -30,7 +35,9 @@ export class AnswerReadingComprehensionMultipleAnswerQuestionComponent extends A
   }
 
   answer(choice:Choice): void {
-    choice.selected = !choice.selected;
-    this.onAnswerChanged();
+    if (this.mode == 'ANSWER') {
+      choice.selected = !choice.selected;
+      this.onAnswerChanged();
+    }
   }
 }

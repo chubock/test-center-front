@@ -1,0 +1,25 @@
+.test-btn {
+  vertical-align: middle;
+  background-color:	#B6D0DC;
+}
+
+.test-btn-square {
+  width: 60px;
+  height: 50px;
+}
+
+.test-border {
+  border: solid 1px black;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.selected-question {
+  background-color: lightblue;
+}

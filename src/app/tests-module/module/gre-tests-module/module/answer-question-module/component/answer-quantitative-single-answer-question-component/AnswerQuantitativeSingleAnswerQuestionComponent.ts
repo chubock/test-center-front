@@ -1,6 +1,7 @@
 import {AnswerChoicesQuestionComponent} from "../AnswerChoicesQuestionComponent";
 import {Component} from "@angular/core";
 import {QuantitativeSingleAnswerQuestion} from "../../../../../../../questions-module/module/gre-questions-module/model/QuantitativeSingleAnswerQuestion";
+import {DomSanitizer} from "@angular/platform-browser";
 /**
  * Created by Yubar on 3/21/2017.
  */
@@ -12,7 +13,10 @@ import {QuantitativeSingleAnswerQuestion} from "../../../../../../../questions-m
 })
 export class AnswerQuantitativeSingleAnswerQuestionComponent extends AnswerChoicesQuestionComponent<QuantitativeSingleAnswerQuestion> {
 
-  direction:string = "Directions: Select a single answer choice.";
+  constructor(sanitizer:DomSanitizer){
+    super(sanitizer);
+  }
+
 
   onAnswerChanged(): void {
     if (this.question.selected != null)
@@ -20,7 +24,9 @@ export class AnswerQuantitativeSingleAnswerQuestionComponent extends AnswerChoic
   }
 
   onSelect(selected: number): void {
-    this.question.selected == selected ? this.question.selected = null : this.question.selected = selected;
-    this.onAnswerChanged();
+    if (this.mode == 'ANSWER'){
+      this.question.selected == selected ? this.question.selected = null : this.question.selected = selected;
+      this.onAnswerChanged();
+    }
   }
 }

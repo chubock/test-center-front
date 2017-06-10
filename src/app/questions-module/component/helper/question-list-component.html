@@ -1,3 +1,45 @@
+<div class="form-horizontal well well-sm">
+
+  <div class="form-group" *ngIf="questionTypes">
+    <label for="difficulties" class="control-label col-sm-3">Question Type: </label>
+    <div class="col-sm-9">
+      <div class="btn-group">
+        <label *ngFor="let q of questionTypes" class="btn btn-default" (click)="filterChangeListener(specification.questionTypes, q)" btnCheckbox>{{q}}</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="difficulties" class="control-label col-sm-3">Difficulty: </label>
+    <div class="col-sm-9">
+      <div class="btn-group">
+        <label class="btn btn-default" (click)="filterChangeListener(specification.difficulties, 'EASY')" btnCheckbox>Easy</label>
+        <label class="btn btn-default" (click)="filterChangeListener(specification.difficulties, 'MEDIUM')" btnCheckbox>Medium</label>
+        <label class="btn btn-default" (click)="filterChangeListener(specification.difficulties, 'HARD')" btnCheckbox>Hard</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="difficultyLevels" class="control-label col-sm-3">Difficulty Level: </label>
+    <div class="col-sm-9">
+      <div class="btn-group">
+        <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL1')" btnCheckbox>LEVEL 1</label>
+        <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL2')" btnCheckbox>LEVEL 2</label>
+        <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL3')" btnCheckbox>LEVEL 3</label>
+        <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL4')" btnCheckbox>LEVEL 4</label>
+        <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL5')" btnCheckbox>LEVEL 5</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="free" class="control-label col-sm-3">Free: </label>
+    <div class="col-sm-9">
+      <div class="btn-group">
+        <label class="btn btn-default" [uncheckable]="true" [(ngModel)]="specification.free" btnRadio="false" (click)="loadQuestions()">NO</label>
+        <label class="btn btn-default" [uncheckable]="true" [(ngModel)]="specification.free" btnRadio="true" (click)="loadQuestions()">YES</label>
+      </div>
+    </div>
+  </div>
+</div>
 <div [ngSwitch]="type">
   <div *ngSwitchCase="'numeric'"><numeric-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></numeric-question></div>
   <div *ngSwitchCase="'quantitative-comparison'"><quantitative-comparison-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></quantitative-comparison-question></div>

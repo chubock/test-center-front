@@ -10,7 +10,8 @@ import {TestSection, greSections} from "../../../../model/TestSection";
 
 @Component({
   selector: 'gre-test-component',
-  templateUrl: './gre-test-component.html'
+  templateUrl: './gre-test-component.html',
+  styleUrls: ['./style.css']
 })
 export class GRETestComponent implements OnInit{
 
@@ -19,6 +20,8 @@ export class GRETestComponent implements OnInit{
   currentSection: TestSection;
   currentSectionType: string;
   sectionLabel:string;
+  view:string = "MAIN";
+  selectedQuestion:Question;
 
   constructor(private activatedRoute: ActivatedRoute, private testService:GRETestService){}
 
@@ -31,9 +34,34 @@ export class GRETestComponent implements OnInit{
       this.sectionLabel = greSections[this.currentSectionType].label;
       this.testService.getTestSection(this.currentSection.id).then(testSection => {
         this.currentSection.answeredQuestions = testSection.answeredQuestions;
+        this.prepareParents();
         this.currentQuestion = this.currentSection.answeredQuestions[0];
       })
     });
+  }
+
+  prepareParents():void {
+    let parent:any = null;
+    let questions:any[] = this.currentSection.answeredQuestions;
+    for (let i=0; i< questions.length; i++) {
+      if (questions[i].parent) {
+        questions[i].parent.number = questions[i].number;
+        questions[i].parent.lastNumber = questions[i].number;
+        if (parent && parent.id == questions[i].parent.id) {
+          questions[i].parent = parent;
+          parent.lastNumber++;
+        } else {
+          parent = questions[i].parent;
+        }
+      }
+    }
+  }
+
+  toggleMark(): void {
+    if (this.currentQuestion.marked)
+      this.testService.unMarkQuestion(this.currentQuestion.id).then(e => this.currentQuestion.marked = false);
+    else
+      this.testService.markQuestion(this.currentQuestion.id).then(e => this.currentQuestion.marked = true);
   }
 
   isFirstQuestion():boolean {
@@ -54,6 +82,13 @@ export class GRETestComponent implements OnInit{
       this.currentQuestion = this.currentSection.answeredQuestions[this.currentSection.answeredQuestions.indexOf(this.currentQuestion) - 1];
   }
 
+  goToSelectedQuestion():void {
+    if (this.selectedQuestion) {
+      this.view = "MAIN";
+      this.currentQuestion = this.selectedQuestion;
+    }
+  }
+
   isFirstSection():boolean {
     return this.test.testSections.indexOf(this.currentSection) == 0;
   }
@@ -72,6 +107,7 @@ export class GRETestComponent implements OnInit{
           nextSection.answeredQuestions = testSection.answeredQuestions;
           this.currentSection = nextSection;
           this.currentQuestion = this.currentSection.answeredQuestions[0];
+          this.prepareParents();
         });
       else {
         this.currentSection = nextSection;
@@ -90,6 +126,7 @@ export class GRETestComponent implements OnInit{
           previousSection.answeredQuestions = testSection.answeredQuestions;
           this.currentSection = previousSection;
           this.currentQuestion = this.currentSection.answeredQuestions[this.currentSection.answeredQuestions.length - 1];
+          this.prepareParents();
         });
       else {
         this.currentSection = previousSection;

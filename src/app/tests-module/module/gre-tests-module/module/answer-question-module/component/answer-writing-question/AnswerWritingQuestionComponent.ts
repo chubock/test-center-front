@@ -1,6 +1,7 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {WritingQuestion} from "../../../../../../../questions-module/module/gre-questions-module/model/WritingQuestion";
 import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
+import {DomSanitizer} from "@angular/platform-browser";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -16,6 +17,10 @@ export class AnswerWritingQuestionComponent extends AnswerQuestionComponent<Writ
   undoBuffer:string[] = [];
   redoBuffer:string[] = [];
   lastActionDate:Date = new Date();
+
+  constructor(sanitizer:DomSanitizer){
+    super(sanitizer);
+  }
 
   onAnswerChanged(): void {
     this.answerChanged.emit(this.question.answer);

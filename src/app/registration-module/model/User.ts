@@ -14,4 +14,5 @@ export class User {
   locked:boolean = false;
   freeGreTestCount:number = 0;
   greTestCount:number = 0;
+  roles:string[] = [];
 }

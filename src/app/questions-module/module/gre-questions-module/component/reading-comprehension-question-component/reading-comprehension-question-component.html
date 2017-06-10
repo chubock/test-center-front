@@ -25,9 +25,9 @@
     <label for="image" class="control-label col-sm-3">Image: </label>
     <div class="col-sm-9">
       <label class="btn btn-default btn-file">
-        Browse <input type="file" name="image" (change)="uploadFile($event)" style="display: none;">
+        Browse <input type="file" name="image" (change)="uploadImage($event)" style="display: none;">
       </label>
-      <button class="btn btn-danger" *ngIf="question.image" (click)="question.image = 0">Remove</button>
+      <button class="btn btn-danger" *ngIf="question.image" (click)="question.image = null">Remove</button>
     </div>
   </div>
   <div class="col-sm-offset-3 col-sm-9">
@@ -41,6 +41,15 @@
         <label class="btn btn-default" [(ngModel)]="question.difficulty" btnRadio="MEDIUM">Medium</label>
         <label class="btn btn-default" [(ngModel)]="question.difficulty" btnRadio="HARD">Hard</label>
       </div>
+    </div>
+  </div>
+  <div class="form-group" *ngIf="mode == 'EDIT'">
+    <label for="document" class="control-label col-sm-3">Document: </label>
+    <div class="col-sm-9">
+      <label class="btn btn-default btn-file">
+        Browse <input type="file" name="document" (change)="uploadDocument($event)" style="display: none;">
+      </label>
+      <button class="btn btn-danger" *ngIf="question.document" (click)="question.document = null">Remove</button>
     </div>
   </div>
   <div class="form-group" *ngIf="mode == 'EDIT'">

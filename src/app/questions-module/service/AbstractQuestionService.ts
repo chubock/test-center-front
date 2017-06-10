@@ -3,6 +3,7 @@ import {Headers, Http, URLSearchParams} from "@angular/http";
 import {Page} from "../../shared-module/model/Page";
 import {Question} from "../model/Question";
 import {apiEndPoint} from "../../AppConfig";
+import {QuestionSpecification} from "./QuestionSpecification";
 /**
  * Created by Yubar on 1/20/2017.
  */
@@ -16,11 +17,21 @@ export abstract class AbstractQuestionService<T extends Question> implements Que
 
   abstract newInstance():T;
 
-  get(page:number = 0, size:number = 5): Promise<Page<T>> {
+  get(specification:QuestionSpecification, page:number = 0, size:number = 5): Promise<Page<T>> {
 
     let params: URLSearchParams = new URLSearchParams;
     params.set("page", page.toString());
     params.set("size", size.toString());
+
+    params.set("sort", "id,desc");
+
+    if (specification) {
+      specification.questionTypes.forEach(questionType=>params.append("questionTypes", questionType));
+      specification.difficulties.forEach(difficulty=>params.append("difficulties", difficulty));
+      specification.difficultyLevels.forEach(difficultyLevel=>params.append("difficultyLevels", difficultyLevel));
+      if (specification.free != null)
+        params.set("free", specification.free == "true" ? "true" : "false");
+    }
 
     return this.http
       .get(this.url, {search: params, withCredentials: true})

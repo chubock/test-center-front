@@ -4,6 +4,7 @@ import {
   PassageParagraph
 } from "../../../../../../../questions-module/module/gre-questions-module/model/SelectInPassageQuestion";
 import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
+import {DomSanitizer} from "@angular/platform-browser";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -15,6 +16,10 @@ import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
   styleUrls: ['./style.css']
 })
 export class AnswerSelectInPassageQuestionComponent extends AnswerQuestionComponent<SelectInPassageQuestion> implements OnInit{
+
+  constructor(sanitizer:DomSanitizer){
+    super(sanitizer);
+  }
 
   paragraphs:PassageParagraph[]= [];
 
@@ -34,6 +39,13 @@ export class AnswerSelectInPassageQuestionComponent extends AnswerQuestionCompon
   onAnswerChanged(): void {
     if (this.question.selected != null)
       this.answerChanged.emit(this.question.selected + "");
+  }
+
+  answer(number:number):void {
+    if (this.mode == "ANSWER"){
+      this.question.selected = number;
+      this.onAnswerChanged()
+    }
   }
 
 }

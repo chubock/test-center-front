@@ -3,6 +3,7 @@ import {OnInit} from "@angular/core";
 import {QuestionService} from "../../service/QuestionService";
 import {Question} from "../../model/Question";
 import {paginationLinksCount} from "../../../AppConfig";
+import {QuestionSpecification} from "../../service/QuestionSpecification";
 /**
  * Created by Yubar on 1/20/2017.
  */
@@ -13,13 +14,23 @@ export abstract class AbstractQuestionListComponent<T extends Question> implemen
   paginationLinksCount:number = paginationLinksCount;
   question:Question;
   protected questionService: QuestionService<T>;
+  specification:QuestionSpecification = new QuestionSpecification();
 
   ngOnInit(): void {
     this.loadQuestions();
   }
 
+  filterChangeListener(filters:string[], filter:string) {
+    let idx:number = filters.indexOf(filter);
+    if (idx == -1)
+      filters.push(filter);
+    else
+      filters.splice(idx, 1);
+    this.loadQuestions();
+  }
+
   loadQuestions(page:number = 0): void {
-    this.questionService.get(page, this.page.size).then(page => {
+    this.questionService.get(this.specification, page, this.page.size).then(page => {
       this.page = page;
       this.question = null;
     });

@@ -66,9 +66,22 @@ export abstract class AbstractQuestionComponent<T extends Question> implements O
     }
   }
 
-  uploadFile(event):void {
+  uploadImage(event):void {
+    let p = this.uploadFile(event);
+    if (p != null)
+      p.then(fileId => this.question.image = fileId);
+  }
+
+  uploadDocument(event):void {
+    let p = this.uploadFile(event);
+    if (p != null)
+      p.then(fileId => this.question.document = fileId);
+  }
+
+  uploadFile(event):Promise<number> {
     let fileList: FileList = event.target.files;
     if(fileList.length > 0)
-      this.fileService.upload(fileList[0]).then(fileId => this.question.image = fileId);
+      return this.fileService.upload(fileList[0]);
+    return null;
   }
 }

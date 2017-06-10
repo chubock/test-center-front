@@ -1,73 +1,40 @@
-<div class="row test-border" style="height: 500px">
-  <div class="col-sm-6 test-border" style="padding: 2px; height: 100%">
-    <div *ngIf="question.parent.number != question.parent.lastNumber" style="background-color: blue; color: white; font-weight: bold; padding: 2px">
-      Question {{question.parent.number}} to {{question.parent.lastNumber}} are based on this passage.
-    </div>
-    <div *ngIf="question.parent.number == question.parent.lastNumber" style="background-color: blue; color: white; font-weight: bold; padding: 2px">
-      Question {{question.parent.number}} is based on this passage.
-    </div>
-    <div style="padding: 15px; padding-top: 30px">
-      <span [mathJax]="question.parent.text"></span>
-    </div>
+<div class="row test-border" [ngClass]="{'hidden-tabs': mode == 'ANSWER'}">
+  <tabset>
+    <tab heading="Question">
 
-    <img *ngIf="question.parent.image" [src]="serverUrl + '/files/' + question.parent.image" style="margin: 0 auto; display: block">
+      <div class="col-sm-6 test-border" style="padding: 2px; height: 600px">
+        <div *ngIf="question.parent.number != question.parent.lastNumber" style="background-color: blue; color: white; font-weight: bold; padding: 2px">
+          Question {{question.parent.number}} to {{question.parent.lastNumber}} are based on this passage.
+        </div>
+        <div *ngIf="question.parent.number == question.parent.lastNumber" style="background-color: blue; color: white; font-weight: bold; padding: 2px">
+          Question {{question.parent.number}} is based on this passage.
+        </div>
+        <div style="padding: 15px; padding-top: 30px">
+          <span [mathJax]="question.parent.text"></span>
+        </div>
 
-  </div>
-  <div class="col-sm-6 test-border" style="padding: 20px; height: 100%">
-    <div style="margin-bottom: 20px;">
-      <span [mathJax]="question.text" class="col-xs-12"></span>
-    </div>
-    <table style="width: 100%">
-      <tr *ngFor="let choice of question.choices; let i = index;">
-        <td style="width: 50px; vertical-align: top"><div (click)="onSelect(i);" class="radio-btn" [ngClass]="{'selected': question.selected == i}"></div></td>
-        <td style="padding-bottom: 20px">{{choice.text}}</td>
-      </tr>
-    </table>
-  </div>
-</div>
+        <img *ngIf="question.parent.image" [src]="serverUrl + '/files/' + question.parent.image" style="margin: 0 auto; display: block">
 
-
-
-
-<div *ngIf="false">
-  <div class="well well-sm form-horizontal">
-    <label *ngIf="question.parent.number != question.parent.lastNumber" class="col-xs-12">
-      Directions: Questions {{question.parent.number}} to {{question.parent.lastNumber}} are based on the following data.
-    </label>
-    <label *ngIf="question.parent.number == question.parent.lastNumber" class="col-xs-12">
-      Directions: Question {{question.parent.number}} is based on the following data.
-    </label>
-    <div class="form-group"></div>
-  </div>
-  <div class="form-horizontal well well-sm">
-    <div class="form-group">
-      <span [mathJax]="question.parent.text" class="col-xs-12"></span>
-    </div>
-    <div class="form-group">
-      <img class="img-responsive img-rounded" *ngIf="question.parent.image" [src]="serverUrl + '/files/' + question.parent.image" style="margin: 0 auto;">
-    </div>
-  </div>
-  <div class="form-horizontal well well-sm">
-    <div class="form-group text-center"><label>{{question.number}}</label></div>
-    <div class="form-group">
-      <span [mathJax]="question.text" class="col-xs-12"></span>
-    </div>
-    <div class="form-group">
-      <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
-    </div>
-    <div class="form-group" *ngFor="let choice of question.choices; let i = index;">
-      <div class="text-right col-xs-1">
-        <p-checkbox *ngIf="multipleAnswer && (mode == 'ANSWER' || mode == 'ANSWERED')" (onChange)="onChange($event, i)" [(ngModel)]="choice.selected" [binary]="true" [disabled]="mode == 'ANSWERED' || (question.maxAnswerCount && question.maxAnswerCount == question.selects.length && !choice.selected)"></p-checkbox>
-        <p-radioButton *ngIf="!multipleAnswer && (mode == 'ANSWER' || mode == 'ANSWERED')" (onClick)="onSelect(i)" value="{{i}}" [(ngModel)]="question.selected" [disabled]="mode == 'ANSWERED'"></p-radioButton>
       </div>
-      <div class="col-xs-11">
-        <span [mathJax]="question.choices[i].text" [ngClass]="{'text-success': mode == 'ANSWERED' && question.answers.indexOf(i) != -1, 'text-danger': mode == 'ANSWERED' && question.selects.indexOf(i) != -1 && question.answers.indexOf(i) == -1}" *ngIf="multipleAnswer"></span>
-        <span [mathJax]="question.choices[i].text" [ngClass]="{'text-success': mode == 'ANSWERED' && question.answer == i, 'text-danger': mode == 'ANSWERED' && question.selected == i && question.answer != i}" *ngIf="!multipleAnswer"></span>
+      <div class="col-sm-6 test-border" style="padding: 20px; height: 600px">
+        <div style="margin-bottom: 20px;">
+          <span [mathJax]="question.text" class="col-xs-12"></span>
+        </div>
+        <table style="width: 100%">
+          <tr *ngFor="let choice of question.choices; let i = index;">
+            <td style="width: 50px; vertical-align: top"><div (click)="onSelect(i);" class="radio-btn" [ngClass]="{'selected': question.selected == i, 'disable': mode != 'ANSWER'}"></div></td>
+            <td style="padding-bottom: 20px"><span  [ngClass]="{'text-success': mode != 'ANSWER' && choice.answer}">{{choice.text}}</span></td>
+          </tr>
+        </table>
       </div>
-    </div>
-  </div>
+    </tab>
+
+    <tab heading="Document" *ngIf="question.document">
+      <object width="100%" height="650" [data]="getDocument()" type='application/pdf'>
+        <p>Sorry, the PDF couldn't be displayed :(</p>
+        <a [href]="getDocument()" target="_blank">Click Here</a>
+      </object>
+    </tab>
+    <tab heading="Video" *ngIf="question.video"></tab>
+  </tabset>
 </div>
-
-
-
-

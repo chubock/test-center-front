@@ -11,3 +11,7 @@
   width: auto !important;
 }
 
+.hidden-tabs ul.nav.nav-tabs {
+  display: none;
+}
+

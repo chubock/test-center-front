@@ -8,6 +8,8 @@ export class WritingQuestion extends Question {
   type:string = "ANALYZE_AND_ISSUE";
   description:string;
 
+  questionTypes:string[] =["GRE_WRITING_ARGUMENT", "GRE_WRITING_ISSUE"];
+
   constructor(text: string = "", public answer:string = "") {
     super(text);
   }

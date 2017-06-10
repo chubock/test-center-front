@@ -19,7 +19,7 @@ export class GRETestsComponent implements OnInit {
 
   ngOnInit():void {
     this.testService.getTests().then(tests => this.tests = tests);
-    this.user = this.loginService.user;
+    this.user = this.loginService.getUser();
   }
 
 }

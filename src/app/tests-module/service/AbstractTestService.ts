@@ -23,7 +23,7 @@ export abstract class AbstractTestService implements TestService {
   }
 
   getTest(id:number):Promise<Test> {
-    return this.http.get(this.url + "/" + id)
+    return this.http.get(this.url + "/" + id, {withCredentials: true})
       .toPromise()
       .then(response => response.json() as Test);
   }
@@ -35,7 +35,7 @@ export abstract class AbstractTestService implements TestService {
         let testSection:TestSection = resp.json();
         let questions: Question[] = [];
         testSection.answeredQuestions.forEach(question => {
-          let q:Question = QuestionFactory.valueOf(question.questionType);
+          let q:Question = QuestionFactory.createQuestion(question.questionType);
           q.copy(question);
           q.prepare();
           questions.push(q);
@@ -55,21 +55,11 @@ export abstract class AbstractTestService implements TestService {
       });
   }
 
-  createFreeTest(test:Test): Promise<Test> {
-    return this.http.post(this.url + "/free", test, {withCredentials: true})
-      .toPromise()
-      .then(response => {
-        let test:Test = response.json() as Test;
-        this.prepareNewTest(test);
-        return test;
-      });
-  }
-
   private prepareNewTest(test:Test):void {
     test.testSections.forEach(testSection => {
       let questions: Question[] = [];
       testSection.answeredQuestions.forEach(question => {
-        let q:Question = QuestionFactory.valueOf(question.questionType);
+        let q:Question = QuestionFactory.createQuestion(question.questionType);
         q.copy(question);
         questions.push(q);
       });
@@ -88,7 +78,7 @@ export abstract class AbstractTestService implements TestService {
           test.testSections.forEach(testSection => {
             let questions: Question[] = [];
             testSection.answeredQuestions.forEach(question => {
-              let q:Question = QuestionFactory.valueOf(question.questionType);
+              let q:Question = QuestionFactory.createQuestion(question.questionType);
               q.copy(question);
               q.prepare();
               questions.push(q);
@@ -107,7 +97,7 @@ export abstract class AbstractTestService implements TestService {
         let testSection:TestSection = response.json() as TestSection;
         let questions: Question[] = [];
         testSection.answeredQuestions.forEach(question => {
-          let q:Question = QuestionFactory.valueOf(question.questionType);
+          let q:Question = QuestionFactory.createQuestion(question.questionType);
           q.copy(question);
           questions.push(q);
         });

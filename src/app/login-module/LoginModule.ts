@@ -10,7 +10,6 @@ import {SharedModule} from "../shared-module/SharedModule";
 import {SharedModule as PrimeSharedModule} from "primeng/components/common/shared";
 import {EditorModule} from "primeng/components/editor/editor";
 import {LoginService} from "./service/LoginService";
-import {Base64Service} from "./service/Base64Service";
 import {ReCaptchaModule} from "angular2-recaptcha";
 /**
  * Created by yubar on 2/19/17.
@@ -32,7 +31,9 @@ import {ReCaptchaModule} from "angular2-recaptcha";
     SharedModule,
     loginRouting
   ],
-  providers: [LoginService, Base64Service]
+  providers: [
+    LoginService
+  ]
 })
 export class LoginModule {
 

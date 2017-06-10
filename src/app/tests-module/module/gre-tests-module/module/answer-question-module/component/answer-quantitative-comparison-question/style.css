@@ -10,7 +10,7 @@
   margin: 1px 10px;
 }
 
-.radio-btn:hover {
+.radio-btn:not(.disable):hover {
   background-color: black;
 }
 

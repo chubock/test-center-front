@@ -12,7 +12,12 @@
   color: black;
 }
 
-.passage-text a.choice-text:hover, .passage-text a.choice-text-selected {
+.passage-text a.choice-text:not(.disable):hover, .passage-text a.choice-text-selected:not(.text-success) {
   background-color: black;
   color: white;
+}
+
+.passage-text a.choice-text-selected.text-success {
+  background-color: black;
+  color: lawngreen;
 }

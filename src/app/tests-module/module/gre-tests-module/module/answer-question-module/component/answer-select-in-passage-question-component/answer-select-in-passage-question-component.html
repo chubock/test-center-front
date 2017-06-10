@@ -1,70 +1,39 @@
-<div class="row test-border" style="height: 500px">
-  <div class="col-sm-6 test-border" style="padding: 2px; height: 100%">
-    <div *ngIf="question.parent.number != question.parent.lastNumber" style="background-color: blue; color: white; font-weight: bold; padding: 2px">
-      Question {{question.parent.number}} to {{question.parent.lastNumber}} are based on this passage.
-    </div>
-    <div *ngIf="question.parent.number == question.parent.lastNumber" style="background-color: blue; color: white; font-weight: bold; padding: 2px">
-      Question {{question.parent.number}} is based on this passage.
-    </div>
-    <div class="passage-text" style="padding: 15px; padding-top: 30px">
-      <p *ngFor="let paragraph of paragraphs; let i = index;">
+<div class="row test-border" [ngClass]="{'hidden-tabs': mode == 'ANSWER'}">
+
+  <tabset>
+    <tab heading="Question">
+      <div class="col-sm-6 test-border" style="padding: 2px; height: 600px">
+        <div *ngIf="question.parent.number != question.parent.lastNumber" style="background-color: blue; color: white; font-weight: bold; padding: 2px">
+          Question {{question.parent.number}} to {{question.parent.lastNumber}} are based on this passage.
+        </div>
+        <div *ngIf="question.parent.number == question.parent.lastNumber" style="background-color: blue; color: white; font-weight: bold; padding: 2px">
+          Question {{question.parent.number}} is based on this passage.
+        </div>
+        <div class="passage-text" style="padding: 15px; padding-top: 30px">
+          <p *ngFor="let paragraph of paragraphs; let i = index;">
         <span *ngFor="let textFraction of paragraph.textFractions; let j = index;">
-          <a class="choice-text" [ngClass]="{'choice-text-selected': question.selected == textFraction.number}" (click)="question.selected = textFraction.number; onAnswerChanged()" *ngIf="mode == 'ANSWER' && textFraction.number != -1" style="cursor: hand">{{textFraction.text}}</a>
-          <span [ngClass]="{'text-primary': question.answer != textFraction.number, 'text-success': question.answer == textFraction.number, 'text-danger': mode == 'ANSWERED' && question.selected == textFraction.number && question.selected != question.answer}" *ngIf="mode == 'ANSWERED' && textFraction.number != -1">{{textFraction.text}}</span>
+          <a class="choice-text" [ngClass]="{'choice-text-selected': question.selected == textFraction.number, 'disable': mode != 'ANSWER'}" (click)="answer(textFraction.number)" *ngIf="textFraction.number != -1" style="cursor: hand"><span [ngClass]="{'text-success': mode != 'ANSWER' && question.answer == textFraction.number}">{{textFraction.text}}</span></a>
           <template [ngIf]="textFraction.text != '<br>' && textFraction.number == -1">
             <span [mathJax]="textFraction.text"></span>
           </template>
           <br *ngIf="textFraction.text == '<br>'">
         </span>
-      </p>
-    </div>
-  </div>
-  <div class="col-sm-6 test-border" style="padding: 20px; height: 100%">
-    <p style="margin-bottom: 20px;">
-      Select the sentence that provides support for an answer to a question in the passage.
-    </p>
-  </div>
-</div>
-
-<div *ngIf="false">
-
-  <div class="well well-sm form-horizontal">
-    <label *ngIf="question.parent.number != question.parent.lastNumber" class="col-xs-12">
-      Directions: Questions {{question.parent.number}} to {{question.parent.lastNumber}} are based on the following data.
-    </label>
-    <div class="form-group"></div>
-  </div>
-  <div class="form-horizontal well well-sm">
-    <div class="form-group">
-      <span [mathJax]="question.parent.text" class="col-xs-12"></span>
-    </div>
-    <div class="form-group">
-      <img class="img-responsive img-rounded" *ngIf="question.parent.image" [src]="serverUrl + '/files/' + question.parent.image" style="margin: 0 auto;">
-    </div>
-  </div>
-  <div class="form-horizontal well well-sm">
-    <div class="form-group text-center"><label>{{question.number}}</label></div>
-    <div class="col-sm-offset-1 col-sm-11">
-      <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
-    </div>
-    <div class="form-group">
-      <div class="col-xs-12">
-        <p *ngFor="let paragraph of paragraphs; let i = index;">
-        <span *ngFor="let textFraction of paragraph.textFractions; let j = index;">
-          <a class="choice-text" [ngClass]="{'choice-text-selected': question.selected == textFraction.number}" (click)="question.selected = textFraction.number; onAnswerChanged()" *ngIf="mode == 'ANSWER' && textFraction.number != -1" style="cursor: hand">{{textFraction.text}}</a>
-          <span [ngClass]="{'text-primary': question.answer != textFraction.number, 'text-success': question.answer == textFraction.number, 'text-danger': mode == 'ANSWERED' && question.selected == textFraction.number && question.selected != question.answer}" *ngIf="mode == 'ANSWERED' && textFraction.number != -1">{{textFraction.text}}</span>
-          <template [ngIf]="textFraction.text != '<br>' && textFraction.number == -1">
-            <span [mathJax]="textFraction.text"></span>
-          </template>
-          <br *ngIf="textFraction.text == '<br>'">
-        </span>
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-6 test-border" style="padding: 20px; height: 600px">
+        <p style="margin-bottom: 20px;">
+          Select the sentence that provides support for an answer to a question in the passage.
         </p>
       </div>
-    </div>
-    <div class="form-group"></div>
-  </div>
+    </tab>
 
+    <tab heading="Document" *ngIf="question.document">
+      <object width="100%" height="650" [data]="getDocument()" type='application/pdf'>
+        <p>Sorry, the PDF couldn't be displayed :(</p>
+        <a [href]="getDocument()" target="_blank">Click Here</a>
+      </object>
+    </tab>
+    <tab heading="Video" *ngIf="question.video"></tab>
+  </tabset>
 </div>
-
-
-

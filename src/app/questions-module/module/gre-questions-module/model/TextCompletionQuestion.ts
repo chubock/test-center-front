@@ -8,6 +8,7 @@ import {TextCompletionQuestionItem} from "./TextCompletionQuestionItem";
 export class TextCompletionQuestion extends Question {
 
   items:TextCompletionQuestionItem[] = [];
+  questionTypes:string[] =["GRE_TEXT_COMPLETION_ONE_BLANK", "GRE_TEXT_COMPLETION_TWO_BLANK", "GRE_TEXT_COMPLETION_THREE_BLANK"];
 
   constructor(text:string = "") {
     super(text);

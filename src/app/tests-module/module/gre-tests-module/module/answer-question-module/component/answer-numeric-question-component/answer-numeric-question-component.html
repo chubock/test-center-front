@@ -1,58 +1,41 @@
 <div class="row test-border" style="height: 700px">
-  <div class="test-border" style="padding: 100px; margin: 2px; height: 694px">
+  <div class="test-border" style="margin: 2px; height: 694px" [ngClass]="{'hidden-tabs': mode == 'ANSWER'}">
 
-    <div style="margin: 10px 100px 50px 100px; text-align: center">
-      <span [mathJax]="question.text"></span>
-    </div>
+    <tabset>
+      <tab heading="Question" style="padding: 50px 100px 0 100px; overflow: auto; height: 650px">
 
-    <div *ngIf="! question.fraction" class="text-center">{{question.prefix}} <input (change)="onAnswerChanged()" [(ngModel)]="question.nominator" style="width: 150px; text-align: right"> {{question.postfix}}</div>
+        <div style="margin: 10px 100px 50px 100px; text-align: center">
+          <span [mathJax]="question.text"></span>
+        </div>
 
-    <div *ngIf="question.fraction" class="text-center">
-      <table style="display: inline-table">
-        <tr>
-          <td style="padding: 10px" rowspan="2">{{question.prefix}}</td>
-          <td style="padding: 10px; border-bottom: solid black 1px; margin: 10px"><input (change)="onAnswerChanged()" [(ngModel)]="question.nominator" style="width: 50px; text-align: right"></td>
-          <td style="padding: 10px" rowspan="2">{{question.postfix}}</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px; margin: 10px"><input (change)="onAnswerChanged()" [(ngModel)]="question.denominator" style="width: 50px; text-align: right"></td>
-        </tr>
-      </table>
-    </div>
+        <div *ngIf="! question.fraction" class="text-center">{{question.prefix}} <input (change)="onAnswerChanged()" [(ngModel)]="question.nominator" [disabled]="mode != 'ANSWER'" style="width: 150px; text-align: right"> {{question.postfix}}</div>
+
+        <div *ngIf="question.fraction" class="text-center">
+          <table style="display: inline-table">
+            <tr>
+              <td style="padding: 10px" rowspan="2">{{question.prefix}}</td>
+              <td style="padding: 10px; border-bottom: solid black 1px; margin: 10px"><input (change)="onAnswerChanged()" [(ngModel)]="question.nominator" [disabled]="mode != 'ANSWER'" style="width: 50px; text-align: right"></td>
+              <td style="padding: 10px" rowspan="2">{{question.postfix}}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; margin: 10px"><input (change)="onAnswerChanged()" [(ngModel)]="question.denominator" [disabled]="mode != 'ANSWER'" style="width: 50px; text-align: right"></td>
+            </tr>
+          </table>
+        </div>
+
+        <div *ngIf="mode != 'ANSWER'" class="text-success" style="margin: 10px 100px 50px 100px; text-align: center">
+          Answer : {{question.nominatorAnswer}} <span *ngIf="question.denominatorAnswer"> / {{question.denominatorAnswer}}</span>
+        </div>
+      </tab>
+
+      <tab heading="Document" *ngIf="question.document">
+        <object width="100%" height="650" [data]="getDocument()" type='application/pdf'>
+          <p>Sorry, the PDF couldn't be displayed :(</p>
+          <a [href]="getDocument()" target="_blank">Click Here</a>
+        </object>
+      </tab>
+      <tab heading="Video" *ngIf="question.video"></tab>
+    </tabset>
 
   </div>
 </div>
-
-<div *ngIf="false">
-  <div *ngIf="direction" class="well well-sm form-horizontal">
-    <label class="col-xs-12">
-      {{direction}}
-    </label>
-    <div class="form-group"></div>
-  </div>
-
-  <div class="form-horizontal well well-sm">
-    <div class="form-group text-center"><label>{{question.number}}</label></div>
-    <div class="form-group">
-      <span [mathJax]="question.text" class="col-xs-12"></span>
-    </div>
-    <div class="form-group">
-      <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
-    </div>
-    <div class="form-group">
-      <label for="nominator" class="control-label col-sm-1">Answer: </label>
-      <div class="col-sm-11 control-text">
-        <div class="col-xs-2 col-sm-1 no-padding" *ngIf="mode == 'ANSWER'">
-          <input name="nominator" (change)="onAnswerChanged()" [(ngModel)]="question.nominator" class="form-control">
-        </div>
-        <span *ngIf="mode == 'ANSWERED'" [ngClass]="{'text-success': question.nominator == question.nominatorAnswer, 'text-danger': question.nominator != question.nominatorAnswer}"> {{question.nominator}} </span>
-        <span class="text-center" [ngClass]="{'col-xs-1': mode == 'ANSWER', 'big-slash': mode == 'ANSWER'}" *ngIf="question.fraction"> / </span>
-        <div class="col-xs-2 col-sm-1 no-padding" *ngIf="mode == 'ANSWER' && question.fraction">
-          <input name="denominator" (change)="onAnswerChanged()" [(ngModel)]="question.denominator" class="form-control">
-        </div>
-        <span *ngIf="mode == 'ANSWERED' && question.fraction" [ngClass]="{'text-success': question.denominator == question.denominatorAnswer, 'text-danger': question.denominator != question.denominatorAnswer}"> {{question.denominator}} </span>
-      </div>
-    </div>
-  </div>
-</div>
-

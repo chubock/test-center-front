@@ -19,7 +19,8 @@ import {AnswerSentenceEquivalenceQuestionComponent} from "./component/answer-sen
 import {AnswerTextCompletionQuestionComponent} from "./component/answer-text-completion-question/AnswerTextCompletionQuestionComponent";
 import {AnswerWritingQuestionComponent} from "./component/answer-writing-question/AnswerWritingQuestionComponent";
 import {SharedModule} from "../../../../../shared-module/SharedModule";
-import {ButtonsModule} from "ng2-bootstrap";
+import {ButtonsModule, TabsModule} from "ng2-bootstrap";
+import {EditorModule} from "primeng/primeng";
 /**
  * Created by Yubar on 3/22/2017.
  */
@@ -48,6 +49,8 @@ import {ButtonsModule} from "ng2-bootstrap";
     PrimeSharedModule,
     RadioButtonModule,
     CheckboxModule,
+    TabsModule.forRoot(),
+    EditorModule,
     SharedModule
   ],
   exports: [

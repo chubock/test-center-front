@@ -20,7 +20,7 @@ import {WritingQuestion} from "../module/gre-questions-module/model/WritingQuest
 
 export class QuestionFactory {
 
-  public static valueOf(questionType: string) : Question {
+  public static createQuestion(questionType: string) : Question {
     switch (questionType) {
       case "GRE_DATA_INTERPRETATION_SET_MULTIPLE_ANSWER":
         return new DataInterpretationMultipleAnswerQuestion();

@@ -3,9 +3,8 @@
     <div class="form-group" [ngClass]="{'has-error' : usernameInput.errors && usernameInput.touched, 'has-success' : !usernameInput.errors && usernameInput.touched}">
       <label for="username" class="col-sm-4 control-label">Username: </label>
       <div class="col-sm-8">
-        <input #usernameInput="ngModel" name="username" class="form-control" [(ngModel)]="username" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+        <input #usernameInput="ngModel" name="username" class="form-control" [(ngModel)]="username" required />
         <span class="help-block" *ngIf="usernameInput.touched && usernameInput.errors && usernameInput.errors.required">Username can't be empty</span>
-        <span class="help-block" *ngIf="usernameInput.touched && usernameInput.errors && usernameInput.errors.pattern">Username is not valid</span>
       </div>
     </div>
     <div class="form-group" [ngClass]="{'has-error' : passwordInput.errors && passwordInput.touched, 'has-success' : !passwordInput.errors && passwordInput.touched}">

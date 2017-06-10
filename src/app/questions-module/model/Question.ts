@@ -10,14 +10,17 @@ export class Question {
   difficultyLevel:string = "LEVEL3";
   image:number;
   questionType:string;
-  seen:boolean = false;
   marked:boolean = false;
   free:boolean = false;
+  status:string;
+  document:number;
+  score:number;
+  comment:string;
 
   constructor(public text:string = "") {}
 
   getState():string {
-    if (! this.seen)
+    if (this.status == "NOT_SEEN")
       return "Not Answered";
     else return "Answered";
   }
@@ -31,8 +34,11 @@ export class Question {
     this.image = question.image;
     this.questionType = question.questionType;
     this.free = question.free;
-    this.seen = question.seen;
     this.marked = question.marked;
+    this.status = question.status;
+    this.document = question.document;
+    this.score = question.score;
+    this.comment = question.comment;
   }
 
   prepare():void {
@@ -40,6 +46,6 @@ export class Question {
   }
 
   toJSON(): any{
-    return {id: this.id, number: this.number, text: this.text, difficulty: this.difficulty, difficultyLevel: this.difficultyLevel, image: this.image, questionType: this.questionType, seen: this.seen, marked: this.marked, free: this.free};
+    return {id: this.id, number: this.number, text: this.text, difficulty: this.difficulty, difficultyLevel: this.difficultyLevel, image: this.image, questionType: this.questionType, marked: this.marked, free: this.free, status: this.status, document: this.document, score: this.score, comment: this.comment};
   }
 }

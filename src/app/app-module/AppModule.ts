@@ -9,6 +9,7 @@ import {AlertsService} from "../shared-module/service/AlertsService";
 import {AppComponent} from "./component/AppComponent";
 import {appRouting} from "./app.routing";
 import {AppRouteComponent} from "./AppRouteComponent";
+import {LoginService} from "../login-module/service/LoginService";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {AppRouteComponent} from "./AppRouteComponent";
     appRouting
   ],
   providers: [
+    LoginService,
     FileService,
     AlertsService
   ],

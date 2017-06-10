@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {AnswerChoicesQuestionComponent} from "../AnswerChoicesQuestionComponent";
 import {ReadingComprehensionSingleAnswerQuestion} from "../../../../../../../questions-module/module/gre-questions-module/model/ReadingComprehensionSingleAnswerQuestion";
+import {DomSanitizer} from "@angular/platform-browser";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -13,14 +14,20 @@ import {ReadingComprehensionSingleAnswerQuestion} from "../../../../../../../que
 })
 export class AnswerReadingComprehensionSingleAnswerQuestionComponent extends AnswerChoicesQuestionComponent<ReadingComprehensionSingleAnswerQuestion>{
 
+  constructor(sanitizer:DomSanitizer){
+    super(sanitizer);
+  }
+
   onAnswerChanged(): void {
     if (this.question.selected != null)
       this.answerChanged.emit(this.question.selected + "");
   }
 
   onSelect(selected: number): void {
-    this.question.selected == selected ? this.question.selected = null : this.question.selected = selected;
-    this.onAnswerChanged();
+    if (this.mode == 'ANSWER'){
+      this.question.selected == selected ? this.question.selected = null : this.question.selected = selected;
+      this.onAnswerChanged();
+    }
   }
 
 }

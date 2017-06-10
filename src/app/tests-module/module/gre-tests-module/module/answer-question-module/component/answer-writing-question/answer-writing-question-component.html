@@ -1,36 +1,52 @@
-<div class="row" style="height: 700px; border: solid 1px black;">
-  <div class="col-sm-5" style="padding: 2px; height: 100%; border: solid 1px black;">
-    <div style="padding: 15px; border: solid 1px black;">
-      <span [mathJax]="question.text"></span>
-    </div>
-    <div style="padding: 15px;">
-      <span [mathJax]="question.description"></span>
-    </div>
-  </div>
-  <div class="col-sm-7" style="padding: 0; height: 100%; border: solid 1px black;">
-    <div class="col-xs-12" style="padding: 2px; background-color: #C2C1BF">
-      <button [disabled]="writingText.selectionStart == writingText.selectionEnd" (click)="cut(writingText.selectionStart, writingText.selectionEnd);" style="background-color: #C4C6C8">Cut</button>
-      <button [disabled]="!cutBuffer" (click)="paste(writingText.selectionStart, writingText.selectionEnd)" style="background-color: #C4C6C8">Paste</button>
-      <button [disabled]="!undoBuffer.length" (click)="undo()" style="background-color: #C4C6C8">Undo</button>
-      <button [disabled]="!redoBuffer.length" (click)="redo()" style="background-color: #C4C6C8">Redo</button>
-    </div>
-    <textarea #writingText (keydown)="handleBackspace($event)" [disabled]="mode == 'ANSWERED'" [(ngModel)]="question.answer" (change)="onAnswerChanged()" style="width: 100%; height: 668px; padding: 2px "></textarea>
-  </div>
-</div>
+<div class="row" style="border: solid 1px black;" [ngClass]="{'hidden-tabs': mode == 'ANSWER'}">
 
+  <tabset>
+    <tab heading="Question" style="height: 658px">
+      <div class="col-sm-5" style="padding: 2px; height: 100%; border: solid 1px black;">
+        <div style="padding: 15px; border: solid 1px black;">
+          <span [mathJax]="question.text"></span>
+        </div>
+        <div style="padding: 15px;">
+          <span [mathJax]="question.description"></span>
+        </div>
+      </div>
+      <div class="col-sm-7" style="padding: 0; height: 100%; border: solid 1px black;">
+        <div class="col-xs-12" style="padding: 2px; background-color: #C2C1BF">
+          <button [disabled]="writingText.selectionStart == writingText.selectionEnd" (click)="cut(writingText.selectionStart, writingText.selectionEnd);" style="background-color: #C4C6C8">Cut</button>
+          <button [disabled]="!cutBuffer" (click)="paste(writingText.selectionStart, writingText.selectionEnd)" style="background-color: #C4C6C8">Paste</button>
+          <button [disabled]="!undoBuffer.length" (click)="undo()" style="background-color: #C4C6C8">Undo</button>
+          <button [disabled]="!redoBuffer.length" (click)="redo()" style="background-color: #C4C6C8">Redo</button>
+        </div>
+        <textarea #writingText (keydown)="handleBackspace($event)" [disabled]="mode == 'ANSWERED'" [(ngModel)]="question.answer" (change)="onAnswerChanged()" style="width: 100%; height: 625px; padding: 2px "></textarea>
+      </div>
+    </tab>
+    <tab heading="Comment" *ngIf="question.comment">
+      <div style="height: 600px; overflow: auto" [innerHtml]="question.comment"></div>
+    </tab>
+    <tab heading="Document" *ngIf="question.document">
+      <object width="100%" height="650" [data]="getDocument()" type='application/pdf'>
+        <p>Sorry, the PDF couldn't be displayed :(</p>
+        <a [href]="getDocument()" target="_blank">Click Here</a>
+      </object>
+    </tab>
+    <tab heading="Video" *ngIf="question.video"></tab>
+    <tab heading="Score" *ngIf="score">
+      <div class="form-group">
+        <label for="score" class="control-label col-sm-3">Score: </label>
+        <div class="col-sm-9">
+          <input class="form-control" type="number" name="score" [(ngModel)]="question.score"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="comment" class="control-label col-sm-3">Comment: </label>
+        <div class="col-sm-12">
+          <p-editor name="comment" [(ngModel)]="question.comment" [style]="{'height': '400px'}"></p-editor>
+        </div>
+      </div>
+      <div class="col-sm-12 text-center" style="padding: 15px;">
+        <button class="btn btn-primary" (click)="scoreQuestion()">Save</button>
+      </div>
+    </tab>
+  </tabset>
 
-<div *ngIf="false" class="form-horizontal well well-sm">
-  <div class="form-group">
-    <span [mathJax]="question.text" class="col-xs-12"></span>
-  </div>
-  <div class="form-group">
-    <img class="img-responsive img-rounded" *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto;">
-  </div>
-  <div class="form-group">
-    <div class="col-xs-12">
-      <textarea [disabled]="mode == 'ANSWERED'" name="answer" [(ngModel)]="question.answer" (change)="onAnswerChanged()" class="form-control" rows="15"></textarea>
-      <!--<span [mathJax]="question.answer" *ngIf="mode == 'ANSWERED'"></span>-->
-    </div>
-  </div>
-  <div class="form-group"></div>
 </div>

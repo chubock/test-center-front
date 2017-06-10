@@ -12,6 +12,7 @@ import {ReadingComprehensionQuestionService} from "../../service/ReadingComprehe
   templateUrl: "../../../../component/helper/question-list-component.html"
 })
 export class ReadingComprehensionQuestionsComponent extends AbstractQuestionListComponent<ReadingComprehensionQuestion>{
+  questionTypes:string[]= ["GRE_READING_COMPREHENSION_LONG", "GRE_READING_COMPREHENSION_MEDIUM", "GRE_READING_COMPREHENSION_SHORT", "GRE_READING_COMPREHENSION_PARAGRAPH_ARGUMENT"];
 
   page:Page<ReadingComprehensionQuestion> = new Page<ReadingComprehensionQuestion>();
   currentPage:number;

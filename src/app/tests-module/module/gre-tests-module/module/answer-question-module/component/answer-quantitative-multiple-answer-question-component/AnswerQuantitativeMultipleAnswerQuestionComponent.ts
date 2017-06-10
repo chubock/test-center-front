@@ -2,6 +2,7 @@ import {AnswerChoicesQuestionComponent} from "../AnswerChoicesQuestionComponent"
 import {Component, OnInit} from "@angular/core";
 import {QuantitativeMultipleAnswerQuestion} from "../../../../../../../questions-module/module/gre-questions-module/model/QuantitativeMultipleAnswerQuestion";
 import {Choice} from "../../../../../../../questions-module/model/Choice";
+import {DomSanitizer} from "@angular/platform-browser";
 /**
  * Created by Yubar on 3/21/2017.
  */
@@ -14,7 +15,10 @@ import {Choice} from "../../../../../../../questions-module/model/Choice";
 export class AnswerQuantitativeMultipleAnswerQuestionComponent extends AnswerChoicesQuestionComponent<QuantitativeMultipleAnswerQuestion> {
 
   multipleAnswer:boolean = true;
-  directions:string = "Directions: Select one or more answer choices according to the specific question directions.";
+
+  constructor(sanitizer:DomSanitizer){
+    super(sanitizer);
+  }
 
   onAnswerChanged(): void {
     let answer:string = "";
@@ -31,8 +35,10 @@ export class AnswerQuantitativeMultipleAnswerQuestionComponent extends AnswerCho
   }
 
   answer(choice:Choice):void {
-    choice.selected = ! choice.selected;
-    this.onAnswerChanged();
+    if (this.mode =='ANSWER'){
+      choice.selected = ! choice.selected;
+      this.onAnswerChanged();
+    }
   }
 
 }

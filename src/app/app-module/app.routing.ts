@@ -11,7 +11,8 @@ const APP_ROUTES: Route[] = [
   {path:'products', loadChildren: 'app/products-module/ProductsModule#ProductsModule'},
   {path:'shopping', loadChildren: 'app/shopping-module/ShoppingModule#ShoppingModule'},
   {path:'registration', loadChildren: 'app/registration-module/RegistrationModule#RegistrationModule'},
-  {path:'login', loadChildren: 'app/login-module/LoginModule#LoginModule'}
+  {path:'login', loadChildren: 'app/login-module/LoginModule#LoginModule'},
+  {path:'user-questions', loadChildren: 'app/user-questions-module/UserQuestionsModule#UserQuestionsModule'}
 ];
 
 export const appRouting = RouterModule.forRoot(APP_ROUTES);

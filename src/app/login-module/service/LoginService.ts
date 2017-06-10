@@ -6,39 +6,62 @@ import {Injectable, OnInit} from "@angular/core";
 import {User} from "../../registration-module/model/User";
 import {Http, Headers} from "@angular/http";
 import {apiEndPoint} from "../../AppConfig";
-import {Base64Service} from "./Base64Service";
 
 @Injectable()
 export class LoginService implements OnInit{
 
   serverUrl = apiEndPoint;
   url = "login";
-  user:User = null ;
 
-  constructor(private http:Http, private base64Service:Base64Service) {
-    if (sessionStorage.getItem("user"))
-      this.user = JSON.parse(sessionStorage.getItem("user")) as User;
-  }
+  constructor(private http:Http) {}
 
   ngOnInit():void {
 
   }
 
+  getUser():User {
+    return JSON.parse(sessionStorage.getItem("user")) as User;
+  }
+
   login(username:string, password:string): Promise<User> {
     let headers:Headers = new Headers();
-    headers.append("Authorization", "Basic " + this.base64Service.encode(username + ":" + password));
+    headers.append("Authorization", "Basic " + btoa(username + ":" + password));
     return this.http.get(this.serverUrl + this.url, {headers: headers, withCredentials: true})
       .toPromise()
       .then(resp => {
         sessionStorage.setItem("user", resp.text());
-        this.user =  resp.json() as User;
-        return this.user;
+        return resp.json() as User;
       });
   }
 
   logout():void {
-    sessionStorage.removeItem("user");
-    this.user = null;
+    this.http.delete(this.serverUrl + this.url, {withCredentials: true})
+      .toPromise()
+      .then(e => sessionStorage.removeItem("user"));
+  }
+
+  isAuthenticated():boolean {
+    return sessionStorage.getItem("user") != null;
+  }
+
+  hasAllRoles(...roles:string[]):boolean {
+    let user:User = this.getUser();
+    if (!user || ! user.roles)
+      return false;
+    for (let i = 0; i< roles.length; i++)
+      if (user.roles.indexOf(roles[i]) == -1)
+        return false;
+    return true;
+  }
+
+  hasAnyRole(...roles:string[]):boolean {
+    let user:User = this.getUser();
+    if (!user || ! user.roles)
+      return false;
+    for (let i=0; i< roles.length; i++)
+      if (user.roles.indexOf(roles[i]) != -1)
+        return true;
+    return false;
   }
 
 }

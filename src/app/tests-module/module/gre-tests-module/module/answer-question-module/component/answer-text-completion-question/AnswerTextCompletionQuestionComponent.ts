@@ -3,6 +3,7 @@ import {TextCompletionQuestion} from "../../../../../../../questions-module/modu
 import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
 import {TextCompletionQuestionItem} from "../../../../../../../questions-module/module/gre-questions-module/model/TextCompletionQuestionItem";
 import {Choice} from "../../../../../../../questions-module/model/Choice";
+import {DomSanitizer} from "@angular/platform-browser";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -15,7 +16,10 @@ import {Choice} from "../../../../../../../questions-module/model/Choice";
 })
 export class AnswerTextCompletionQuestionComponent extends AnswerQuestionComponent<TextCompletionQuestion> {
 
-  direction:string = "Directions: For each blank select one entry from the corresponding column of choices. Fill all blanks in the way that best completes the text.";
+  constructor(sanitizer:DomSanitizer){
+    super(sanitizer);
+  }
+
 
   onAnswerChanged(): void {
     let answer:string = "";
@@ -26,7 +30,9 @@ export class AnswerTextCompletionQuestionComponent extends AnswerQuestionCompone
   }
 
   answer(item:TextCompletionQuestionItem, choice:number):void {
-    item.selected == choice ? item.selected = null : item.selected = choice;
-    this.onAnswerChanged();
+    if (this.mode == 'ANSWER'){
+      item.selected == choice ? item.selected = null : item.selected = choice;
+      this.onAnswerChanged();
+    }
   }
 }

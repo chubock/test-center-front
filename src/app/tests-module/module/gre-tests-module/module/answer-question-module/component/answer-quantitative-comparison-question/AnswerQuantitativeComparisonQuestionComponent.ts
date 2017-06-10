@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {QuantitativeComparisonQuestion} from "../../../../../../../questions-module/module/gre-questions-module/model/QuantitativeComparisonQuestion";
 import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
+import {DomSanitizer} from "@angular/platform-browser";
 /**
  * Created by Yubar on 1/5/2017.
  */
@@ -13,7 +14,9 @@ import {AnswerQuestionComponent} from "../AnswerQuestionComponent";
 })
 export class AnswerQuantitativeComparisonQuestionComponent extends AnswerQuestionComponent<QuantitativeComparisonQuestion>{
 
-  direction:string = "Directions: Compare Quantity A and Quantity B, using additional information centered above the two quantities if such information is given, and select one of the following four answer choices.";
+  constructor(sanitizer:DomSanitizer){
+    super(sanitizer);
+  }
 
   onAnswerChanged(): void {
     if (this.question.selected != null)
@@ -21,8 +24,10 @@ export class AnswerQuantitativeComparisonQuestionComponent extends AnswerQuestio
   }
 
   onSelect(selected: number): void {
-    this.question.selected == selected ? this.question.selected = null : this.question.selected = selected;
-    this.onAnswerChanged();
+    if (this.mode == "ANSWER"){
+      this.question.selected == selected ? this.question.selected = null : this.question.selected = selected;
+      this.onAnswerChanged();
+    }
   }
 
 }

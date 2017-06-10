@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit():void {
-    this.user = this.loginService.user;
+    this.user = this.loginService.getUser();
   }
 
   handleCorrectCaptcha(token:string):void {

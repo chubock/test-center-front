@@ -45,27 +45,16 @@ export class NewGRETestComponent {
   }
 
   start():void {
-    if (this.activatedRoute.snapshot.queryParams['free']) {
-      this.testService.createFreeTest(this.test).then(test => {
-        this.test = test;
-        this.initNewTest();
-      })
-    } else {
-      this.testService.createTest(this.test).then(test => {
-        this.test = test;
-        this.initNewTest();
-      });
-    }
-  }
-
-  initNewTest():void {
-    this.currentSectionType = this.test.sectionTypes[0];
-    this.currentSection = this.test.testSections[0];
-    this.prepareParents();
-    this.sectionTimer  = new Timer(greSections[this.currentSectionType].time * 60, true);
-    this.sectionLabel = greSections[this.currentSectionType].label;
-    this.currentQuestion = this.currentSection.answeredQuestions[0];
-    this.seeQuestion();
+    this.testService.createTest(this.test).then(test => {
+      this.test = test;
+      this.currentSectionType = this.test.sectionTypes[0];
+      this.currentSection = this.test.testSections[0];
+      this.prepareParents();
+      this.sectionTimer  = new Timer(greSections[this.currentSectionType].time * 60, true);
+      this.sectionLabel = greSections[this.currentSectionType].label;
+      this.currentQuestion = this.currentSection.answeredQuestions[0];
+      this.seeQuestion();
+    });
   }
 
   prepareParents():void {
@@ -86,7 +75,10 @@ export class NewGRETestComponent {
   }
 
   seeQuestion():void {
-    this.testService.seeQuestion(this.currentQuestion.id).then(e => this.currentQuestion.seen = true);
+    this.testService.seeQuestion(this.currentQuestion.id).then(e => {
+      if (this.currentQuestion.status == "NOT_SEEN")
+        this.currentQuestion.status = "NOT_ANSWERED";
+    });
   }
 
   toggleMark(): void {

@@ -13,6 +13,8 @@ import {NumericQuestionService} from "../../service/NumericQuestionService";
 })
 export class NumericQuestionsComponent extends AbstractQuestionListComponent<NumericQuestion>{
 
+  questionTypes:string[] = ["GRE_NUMERIC", "GRE_NUMERIC_FRACTION"];
+
   page:Page<NumericQuestion> = new Page<NumericQuestion>();
   currentPage:number;
   question:NumericQuestion;

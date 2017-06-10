@@ -3,8 +3,8 @@
     <div class="col-sm-6 bold">GRE Practice Test Section {{currentSection.number}} of {{test.sectionTypes.length}}</div>
     <div class="col-sm-6 text-right">
       <button *ngIf="view == 'MAIN' && ! isLastSection()" (click)="nextSection()" class="test-btn test-btn-square bold">Exit Section</button>
-      <button *ngIf="view == 'MAIN'" class="test-btn test-btn-square bold">Quit w/Save</button>
-      <button *ngIf="view == 'MAIN'" class="test-btn test-btn-square bold">Help</button>
+      <button *ngIf="view == 'MAIN'" (click)="finishTest()" class="test-btn test-btn-square bold">Quit w/Save</button>
+      <!--<button *ngIf="view == 'MAIN'" class="test-btn test-btn-square bold">Help</button>-->
       <button *ngIf="view == 'MAIN'" (click)="toggleMark()" class="test-btn test-btn-square bold">{{currentQuestion.marked ? 'UnMark': 'Mark'}}</button>
       <button *ngIf="view == 'MAIN' && currentSection.answeredQuestions.length > 1" (click)="view = 'REVIEW'" class="test-btn test-btn-square bold">Review</button>
       <button *ngIf="view == 'REVIEW'" (click)="view = 'MAIN'" class="test-btn test-btn-square bold">Return</button>

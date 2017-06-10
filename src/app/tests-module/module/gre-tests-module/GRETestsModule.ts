@@ -6,7 +6,7 @@ import {GRETestService} from "./service/GRETestService";
 import {CommonModule} from "@angular/common";
 import {GRETestComponent} from "./component/gre-test-component/GRETestComponent";
 import {AnswerQuestionModule} from "./module/answer-question-module/AnswerQuestionModule";
-import {SharedModule} from "../../../shared-module/SharedModule";
+import {LoginService} from "../../../login-module/service/LoginService";
 
 /**
  * Created by yubar on 2/19/17.
@@ -23,7 +23,7 @@ import {SharedModule} from "../../../shared-module/SharedModule";
     AnswerQuestionModule,
     greTestsRouting
   ],
-  providers: [GRETestService]
+  providers: [GRETestService, LoginService]
 })
 export class GRETestsModule {
 

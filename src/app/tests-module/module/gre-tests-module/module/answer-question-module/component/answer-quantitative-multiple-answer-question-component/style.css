@@ -13,7 +13,7 @@
   display: inline-block;
 }
 
-.test-checkbox:hover, .test-checkbox.selected {
+.test-checkbox:not(.disable):hover, .test-checkbox.selected {
   background-image: url('cross.png');
   background-size: contain
 }
