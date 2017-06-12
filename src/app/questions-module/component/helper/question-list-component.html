@@ -1,71 +1,79 @@
-<div class="form-horizontal well well-sm">
+<div class="container">
 
-  <div class="form-group" *ngIf="questionTypes">
-    <label for="difficulties" class="control-label col-sm-3">Question Type: </label>
-    <div class="col-sm-9">
-      <div class="btn-group">
-        <label *ngFor="let q of questionTypes" class="btn btn-default" (click)="filterChangeListener(specification.questionTypes, q)" btnCheckbox>{{q}}</label>
+  <div style="text-align: right; margin: 10px 0;">
+    <button class="btn btn-primary" (click)="filterShow = !filterShow">{{filterShow ? 'Hide' : 'Show'}} Filters</button>
+  </div>
+
+  <div class="form-horizontal well well-sm" [ngClass]="{'hidden': !filterShow}">
+    <div class="form-group" *ngIf="questionTypes">
+      <label for="difficulties" class="control-label col-sm-3">Question Type: </label>
+      <div class="col-sm-9">
+        <div class="btn-group">
+          <label *ngFor="let q of questionTypes" class="btn btn-default" (click)="filterChangeListener(specification.questionTypes, q)" btnCheckbox>{{q}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="difficulties" class="control-label col-sm-3">Difficulty: </label>
+      <div class="col-sm-9">
+        <div class="btn-group">
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficulties, 'EASY')" btnCheckbox>Easy</label>
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficulties, 'MEDIUM')" btnCheckbox>Medium</label>
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficulties, 'HARD')" btnCheckbox>Hard</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="difficultyLevels" class="control-label col-sm-3">Difficulty Level: </label>
+      <div class="col-sm-9">
+        <div class="btn-group">
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL1')" btnCheckbox>LEVEL 1</label>
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL2')" btnCheckbox>LEVEL 2</label>
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL3')" btnCheckbox>LEVEL 3</label>
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL4')" btnCheckbox>LEVEL 4</label>
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL5')" btnCheckbox>LEVEL 5</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="free" class="control-label col-sm-3">Free: </label>
+      <div class="col-sm-9">
+        <div class="btn-group">
+          <label class="btn btn-default" [uncheckable]="true" [(ngModel)]="specification.free" btnRadio="false" (click)="loadQuestions()">NO</label>
+          <label class="btn btn-default" [uncheckable]="true" [(ngModel)]="specification.free" btnRadio="true" (click)="loadQuestions()">YES</label>
+        </div>
       </div>
     </div>
   </div>
-  <div class="form-group">
-    <label for="difficulties" class="control-label col-sm-3">Difficulty: </label>
-    <div class="col-sm-9">
-      <div class="btn-group">
-        <label class="btn btn-default" (click)="filterChangeListener(specification.difficulties, 'EASY')" btnCheckbox>Easy</label>
-        <label class="btn btn-default" (click)="filterChangeListener(specification.difficulties, 'MEDIUM')" btnCheckbox>Medium</label>
-        <label class="btn btn-default" (click)="filterChangeListener(specification.difficulties, 'HARD')" btnCheckbox>Hard</label>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="difficultyLevels" class="control-label col-sm-3">Difficulty Level: </label>
-    <div class="col-sm-9">
-      <div class="btn-group">
-        <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL1')" btnCheckbox>LEVEL 1</label>
-        <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL2')" btnCheckbox>LEVEL 2</label>
-        <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL3')" btnCheckbox>LEVEL 3</label>
-        <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL4')" btnCheckbox>LEVEL 4</label>
-        <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL5')" btnCheckbox>LEVEL 5</label>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="free" class="control-label col-sm-3">Free: </label>
-    <div class="col-sm-9">
-      <div class="btn-group">
-        <label class="btn btn-default" [uncheckable]="true" [(ngModel)]="specification.free" btnRadio="false" (click)="loadQuestions()">NO</label>
-        <label class="btn btn-default" [uncheckable]="true" [(ngModel)]="specification.free" btnRadio="true" (click)="loadQuestions()">YES</label>
-      </div>
-    </div>
-  </div>
-</div>
-<div [ngSwitch]="type">
-  <div *ngSwitchCase="'numeric'"><numeric-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></numeric-question></div>
-  <div *ngSwitchCase="'quantitative-comparison'"><quantitative-comparison-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></quantitative-comparison-question></div>
-  <div *ngSwitchCase="'quantitative-multiple-answer'"><quantitative-multiple-answer-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></quantitative-multiple-answer-question></div>
-  <div *ngSwitchCase="'quantitative-single-answer'"><quantitative-single-answer-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></quantitative-single-answer-question></div>
-  <div *ngSwitchCase="'reading-comprehension'"><reading-comprehension-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></reading-comprehension-question></div>
-  <div *ngSwitchCase="'sentence-equivalence'"><sentence-equivalence-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></sentence-equivalence-question></div>
-  <div *ngSwitchCase="'text-completion'"><text-completion-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></text-completion-question></div>
-  <div *ngSwitchCase="'writing'"><writing-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></writing-question></div>
-  <div *ngSwitchCase="'data-interpretation-set'"><data-interpretation-set-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></data-interpretation-set-question></div>
-</div>
-<div>
-  <button *ngIf="!question" style="margin: 10px 0;" class="btn btn-primary" (click)="create()">New</button>
+
   <div [ngSwitch]="type">
-    <div *ngSwitchCase="'numeric'"><numeric-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></numeric-question></div>
-    <div *ngSwitchCase="'quantitative-comparison'"><quantitative-comparison-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></quantitative-comparison-question></div>
-    <div *ngSwitchCase="'quantitative-multiple-answer'"><quantitative-multiple-answer-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></quantitative-multiple-answer-question></div>
-    <div *ngSwitchCase="'quantitative-single-answer'"><quantitative-single-answer-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></quantitative-single-answer-question></div>
-    <div *ngSwitchCase="'reading-comprehension'"><reading-comprehension-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></reading-comprehension-question></div>
-    <div *ngSwitchCase="'sentence-equivalence'"><sentence-equivalence-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></sentence-equivalence-question></div>
-    <div *ngSwitchCase="'text-completion'"><text-completion-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></text-completion-question></div>
-    <div *ngSwitchCase="'writing'"><writing-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></writing-question></div>
-    <div *ngSwitchCase="'data-interpretation-set'"><data-interpretation-set-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></data-interpretation-set-question></div>
+    <div *ngSwitchCase="'numeric'"><numeric-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></numeric-question></div>
+    <div *ngSwitchCase="'quantitative-comparison'"><quantitative-comparison-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></quantitative-comparison-question></div>
+    <div *ngSwitchCase="'quantitative-multiple-answer'"><quantitative-multiple-answer-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></quantitative-multiple-answer-question></div>
+    <div *ngSwitchCase="'quantitative-single-answer'"><quantitative-single-answer-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></quantitative-single-answer-question></div>
+    <div *ngSwitchCase="'reading-comprehension'"><reading-comprehension-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></reading-comprehension-question></div>
+    <div *ngSwitchCase="'sentence-equivalence'"><sentence-equivalence-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></sentence-equivalence-question></div>
+    <div *ngSwitchCase="'text-completion'"><text-completion-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></text-completion-question></div>
+    <div *ngSwitchCase="'writing'"><writing-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></writing-question></div>
+    <div *ngSwitchCase="'data-interpretation-set'"><data-interpretation-set-question [question]="question" *ngIf="question" [mode]="'EDIT'" (onCancel)="cancel()" (onSave)="loadQuestions(currentPage - 1)"></data-interpretation-set-question></div>
   </div>
-  <div class="col-xs-12 text-center">
-    <pagination [totalItems]="page.totalElements" [(ngModel)]="currentPage" [itemsPerPage]="page.size" [maxSize]="paginationLinksCount" (pageChanged)="loadQuestions($event.page - 1)"></pagination>
+  <div>
+    <button *ngIf="!question" style="margin: 10px 0;" class="btn btn-primary" (click)="create()">New</button>
+    <div [ngSwitch]="type">
+      <div *ngSwitchCase="'numeric'"><numeric-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></numeric-question></div>
+      <div *ngSwitchCase="'quantitative-comparison'"><quantitative-comparison-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></quantitative-comparison-question></div>
+      <div *ngSwitchCase="'quantitative-multiple-answer'"><quantitative-multiple-answer-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></quantitative-multiple-answer-question></div>
+      <div *ngSwitchCase="'quantitative-single-answer'"><quantitative-single-answer-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></quantitative-single-answer-question></div>
+      <div *ngSwitchCase="'reading-comprehension'"><reading-comprehension-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></reading-comprehension-question></div>
+      <div *ngSwitchCase="'sentence-equivalence'"><sentence-equivalence-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></sentence-equivalence-question></div>
+      <div *ngSwitchCase="'text-completion'"><text-completion-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></text-completion-question></div>
+      <div *ngSwitchCase="'writing'"><writing-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></writing-question></div>
+      <div *ngSwitchCase="'data-interpretation-set'"><data-interpretation-set-question *ngFor="let q of page.content" [question]="q" (onDelete)="loadQuestions(currentPage - 1)"></data-interpretation-set-question></div>
+    </div>
+    <div class="col-xs-12 text-center">
+      <pagination [totalItems]="page.totalElements" [(ngModel)]="currentPage" [itemsPerPage]="page.size" [maxSize]="paginationLinksCount" (pageChanged)="loadQuestions($event.page - 1)"></pagination>
+    </div>
   </div>
+
 </div>
 
