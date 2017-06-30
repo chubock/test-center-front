@@ -2,7 +2,7 @@ import {Headers, RequestOptions, Http} from "@angular/http";
 import {Injectable} from "@angular/core";
 
 import 'rxjs/add/operator/toPromise';
-import {apiEndPoint} from "../../AppConfig";
+import {environment} from "../../../environments/environment";
 
 /**
  * Created by Yubar on 1/25/2017.
@@ -11,7 +11,7 @@ import {apiEndPoint} from "../../AppConfig";
 @Injectable()
 export class FileService {
 
-  private url:string = apiEndPoint + '/files';
+  private url:string = environment.apiEndPoint + '/files';
 
   constructor(protected http:Http){}
 

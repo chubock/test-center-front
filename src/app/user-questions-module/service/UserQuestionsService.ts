@@ -1,31 +1,16 @@
 import {Injectable} from "@angular/core";
-import {apiEndPoint} from "../../AppConfig";
 import {Http, URLSearchParams} from "@angular/http";
 import {Question} from "../../questions-module/model/Question";
 import {Page} from "../../shared-module/model/Page";
-import {DataInterpretationSetQuestion} from "../../questions-module/module/gre-questions-module/model/DataInterpretationSetQuestion";
-import {DataInterpretationSingleAnswerQuestion} from "../../questions-module/module/gre-questions-module/model/DataInterpretationSingleAnswerQuestion";
-import {DataInterpretationMultipleAnswerQuestion} from "../../questions-module/module/gre-questions-module/model/DataInterpretationMultipleAnswerQuestion";
-import {DataInterpretationNumericQuestion} from "../../questions-module/module/gre-questions-module/model/DataInterpretationNumericQuestion";
-import {NumericQuestion} from "../../questions-module/module/gre-questions-module/model/NumericQuestion";
-import {QuantitativeComparisonQuestion} from "../../questions-module/module/gre-questions-module/model/QuantitativeComparisonQuestion";
-import {QuantitativeSingleAnswerQuestion} from "../../questions-module/module/gre-questions-module/model/QuantitativeSingleAnswerQuestion";
-import {QuantitativeMultipleAnswerQuestion} from "../../questions-module/module/gre-questions-module/model/QuantitativeMultipleAnswerQuestion";
-import {ReadingComprehensionQuestion} from "../../questions-module/module/gre-questions-module/model/ReadingComprehensionQuestion";
-import {ReadingComprehensionSingleAnswerQuestion} from "../../questions-module/module/gre-questions-module/model/ReadingComprehensionSingleAnswerQuestion";
-import {ReadingComprehensionMultipleAnswerQuestion} from "../../questions-module/module/gre-questions-module/model/ReadingComprehensionMultipleAnswerQuestion";
-import {SelectInPassageQuestion} from "../../questions-module/module/gre-questions-module/model/SelectInPassageQuestion";
-import {SentenceEquivalenceQuestion} from "../../questions-module/module/gre-questions-module/model/SentenceEquivalenceQuestion";
-import {TextCompletionQuestion} from "../../questions-module/module/gre-questions-module/model/TextCompletionQuestion";
-import {WritingQuestion} from "../../questions-module/module/gre-questions-module/model/WritingQuestion";
 import {QuestionFactory} from "../../questions-module/service/QuestionFactoryService";
+import {environment} from "../../../environments/environment";
 /**
  * Created by yubar on 6/2/17.
  */
 
 @Injectable()
 export class UserQuestionsService {
-  url:string = apiEndPoint + "answered-questions";
+  url:string = environment.apiEndPoint + "answered-questions";
 
   constructor(private http:Http){}
 

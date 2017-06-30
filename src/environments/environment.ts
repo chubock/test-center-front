@@ -4,5 +4,10 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiEndPoint: "http://localhost:8080/",
+  alertsDismissible: true,
+  alertsDismissTimeout: 5000,
+  paginationLinksCount: 9,
+  mathjaxUrl: "http://localhost/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
 };

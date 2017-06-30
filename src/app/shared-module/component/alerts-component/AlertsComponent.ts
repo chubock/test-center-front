@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {AlertsService} from "../../service/AlertsService";
 import {Alert} from "../../model/Alert";
-import {alertsDismissTimeout, alertsDismissible} from "../../../AppConfig";
+import {environment} from "../../../../environments/environment";
 /**
  * Created by Yubar on 1/28/2017.
  */
@@ -12,8 +12,8 @@ import {alertsDismissTimeout, alertsDismissible} from "../../../AppConfig";
 })
 export class AlertsComponent implements OnInit{
   alerts:Alert[] = [];
-  dismissTimeout:number = alertsDismissTimeout;
-  dismissible:boolean = alertsDismissible;
+  dismissTimeout:number = environment.alertsDismissTimeout;
+  dismissible:boolean = environment.alertsDismissible;
 
   constructor(private alertService:AlertsService) {}
 

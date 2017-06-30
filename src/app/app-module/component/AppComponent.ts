@@ -1,13 +1,14 @@
 import {Component} from '@angular/core';
-import {apiEndPoint} from "../../AppConfig";
 import {LoginService} from "../../login-module/service/LoginService";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  serverUrl:string = apiEndPoint;
+  serverUrl:string = environment.apiEndPoint;
 
-  constructor(public loginService:LoginService){}
+  constructor(public loginService:LoginService){
+  }
 }

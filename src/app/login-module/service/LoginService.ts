@@ -5,12 +5,12 @@
 import {Injectable, OnInit} from "@angular/core";
 import {User} from "../../registration-module/model/User";
 import {Http, Headers} from "@angular/http";
-import {apiEndPoint} from "../../AppConfig";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class LoginService implements OnInit{
 
-  serverUrl = apiEndPoint;
+  serverUrl = environment.apiEndPoint;
   url = "login";
 
   constructor(private http:Http) {}

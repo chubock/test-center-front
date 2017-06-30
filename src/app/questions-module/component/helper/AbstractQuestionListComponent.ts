@@ -2,8 +2,8 @@ import {Page} from "../../../shared-module/model/Page";
 import {OnInit} from "@angular/core";
 import {QuestionService} from "../../service/QuestionService";
 import {Question} from "../../model/Question";
-import {paginationLinksCount} from "../../../AppConfig";
 import {QuestionSpecification} from "../../service/QuestionSpecification";
+import {environment} from "../../../../environments/environment";
 /**
  * Created by Yubar on 1/20/2017.
  */
@@ -11,7 +11,7 @@ import {QuestionSpecification} from "../../service/QuestionSpecification";
 export abstract class AbstractQuestionListComponent<T extends Question> implements OnInit{
   page:Page<Question> = new Page<Question>();
   currentPage:number;
-  paginationLinksCount:number = paginationLinksCount;
+  paginationLinksCount:number = environment.paginationLinksCount;
   question:Question;
   protected questionService: QuestionService<T>;
   specification:QuestionSpecification = new QuestionSpecification();

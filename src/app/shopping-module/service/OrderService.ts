@@ -1,16 +1,16 @@
 import {Injectable} from "@angular/core";
-import {apiEndPoint} from "../../AppConfig";
 import {Http} from "@angular/http";
 import {Product} from "../../products-module/model/Product";
 import {Order} from "../model/Order";
 import {OrderItem} from "../model/OrderItem";
+import {environment} from "../../../environments/environment";
 /**
  * Created by yubar on 4/5/17.
  */
 
 @Injectable()
 export class OrderService {
-  serverUrl:string = apiEndPoint;
+  serverUrl:string = environment.apiEndPoint;
   url:string = "orders";
   order:Order = new Order();
 

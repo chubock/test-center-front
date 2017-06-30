@@ -1,7 +1,9 @@
 import {Input, Output, EventEmitter} from "@angular/core";
-import {apiEndPoint} from "../../../../../../AppConfig";
 import {DomSanitizer} from "@angular/platform-browser";
 import {Question} from "../../../../../../questions-module/model/Question";
+import {environment} from "../../../../../../../environments/environment";
+
+
 /**
  * Created by Yubar on 3/21/2017.
  */
@@ -13,7 +15,7 @@ export abstract class AnswerQuestionComponent<T extends Question> {
   @Input() mode: string = "ANSWER";
   @Output() answerChanged:EventEmitter<String> = new EventEmitter<String>();
   @Output() scoreChanged:EventEmitter<Question> = new EventEmitter<Question>();
-  serverUrl:string = apiEndPoint;
+  serverUrl:string = environment.apiEndPoint;
 
   constructor(private sanitizer:DomSanitizer){}
 

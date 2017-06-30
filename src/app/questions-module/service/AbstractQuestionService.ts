@@ -2,8 +2,8 @@ import {QuestionService} from "./QuestionService";
 import {Headers, Http, URLSearchParams} from "@angular/http";
 import {Page} from "../../shared-module/model/Page";
 import {Question} from "../model/Question";
-import {apiEndPoint} from "../../AppConfig";
 import {QuestionSpecification} from "./QuestionSpecification";
+import {environment} from "../../../environments/environment";
 /**
  * Created by Yubar on 1/20/2017.
  */
@@ -11,7 +11,7 @@ import {QuestionSpecification} from "./QuestionSpecification";
 export abstract class AbstractQuestionService<T extends Question> implements QuestionService<T>{
 
   protected http:Http;
-  protected serverUrl:string = apiEndPoint;
+  protected serverUrl:string = environment.apiEndPoint;
 
   protected abstract get url(): string;
 

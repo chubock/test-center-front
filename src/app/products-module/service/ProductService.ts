@@ -1,8 +1,8 @@
 import {Http, URLSearchParams} from "@angular/http";
-import {apiEndPoint} from "../../AppConfig";
 import {Product} from "../model/Product";
 import {Page} from "../../shared-module/model/Page";
 import {Injectable} from "@angular/core";
+import {environment} from "../../../environments/environment";
 /**
  * Created by yubar on 4/4/17.
  */
@@ -11,7 +11,7 @@ import {Injectable} from "@angular/core";
 export class ProductService {
 
   url:string = "/products";
-  serverUrl = apiEndPoint;
+  serverUrl = environment.apiEndPoint;
 
   constructor(private http:Http) {}
 

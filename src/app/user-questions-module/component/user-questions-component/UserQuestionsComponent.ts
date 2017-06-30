@@ -2,8 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {UserQuestionSpecification, UserQuestionsService} from "../../service/UserQuestionsService";
 import {Question} from "../../../questions-module/model/Question";
 import {Page} from "../../../shared-module/model/Page";
-import {paginationLinksCount} from "../../../AppConfig";
 import {LoginService} from "../../../login-module/service/LoginService";
+import {environment} from "../../../../environments/environment";
 /**
  * Created by yubar on 6/2/17.
  */
@@ -17,7 +17,7 @@ export class UserQuestionsComponent implements OnInit{
 
   questionTypes:string[] =["GRE_DATA_INTERPRETATION_SET_MULTIPLE_ANSWER", "GRE_DATA_INTERPRETATION_SET_NUMERIC", "GRE_DATA_INTERPRETATION_SET_SINGLE_ANSWER", "GRE_NUMERIC", "GRE_NUMERIC_FRACTION", "GRE_QUANTITATIVE_COMPARISON", "GRE_QUANTITATIVE_MULTIPLE_ANSWER", "GRE_QUANTITATIVE_SINGLE_ANSWER", "GRE_READING_COMPREHENSION_SELECT_IN_PASSAGE", "GRE_READING_COMPREHENSION_MULTIPLE_ANSWER", "GRE_READING_COMPREHENSION_SINGLE_ANSWER", "GRE_SENTENCE_EQUIVALENCE", "GRE_TEXT_COMPLETION_ONE_BLANK", "GRE_TEXT_COMPLETION_TWO_BLANK", "GRE_TEXT_COMPLETION_THREE_BLANK", "GRE_WRITING_ARGUMENT", "GRE_WRITING_ISSUE"];
   page:Page<Question> = new Page<Question>(1);
-  paginationLinksCount:number = paginationLinksCount;
+  paginationLinksCount:number = environment.paginationLinksCount;
   currentPage:number;
   specification:UserQuestionSpecification = new UserQuestionSpecification();
 

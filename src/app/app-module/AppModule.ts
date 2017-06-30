@@ -26,7 +26,7 @@ import {LoginService} from "../login-module/service/LoginService";
   providers: [
     LoginService,
     FileService,
-    AlertsService
+    AlertsService,
   ],
   bootstrap: [AppRouteComponent]
 })

@@ -1,10 +1,10 @@
 import {TestService} from "./TestService";
 import {Headers, Http} from "@angular/http";
-import {apiEndPoint} from "../../AppConfig";
 import {Test} from "../model/Test";
 import {TestSection} from "../model/TestSection";
 import {QuestionFactory} from "../../questions-module/service/QuestionFactoryService";
 import {Question} from "../../questions-module/model/Question";
+import {environment} from "../../../environments/environment";
 /**
  * Created by Yubar on 3/17/2017.
  */
@@ -12,7 +12,7 @@ import {Question} from "../../questions-module/model/Question";
 export abstract class AbstractTestService implements TestService {
 
   protected http:Http;
-  protected serverUrl:string = apiEndPoint;
+  protected serverUrl:string = environment.apiEndPoint;
 
   protected abstract get url(): string;
 

@@ -4,7 +4,7 @@ import {QuestionService} from "../../service/QuestionService";
 import {FileService} from "../../../shared-module/service/FileService";
 import {AlertsService} from "../../../shared-module/service/AlertsService";
 import {Alert} from "../../../shared-module/model/Alert";
-import {apiEndPoint} from "../../../AppConfig";
+import {environment} from "../../../../environments/environment";
 /**
  * Created by yubar on 1/8/17.
  */
@@ -21,7 +21,7 @@ export abstract class AbstractQuestionComponent<T extends Question> implements O
   backup: T;
   protected questionService: QuestionService<T>;
   protected fileService: FileService;
-  protected serverUrl:string = apiEndPoint;
+  protected serverUrl:string = environment.apiEndPoint;
   protected alertsService:AlertsService;
 
   getQuestion(): T { return this.question};
