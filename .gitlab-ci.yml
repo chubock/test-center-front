@@ -1,0 +1,23 @@
+stages:
+  - build
+  - deploy
+
+job1:
+  stage: build
+  script:
+    - cd /home/frontend/test-center-front
+    - git pull origin test
+    - npm install
+  tags:
+    [test]
+  only:
+    [test]
+
+job2:
+  stage: deploy
+  script:
+    - sudo systemctl restart frontend.service
+  tags:
+    [test]
+  only:
+    [test]
