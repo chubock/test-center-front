@@ -2,7 +2,7 @@ stages:
   - build
   - deploy
 
-job1:
+build_job:
   stage: build
   script:
     - cd /home/frontend/test-center-front
@@ -13,7 +13,7 @@ job1:
   only:
     [test]
 
-job2:
+deploy_job:
   stage: deploy
   script:
     - sudo systemctl restart frontend.service
