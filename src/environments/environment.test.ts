@@ -4,5 +4,5 @@ export const environment = {
   alertsDismissible: true,
   alertsDismissTimeout: 5000,
   paginationLinksCount: 9,
-  mathjaxUrl: "http://mathjax.test-center.ir/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+  mathjaxUrl: "https://mathjax.test-center.ir/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
 };
