@@ -10,6 +10,7 @@ import {AppComponent} from "./component/AppComponent";
 import {appRouting} from "./app.routing";
 import {AppRouteComponent} from "./AppRouteComponent";
 import {LoginService} from "../login-module/service/LoginService";
+import {ChartModule} from "primeng/primeng";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {LoginService} from "../login-module/service/LoginService";
     BrowserModule,
     FormsModule,
     HttpModule,
+    ChartModule,
     SharedModule,
     appRouting
   ],

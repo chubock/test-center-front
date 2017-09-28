@@ -3,5 +3,6 @@
     <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['/tests']">Back</a></li>
     <li *ngIf="user.greTestCount + user.freeGreTestCount > 0" role="presentation" routerLinkActive="active" ><a [routerLink]="['new']">New</a></li>
     <li *ngFor="let test of tests" role="presentation" routerLinkActive="active" ><a [routerLink]="['view', test.id]">{{test.startDate | date:'medium'}} - {{test.endDate | date:'medium'}}</a></li>
+    <li *ngFor="let test of tests" role="presentation" routerLinkActive="active" ><a [routerLink]="['result', test.id]">Result of {{test.startDate | date:'medium'}} - {{test.endDate | date:'medium'}}</a></li>
   </ul>
 </div>

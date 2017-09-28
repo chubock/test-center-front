@@ -10,7 +10,7 @@ import {environment} from "../../../environments/environment";
 @Injectable()
 export class ProductService {
 
-  url:string = "/products";
+  url:string = "/admin/products";
   serverUrl = environment.apiEndPoint;
 
   constructor(private http:Http) {}

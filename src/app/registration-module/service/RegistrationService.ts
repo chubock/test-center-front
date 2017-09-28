@@ -10,7 +10,7 @@ import {environment} from "../../../environments/environment";
 export class RegistrationService {
 
   serverUrl:string = environment.apiEndPoint;
-  url:string = "register";
+  url:string = "student/register";
 
   constructor(private http:Http) {}
 

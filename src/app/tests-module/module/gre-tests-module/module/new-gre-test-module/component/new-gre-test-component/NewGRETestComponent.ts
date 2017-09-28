@@ -4,7 +4,7 @@ import {GRETestService} from "../../../../service/GRETestService";
 import {TestSection, greSections} from "../../../../../../model/TestSection";
 import {Question} from "../../../../../../../questions-module/model/Question";
 import {Timer} from "../../../../../../../shared-module/model/Timer";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 /**
  * Created by Yubar on 3/19/2017.
  */
@@ -27,7 +27,7 @@ export class NewGRETestComponent {
   view:string = "MAIN";
   selectedQuestion:Question;
 
-  constructor(private testService:GRETestService, private activatedRoute:ActivatedRoute){
+  constructor(private testService:GRETestService, private activatedRoute:ActivatedRoute, private router:Router){
     testService.getCurrentTest().then(test => {
       if (test) {
         this.test = test;
@@ -144,6 +144,11 @@ export class NewGRETestComponent {
 
   finishTest(): Promise<void> {
     return this.testService.finishTest(this.test.id, this.answers).then(endDate => this.test.endDate = endDate);
+  }
+
+  commentTest():void {
+    this.testService.commentTest(this.test.id, this.test.comment);
+    this.router.navigate(['/']);
   }
 
   sectionTimeEnded():void {

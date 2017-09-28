@@ -5,7 +5,11 @@
 
 export const environment = {
   production: false,
-  apiEndPoint: "http://localhost:8080/",
+  apiEndPoint: "http://localhost:8080",
+  clientId: "yubar",
+  clientSecret: "persia",
+  grantType: "password",
+  scope: "read write",
   alertsDismissible: true,
   alertsDismissTimeout: 5000,
   paginationLinksCount: 9,

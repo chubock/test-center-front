@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {UserQuestionSpecification, UserQuestionsService} from "../../service/UserQuestionsService";
 import {Question} from "../../../questions-module/model/Question";
 import {Page} from "../../../shared-module/model/Page";
@@ -20,11 +20,13 @@ export class UserQuestionsComponent implements OnInit{
   paginationLinksCount:number = environment.paginationLinksCount;
   currentPage:number;
   specification:UserQuestionSpecification = new UserQuestionSpecification();
+  allUsers:boolean = false;
 
   constructor(private userQuestionsService:UserQuestionsService, public loginService:LoginService){}
 
   ngOnInit():void {
     this.loadQuestions();
+    this.allUsers = this.loginService.hasAnyRole('TEACHER', 'ADMIN');
   }
 
   filterChangeListener(filters:string[], filter:string) {
@@ -37,7 +39,10 @@ export class UserQuestionsComponent implements OnInit{
   }
 
   loadQuestions(page:number = 0):void {
-    this.userQuestionsService.getQuestions(page, this.page.size, this.specification).then(page => this.page = page);
+    if (this.allUsers)
+      this.userQuestionsService.getAllQuestions(page, this.page.size, this.specification).then(page => this.page = page);
+    else
+      this.userQuestionsService.getAllQuestions(page, this.page.size, this.specification).then(page => this.page = page);
   }
 
   scoreChanged(question:Question):void {

@@ -131,4 +131,9 @@ export abstract class AbstractTestService implements TestService {
       .toPromise();
   }
 
+  commentTest(id:number, comment:string):Promise<void> {
+    return this.http.patch(this.url + "/" + id + "/comment", {comment: comment}, {withCredentials: true})
+      .toPromise();
+  }
+
 }

@@ -12,5 +12,6 @@ export class Test {
   intelligentType:string = "INTELLIGENT";
   testSections:TestSection[] = [];
   sectionTypes:string[] = [];
+  comment:string;
 
 }

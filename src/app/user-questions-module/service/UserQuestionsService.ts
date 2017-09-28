@@ -10,11 +10,11 @@ import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class UserQuestionsService {
-  url:string = environment.apiEndPoint + "answered-questions";
+  url:string = environment.apiEndPoint;
 
   constructor(private http:Http){}
 
-  getQuestions(page:number = 0, size:number = 5, specification:UserQuestionSpecification): Promise<Page<Question>> {
+  private getQuestions(page:number = 0, size:number = 5, specification:UserQuestionSpecification, url:string): Promise<Page<Question>> {
     let params: URLSearchParams = new URLSearchParams;
     params.set("page", page.toString());
     params.set("size", size.toString());
@@ -28,7 +28,7 @@ export class UserQuestionsService {
       specification.questionTypes.forEach(questionType => params.append("questionTypes", questionType));
     }
     return this.http
-      .get(this.url, {search: params, withCredentials: true})
+      .get(url, {search: params, withCredentials: true})
       .toPromise()
       .then(response => {
         let page:Page<Question> = response.json() as Page<Question>;
@@ -42,6 +42,14 @@ export class UserQuestionsService {
         page.content = content;
         return page;
       });
+  }
+
+  getUserQuestions(page:number = 0, size:number = 5, specification:UserQuestionSpecification): Promise<Page<Question>> {
+    return this.getQuestions(page, size, specification, this.url + "student/answered-questions");
+  }
+
+  getAllQuestions(page:number = 0, size:number = 5, specification:UserQuestionSpecification): Promise<Page<Question>> {
+    return this.getQuestions(page, size, specification, this.url + "admin/answered-questions");
   }
 
   scoreQuestion(question:Question):Promise<void> {

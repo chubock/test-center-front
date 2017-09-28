@@ -14,7 +14,7 @@ import {DataInterpretationSetQuestion} from "../model/DataInterpretationSetQuest
 export class DataInterpretationSetQuestionService extends AbstractQuestionService<DataInterpretationSetQuestion>{
 
   protected get url(): string{
-    return this.serverUrl + "/dataInterpretationSetQuestions";
+    return this.serverUrl + "admin/dataInterpretationSetQuestions";
   }
 
   constructor(protected http:Http){

@@ -9,7 +9,7 @@ import {Injectable} from "@angular/core";
 export class GRETestService extends AbstractTestService {
 
   protected get url(): string {
-    return this.serverUrl + "/test/gre";
+    return this.serverUrl + "/student/tests/gre";
   }
 
   constructor(protected http:Http) {

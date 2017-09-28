@@ -14,7 +14,7 @@ import {NumericQuestion} from "../model/NumericQuestion";
 export class NumericQuestionService extends AbstractQuestionService<NumericQuestion>{
 
   protected get url(): string{
-    return this.serverUrl + "/numericQuestions";
+    return this.serverUrl + "admin/numericQuestions";
   }
 
   constructor(protected http:Http){

@@ -1,0 +1,16 @@
+<div class="container">
+
+
+  <div class="col-xs-12">
+    <span style="padding: 3px; margin: 10px 2px; cursor: pointer" (click)="selectFromSpecification(i);" *ngFor="let item of specification.types; let i = index" class="label label-primary">{{item}} : {{specification.values[i]}}<span (click)="removeFromSpecification(i);" class="glyphicon glyphicon-remove"></span></span>
+  </div>
+
+  <div class="col-xs-12">
+    <carousel>
+      <slide *ngFor="let diagram of diagrams; let i = index">
+        <p-chart class="col-sm-offset-3 col-sm-6" [type]="diagram.type" [data]="diagram" [options]="diagram.option" (onDataSelect)="selectData($event, i)"></p-chart>
+      </slide>
+    </carousel>
+  </div>
+</div>
+

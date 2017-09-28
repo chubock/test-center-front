@@ -14,7 +14,7 @@ import {QuantitativeComparisonQuestion} from "../model/QuantitativeComparisonQue
 export class QuantitativeComparisonQuestionService extends AbstractQuestionService<QuantitativeComparisonQuestion>{
 
   protected get url(): string{
-    return this.serverUrl + "/quantitativeComparisonQuestions";
+    return this.serverUrl + "admin/quantitativeComparisonQuestions";
   }
 
   constructor(protected http:Http){

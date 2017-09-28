@@ -14,7 +14,7 @@ import {SentenceEquivalenceQuestion} from "../model/SentenceEquivalenceQuestion"
 export class SentenceEquivalenceQuestionService extends AbstractQuestionService<SentenceEquivalenceQuestion>{
 
   protected get url(): string{
-    return this.serverUrl + "/sentenceEquivalenceQuestions";
+    return this.serverUrl + "admin/sentenceEquivalenceQuestions";
   }
 
   constructor(protected http:Http){

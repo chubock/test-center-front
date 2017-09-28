@@ -17,5 +17,6 @@ export interface TestService {
   markQuestion(id:number):Promise<void>;
   unMarkQuestion(id:number):Promise<void>;
   finishTest(id:number, answers:any): Promise<Date>;
+  commentTest(id:number, comment:string): Promise<void>;
 
 }

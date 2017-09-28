@@ -1,4 +1,4 @@
-<div *ngIf="test.id && currentQuestion" class="container" style="height: 800px">
+<div *ngIf="test.id && currentQuestion && !test.endDate" class="container" style="height: 800px">
   <div class="row" style="background-color: #D2E4F0">
     <div class="col-sm-6 bold">GRE Practice Test Section {{currentSection.number}} of {{test.sectionTypes.length}}</div>
     <div class="col-sm-6 text-right">
@@ -89,6 +89,21 @@
     </div>
   </div>
 
+</div>
+
+<div *ngIf="test.endDate" class="container">
+  <div class="well well-sm form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-12">You finished your test. you can tell us any comments or feedback now.</label>
+      <div class="col-sm-12">
+        <textarea style="height: 300px" [(ngModel)]="test.comment" class="form-control"></textarea>
+      </div>
+    </div>
+    <div class="form-group text-center control-text">
+      <button (click)="commentTest()" class="btn btn-primary">Send Feedback</button>
+      <button class="btn btn-default" [routerLink]="['/tests/gre']">Return</button>
+    </div>
+  </div>
 </div>
 
 

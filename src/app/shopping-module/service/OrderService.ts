@@ -11,7 +11,7 @@ import {environment} from "../../../environments/environment";
 @Injectable()
 export class OrderService {
   serverUrl:string = environment.apiEndPoint;
-  url:string = "orders";
+  url:string = "students/orders";
   order:Order = new Order();
 
   constructor(private http:Http) {}

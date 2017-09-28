@@ -14,7 +14,7 @@ import {ReadingComprehensionQuestion} from "../model/ReadingComprehensionQuestio
 export class ReadingComprehensionQuestionService extends AbstractQuestionService<ReadingComprehensionQuestion>{
 
   protected get url(): string{
-    return this.serverUrl + "/readingComprehensionQuestions";
+    return this.serverUrl + "admin/readingComprehensionQuestions";
   }
 
   constructor(protected http:Http){
