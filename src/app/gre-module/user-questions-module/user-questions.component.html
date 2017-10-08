@@ -1,0 +1,80 @@
+<a [routerLink]="['/']">Back</a>
+<div class="container">
+
+  <div style="text-align: right; margin: 10px 0;">
+    <button class="btn btn-primary" (click)="filterShow = !filterShow">{{filterShow ? 'Hide' : 'Show'}} Filters</button>
+  </div>
+
+  <div class="form-horizontal well well-sm" [ngClass]="{'hidden': !filterShow}">
+
+    <div class="form-group">
+      <label for="difficulties" class="control-label col-sm-3">Difficulty: </label>
+      <div class="col-sm-9">
+        <div class="btn-group">
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficulties, 'EASY')" btnCheckbox>Easy</label>
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficulties, 'MEDIUM')" btnCheckbox>Medium</label>
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficulties, 'HARD')" btnCheckbox>Hard</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="difficultyLevels" class="control-label col-sm-3">Difficulty Level: </label>
+      <div class="col-sm-9">
+        <div class="btn-group">
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL1')" btnCheckbox>LEVEL 1</label>
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL2')" btnCheckbox>LEVEL 2</label>
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL3')" btnCheckbox>LEVEL 3</label>
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL4')" btnCheckbox>LEVEL 4</label>
+          <label class="btn btn-default" (click)="filterChangeListener(specification.difficultyLevels, 'LEVEL5')" btnCheckbox>LEVEL 5</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="marked" class="control-label col-sm-3">Marked: </label>
+      <div class="col-sm-9">
+        <div class="btn-group">
+          <label class="btn btn-default" [uncheckable]="true" [(ngModel)]="specification.marked" btnRadio="false" (click)="loadQuestions()">NO</label>
+          <label class="btn btn-default" [uncheckable]="true" [(ngModel)]="specification.marked" btnRadio="true" (click)="loadQuestions()">YES</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="difficulties" class="control-label col-sm-3">Question Type: </label>
+      <div class="col-sm-9">
+        <div class="btn-group btn-group-vertical">
+          <label *ngFor="let q of questionTypes" class="btn btn-default" (click)="filterChangeListener(specification.questionTypes, q)" btnCheckbox>{{q}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+
+    <div *ngFor="let question of page.content">
+      <div [ngSwitch]="question.questionType">
+        <div *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_MULTIPLE_ANSWER'"><answer-data-interpretation-set-multiple-answer-question [mode]="'ANSWERED'" [question]="question"></answer-data-interpretation-set-multiple-answer-question></div>
+        <div *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_NUMERIC'"><answer-data-interpretation-set-numeric-question [mode]="'ANSWERED'" [question]="question"></answer-data-interpretation-set-numeric-question></div>
+        <div *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_SINGLE_ANSWER'"><answer-data-interpretation-set-single-answer-question [mode]="'ANSWERED'" [question]="question"></answer-data-interpretation-set-single-answer-question></div>
+        <div *ngSwitchCase="'GRE_NUMERIC'"><answer-numeric-question [mode]="'ANSWERED'" [question]="question"></answer-numeric-question></div>
+        <div *ngSwitchCase="'GRE_NUMERIC_FRACTION'"><answer-numeric-question [mode]="'ANSWERED'" [question]="question"></answer-numeric-question></div>
+        <div *ngSwitchCase="'GRE_QUANTITATIVE_COMPARISON'"><answer-quantitative-comparison-question [mode]="'ANSWERED'" [question]="question"></answer-quantitative-comparison-question></div>
+        <div *ngSwitchCase="'GRE_QUANTITATIVE_MULTIPLE_ANSWER'"><answer-quantitative-multiple-answer-question [mode]="'ANSWERED'" [question]="question"></answer-quantitative-multiple-answer-question></div>
+        <div *ngSwitchCase="'GRE_QUANTITATIVE_SINGLE_ANSWER'"><answer-quantitative-single-answer-question [mode]="'ANSWERED'" [question]="question"></answer-quantitative-single-answer-question></div>
+        <div *ngSwitchCase="'GRE_READING_COMPREHENSION_SELECT_IN_PASSAGE'"><answer-select-in-passage-question [mode]="'ANSWERED'" [question]="question"></answer-select-in-passage-question></div>
+        <div *ngSwitchCase="'GRE_READING_COMPREHENSION_MULTIPLE_ANSWER'"><answer-reading-comprehension-multiple-answer-question [mode]="'ANSWERED'" [question]="question"></answer-reading-comprehension-multiple-answer-question></div>
+        <div *ngSwitchCase="'GRE_READING_COMPREHENSION_SINGLE_ANSWER'"><answer-reading-comprehension-single-answer-question [mode]="'ANSWERED'" [question]="question"></answer-reading-comprehension-single-answer-question></div>
+        <div *ngSwitchCase="'GRE_SENTENCE_EQUIVALENCE'"><answer-sentence-equivalence-question [mode]="'ANSWERED'" [question]="question"></answer-sentence-equivalence-question></div>
+        <div *ngSwitchCase="'GRE_TEXT_COMPLETION_ONE_BLANK'"><answer-text-completion-question [mode]="'ANSWERED'" [question]="question"></answer-text-completion-question></div>
+        <div *ngSwitchCase="'GRE_TEXT_COMPLETION_TWO_BLANK'"><answer-text-completion-question [mode]="'ANSWERED'" [question]="question"></answer-text-completion-question></div>
+        <div *ngSwitchCase="'GRE_TEXT_COMPLETION_THREE_BLANK'"><answer-text-completion-question [mode]="'ANSWERED'" [question]="question"></answer-text-completion-question></div>
+        <div *ngSwitchCase="'GRE_WRITING_ARGUMENT'"><answer-writing-question [mode]="'ANSWERED'" [question]="question" [score]="authorityService.hasAnyRole('TEACHER', 'ADMIN')" (scoreChanged)="scoreChanged($event)"></answer-writing-question></div>
+        <div *ngSwitchCase="'GRE_WRITING_ISSUE'"><answer-writing-question [mode]="'ANSWERED'" [question]="question" [score]="authorityService.hasAnyRole('TEACHER', 'ADMIN')" (scoreChanged)="scoreChanged($event)"></answer-writing-question></div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 text-center">
+      <pagination [totalItems]="page.totalElements" [(ngModel)]="currentPage" [itemsPerPage]="page.size" [maxSize]="paginationLinksCount" (pageChanged)="loadQuestions($event.page - 1)"></pagination>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,5 @@
+<div style="position: absolute; right: 15px; top: 15px; width: 500px; z-index: 1000">
+  <alert *ngFor="let alert of alerts" [type]="alert.severity" [dismissible]="dismissible" [dismissOnTimeout]="dismissTimeout">
+    <span>{{alert.text}}</span>
+  </alert>
+</div>

@@ -1,0 +1,36 @@
+<form #registrationForm="ngForm" class="form-horizontal col-sm-12 well well-lg" role="form" novalidate>
+  <div class="form-group" [ngClass]="{'has-error' : firstName.errors && firstName.touched, 'has-success' : !firstName.errors && firstName.touched}">
+    <label for="firstName" class="col-sm-4 control-label">First Name: </label>
+    <div class="col-sm-8">
+      <input #firstName="ngModel" name="firstName" class="form-control" [(ngModel)]="student.firstName" required />
+      <span class="help-block" *ngIf="firstName.touched && firstName.errors && firstName.errors.required">First Name can't be empty</span>
+    </div>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error' : lastName.errors && lastName.touched, 'has-success' : !lastName.errors && lastName.touched}">
+    <label for="lastName" class="col-sm-4 control-label">Last Name: </label>
+    <div class="col-sm-8">
+      <input #lastName="ngModel" name="lastName" class="form-control" [(ngModel)]="student.lastName" required />
+      <span class="help-block" *ngIf="lastName.touched && lastName.errors && lastName.errors.required">Last Name can't be empty</span>
+    </div>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error' : password.errors && password.touched, 'has-success' : !password.errors && password.touched}">
+    <label for="password" class="col-sm-4 control-label">Password: </label>
+    <div class="col-sm-8">
+      <input type="password" minlength="6" #password="ngModel" name="password" class="form-control" [(ngModel)]="student.password" required />
+      <span class="help-block" *ngIf="password.touched && password.errors && password.errors.required">Password can't be empty</span>
+      <span class="help-block" *ngIf="password.touched && password.errors && password.errors.minlength">Password must be at least 6 characters</span>
+    </div>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error' : confirmPasswordInput.touched && password.touched && student.password != confirmPassword, 'has-success' : student.password && student.password == confirmPassword}">
+    <label for="confirmPassword" class="col-sm-4 control-label">Confirm Password: </label>
+    <div class="col-sm-8">
+      <input type="password" minlength="6" #confirmPasswordInput="ngModel" name="confirmPassword" class="form-control" [(ngModel)]="confirmPassword" />
+      <span class="help-block" *ngIf="confirmPasswordInput.touched && password.touched && student.password != confirmPassword">Passwords don't match</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+      <button (click)="registerStudent()" [disabled]="!registrationForm.valid || student.password != confirmPassword" class="btn btn-primary">Register</button>
+    </div>
+  </div>
+</form>
