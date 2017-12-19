@@ -30,7 +30,7 @@ export class TimerComponent implements OnInit, OnChanges{
       this.timer.seconds = this.timer.endTime;
     this.st.delTimer("mainTimer");
     this.st.newTimer("mainTimer", this.timer.interval);
-    this.st.subscribe("mainTimer", e => {
+    this.st.subscribe("mainTimer", () => {
       if (this.isEnded()) {
         this.st.delTimer("mainTimer");
         this.timeEnded.emit();

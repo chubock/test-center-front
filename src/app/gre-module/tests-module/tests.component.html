@@ -1,6 +1,8 @@
 <div class="col-sm-12 visible-lg">
   <ul class="nav nav-pills nav-stacked">
-    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['/']">Back</a></li>
-    <li role="presentation" routerLinkActive="active" ><a [routerLink]="['gre']">GRE</a></li>
+    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a [routerLink]="['/tests']">Back</a></li>
+    <li role="presentation" routerLinkActive="active" ><a [routerLink]="['new']">New</a></li>
+    <li *ngFor="let test of tests" role="presentation" routerLinkActive="active" ><a [routerLink]="['view', test.id]">{{test.startDate | date:'medium'}} - {{test.endDate | date:'medium'}}</a></li>
+    <li *ngFor="let test of tests" role="presentation" routerLinkActive="active" ><a [routerLink]="['result', test.id]">Result of {{test.startDate | date:'medium'}} - {{test.endDate | date:'medium'}}</a></li>
   </ul>
 </div>

@@ -13,5 +13,6 @@ export const environment = {
   alertsDismissible: true,
   alertsDismissTimeout: 5000,
   paginationLinksCount: 9,
-  mathjaxUrl: "http://localhost/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+  // mathjaxUrl: "http://localhost/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+  mathjaxUrl: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"
 };
