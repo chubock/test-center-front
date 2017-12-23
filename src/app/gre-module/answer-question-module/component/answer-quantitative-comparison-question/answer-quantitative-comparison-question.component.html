@@ -1,11 +1,11 @@
-<div class="row test-border" style="height: 700px">
+<div class="row test-border" style="height: calc(100vh - 85px);">
 
-  <div class="test-border" style="margin: 2px; height: 694px" [ngClass]="{'hidden-tabs': mode == 'ANSWER'}">
+  <div class="test-border" style="margin: 2px; height: calc(100vh - 93px); overflow: auto;" [ngClass]="{'hidden-tabs': mode == 'ANSWER'}">
 
     <tabset>
-      <tab heading="Question" style="padding: 50px 100px 0 100px; overflow: auto;">
+      <tab heading="Question" style="padding: 50px 100px 0 100px;">
 
-        <img *ngIf="question.image" [src]="serverUrl + '/files/' + question.image" style="margin: 0 auto; display: block">
+        <img *ngIf="question.image" [src]="serverUrl + '/file-service/' + question.image" style="margin: 0 auto; display: block">
 
         <div style="margin: 10px 100px 50px 100px; text-align: center">
           <span [mathJax]="question.text"></span>

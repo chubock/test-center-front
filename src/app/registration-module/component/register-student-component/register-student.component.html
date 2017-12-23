@@ -1,4 +1,4 @@
-<form #registrationForm="ngForm" class="form-horizontal col-sm-12 well well-lg" role="form" novalidate>
+<form *ngIf="false" #registrationForm="ngForm" class="form-horizontal col-sm-12 well well-lg" role="form" novalidate>
   <div class="form-group" [ngClass]="{'has-error' : firstName.errors && firstName.touched, 'has-success' : !firstName.errors && firstName.touched}">
     <label for="firstName" class="col-sm-4 control-label">First Name: </label>
     <div class="col-sm-8">
@@ -34,3 +34,19 @@
     </div>
   </div>
 </form>
+
+
+
+<div class="container">
+  <div class="login-page" style="margin-top: 50%">
+    <div class="form">
+      <form class="login-form">
+        <input name="firstName" type="text" placeholder="First Name" [(ngModel)]="student.firstName"/>
+        <input name="lastName" type="text" placeholder="Last Name" [(ngModel)]="student.lastName"/>
+        <input name="password" type="password" placeholder="Password" [(ngModel)]="student.password" />
+        <input name="confirmPassword" type="password" placeholder="Retype Password" [(ngModel)]="confirmPassword" />
+        <button (click)="registerStudent()" [disabled]="student.password != confirmPassword">Register</button>
+      </form>
+    </div>
+  </div>
+</div>

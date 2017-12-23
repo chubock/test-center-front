@@ -11,7 +11,7 @@ export class AuthorityService {
 
 
   isAuthenticated():boolean {
-    return sessionStorage.getItem('token') != null && tokenNotExpired();
+    return sessionStorage.getItem('token') != null;
   }
 
   getUser() {
@@ -29,6 +29,16 @@ export class AuthorityService {
   }
 
   hasAnyRole(...roles:string[]):boolean {
+
+    let decodedToken = this.jwtHelper.decodeToken(sessionStorage.getItem("token"));
+
+    for (let i=0; i< roles.length; i++)
+      if (decodedToken.authorities.indexOf(roles[i]) != -1)
+        return true;
+    return false;
+  }
+
+  hasAnyRoles(roles:string[]):boolean {
 
     let decodedToken = this.jwtHelper.decodeToken(sessionStorage.getItem("token"));
 

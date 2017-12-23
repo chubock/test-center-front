@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Http, Response} from "@angular/http";
 import {environment} from "../../../environments/environment";
 import {Student} from "../model/student";
 /**
@@ -11,7 +11,7 @@ export class RegistrationService {
 
   constructor(private http:Http) {}
 
-  registerPhoneNumber(phoneNumber:string):Promise<void> {
+  registerPhoneNumber(phoneNumber:string):Promise<Response> {
     return this.http
       .post(environment.apiEndPoint + "/registration-service/register-phone-number/" + phoneNumber, "")
       .toPromise();
@@ -24,7 +24,7 @@ export class RegistrationService {
       .then(resp => resp.json().registrationCode)
   }
 
-  registerStudent(student:Student): Promise<void> {
+  registerStudent(student:Student): Promise<Response> {
     return this.http
       .post(environment.apiEndPoint + "/registration-service/register-student", student)
       .toPromise();

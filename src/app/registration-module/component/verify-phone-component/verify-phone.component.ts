@@ -8,7 +8,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AlertsService} from "../../../shared-module/service/alerts.service";
 import {Alert} from "../../../shared-module/model/alert";
 @Component({
-  templateUrl: './verify-phone.component.html'
+  templateUrl: './verify-phone.component.html',
+  styleUrls: ['../../../../assets/css/login.css']
 })
 export class VerifyPhoneComponent implements OnInit{
 

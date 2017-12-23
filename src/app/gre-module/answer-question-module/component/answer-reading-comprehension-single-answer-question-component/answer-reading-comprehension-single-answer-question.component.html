@@ -2,7 +2,7 @@
   <tabset>
     <tab heading="Question">
 
-      <div class="col-sm-6 test-border" style="padding: 2px; height: 600px">
+      <div class="col-sm-6 test-border" style="padding: 2px; height: calc(100vh - 88px)">
         <div *ngIf="question.parent.number != question.parent.lastNumber" style="background-color: blue; color: white; font-weight: bold; padding: 2px">
           Question {{question.parent.number}} to {{question.parent.lastNumber}} are based on this passage.
         </div>
@@ -13,11 +13,11 @@
           <span [mathJax]="question.parent.text"></span>
         </div>
 
-        <img *ngIf="question.parent.image" [src]="serverUrl + '/files/' + question.parent.image" style="margin: 0 auto; display: block">
+        <img *ngIf="question.parent.image" [src]="serverUrl + '/file-service/' + question.parent.image" style="margin: 0 auto; display: block">
 
       </div>
-      <div class="col-sm-6 test-border" style="padding: 20px; height: 600px">
-        <div style="margin-bottom: 20px;">
+      <div class="col-sm-6 test-border" style="padding: 20px; height: calc(100vh - 88px)">
+        <div style="margin-bottom: 50px;">
           <span [mathJax]="question.text" class="col-xs-12"></span>
         </div>
         <table style="width: 100%">

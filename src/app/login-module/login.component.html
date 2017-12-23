@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="false" class="container">
   <form *ngIf="! authorityService.isAuthenticated()" #loginForm="ngForm" class="form-horizontal col-sm-12 well well-lg" role="form" novalidate>
     <div class="form-group" [ngClass]="{'has-error' : usernameInput.errors && usernameInput.touched, 'has-success' : !usernameInput.errors && usernameInput.touched}">
       <label for="username" class="col-sm-4 control-label">Username: </label>
@@ -26,4 +26,17 @@
       <button class="btn btn-primary" (click)="logout()">Logout</button>
     </div>
   </div>
+</div>
+
+<div class="container">
+<div class="login-page" style="margin-top: 50%">
+  <div class="form">
+    <form class="login-form">
+      <input name="username" type="text" placeholder="Phone Number" [(ngModel)]="username"/>
+      <input name="password" type="password" placeholder="Password" [(ngModel)]="password" />
+      <button (click)="login()">login</button>
+      <p class="message">Not registered? <a [routerLink]="['/', 'registration']" href="#">Create an account</a></p>
+    </form>
+  </div>
+</div>
 </div>

@@ -13,6 +13,7 @@ import {ChartModule} from "primeng/primeng";
 import {AuthorityService} from "./shared-module/service/authority.service";
 import {authHttpServiceFactory} from "./shared-module/service/auth-http-service.factory";
 import {AuthHttp} from "angular2-jwt";
+import {LoginService} from "./login-module/login.service";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {AuthHttp} from "angular2-jwt";
   ],
   providers: [
     FileService,
+    LoginService,
     AlertsService,
     AuthorityService,
     {

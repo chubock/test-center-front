@@ -1,7 +1,8 @@
-<div *ngIf="test.id && currentQuestion && !test.endDate" class="container" style="height: 800px">
-  <div class="row" style="background-color: #D2E4F0">
+<div *ngIf="test.id && currentQuestion && !test.endDate" class="container" style="height: 100vh">
+  <div class="row" style="background-color: #D2E4F0; height: 50px">
     <div class="col-sm-6 bold">GRE Practice Test Section {{currentSection.number}} of {{test.sectionTypes.length}}</div>
     <div class="col-sm-6 text-right">
+      <button *ngIf="view == 'NO_TIME'" (click)="isLastSection() ? finishTest() : nextSection()" class="test-btn test-btn-square bold">Continue</button>
       <button *ngIf="view == 'MAIN' && ! isLastSection()" (click)="nextSection()" class="test-btn test-btn-square bold">Exit Section</button>
       <button *ngIf="view == 'MAIN'" (click)="finishTest()" class="test-btn test-btn-square bold">Quit w/Save</button>
       <!--<button *ngIf="view == 'MAIN'" class="test-btn test-btn-square bold">Help</button>-->
@@ -13,7 +14,7 @@
       <button *ngIf="view == 'MAIN' && ! isLastQuestion()" (click)="nextQuestion()" class="test-btn test-btn-square bold">Next</button>
     </div>
   </div>
-  <div class="row" style="background-color: #D2E4F0; padding: 5px 0;">
+  <div class="row" style="background-color: #D2E4F0; padding: 5px 0; height: 35px">
     <div class="col-sm-4"></div>
     <div class="col-sm-4 text-center bold">Question {{currentQuestion.number}} of {{currentSection.answeredQuestions.length}}</div>
     <div class="col-sm-4 text-right">
@@ -86,6 +87,12 @@
           </table>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div *ngIf="view == 'NO_TIME'" style="height: calc(100vh - 86px)">
+    <div style="height: calc(50vh - 43px); text-align: center">
+      TIME ENDED
     </div>
   </div>
 

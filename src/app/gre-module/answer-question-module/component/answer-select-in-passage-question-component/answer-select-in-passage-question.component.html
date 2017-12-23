@@ -2,7 +2,7 @@
 
   <tabset>
     <tab heading="Question">
-      <div class="col-sm-6 test-border" style="padding: 2px; height: 600px">
+      <div class="col-sm-6 test-border" style="padding: 2px; height: calc(100vh - 86px); overflow: auto">
         <div *ngIf="question.parent.number != question.parent.lastNumber" style="background-color: blue; color: white; font-weight: bold; padding: 2px">
           Question {{question.parent.number}} to {{question.parent.lastNumber}} are based on this passage.
         </div>
@@ -21,7 +21,7 @@
           </p>
         </div>
       </div>
-      <div class="col-sm-6 test-border" style="padding: 20px; height: 600px">
+      <div class="col-sm-6 test-border" style="padding: 20px; height: calc(100vh - 86px)">
         <p style="margin-bottom: 20px;">
           Select the sentence that provides support for an answer to a question in the passage.
         </p>

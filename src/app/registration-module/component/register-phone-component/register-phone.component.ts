@@ -8,7 +8,8 @@ import {RegistrationService} from "../../service/registration.service";
 import {AlertsService} from "../../../shared-module/service/alerts.service";
 import {Alert} from "../../../shared-module/model/alert";
 @Component({
-  templateUrl: './register-phone.component.html'
+  templateUrl: './register-phone.component.html',
+  styleUrls: ['../../../../assets/css/login.css']
 })
 export class RegisterPhoneComponent {
   phoneNumber:string;
