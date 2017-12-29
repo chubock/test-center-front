@@ -1,8 +1,8 @@
-<div class="row" style="border: solid 1px black;" [ngClass]="{'hidden-tabs': mode == 'ANSWER'}">
+<div class="row" style="border: solid 1px black; height: 100%;" [ngClass]="{'hidden-tabs': mode == 'ANSWER'}">
 
-  <tabset>
-    <tab heading="Question" style="height: 658px">
-      <div class="col-sm-5" style="padding: 2px; height: 100%; border: solid 1px black;">
+  <tabset class="max-height-tabs">
+    <tab heading="Question" style="height: 100%;">
+      <div class="col-sm-5" style="padding: 2px; height: 100%; border: solid 1px black; overflow: auto">
         <div style="padding: 15px; border: solid 1px black;">
           <span [mathJax]="question.text"></span>
         </div>
@@ -11,13 +11,13 @@
         </div>
       </div>
       <div class="col-sm-7" style="padding: 0; height: 100%; border: solid 1px black;">
-        <div class="col-xs-12" style="padding: 2px; background-color: #C2C1BF">
+        <div class="col-xs-12" style="padding: 2px; background-color: #C2C1BF; height: 30px;">
           <button [disabled]="writingText.selectionStart == writingText.selectionEnd" (click)="cut(writingText.selectionStart, writingText.selectionEnd);" style="background-color: #C4C6C8">Cut</button>
           <button [disabled]="!cutBuffer" (click)="paste(writingText.selectionStart, writingText.selectionEnd)" style="background-color: #C4C6C8">Paste</button>
           <button [disabled]="!undoBuffer.length" (click)="undo()" style="background-color: #C4C6C8">Undo</button>
           <button [disabled]="!redoBuffer.length" (click)="redo()" style="background-color: #C4C6C8">Redo</button>
         </div>
-        <textarea #writingText (keydown)="handleBackspace($event)" [disabled]="mode == 'ANSWERED'" [(ngModel)]="question.answer" (change)="onAnswerChanged()" style="width: 100%; height: 625px; padding: 2px "></textarea>
+        <textarea #writingText (keydown)="handleBackspace($event)" [disabled]="mode == 'ANSWERED'" [(ngModel)]="question.answer" (change)="onAnswerChanged()" style="width: 100%; height: calc(100% - 30px); padding: 2px "></textarea>
       </div>
     </tab>
     <tab heading="Comment" *ngIf="question.comment">

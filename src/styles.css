@@ -22,3 +22,11 @@
   display: flex;
   align-items: center;
 }
+
+.hidden-tabs div.tab-content {
+  height: 100% !important;
+}
+
+.max-height-tabs div.tab-content {
+  height: calc(100% - 42px) !important;
+}

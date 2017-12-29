@@ -23,24 +23,24 @@
     </div>
   </div>
 
-  <div *ngIf="view == 'MAIN'" [ngSwitch]="currentQuestion.questionType">
-    <div *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_SINGLE_ANSWER'"><answer-data-interpretation-set-single-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-data-interpretation-set-single-answer-question></div>
-    <div *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_MULTIPLE_ANSWER'"><answer-data-interpretation-set-multiple-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-data-interpretation-set-multiple-answer-question></div>
-    <div *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_NUMERIC'"><answer-data-interpretation-set-numeric-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-data-interpretation-set-numeric-question></div>
-    <div *ngSwitchCase="'GRE_NUMERIC'"><answer-numeric-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-numeric-question></div>
-    <div *ngSwitchCase="'GRE_NUMERIC_FRACTION'"><answer-numeric-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-numeric-question></div>
-    <div *ngSwitchCase="'GRE_QUANTITATIVE_COMPARISON'"><answer-quantitative-comparison-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-quantitative-comparison-question></div>
-    <div *ngSwitchCase="'GRE_QUANTITATIVE_SINGLE_ANSWER'"><answer-quantitative-single-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-quantitative-single-answer-question></div>
-    <div *ngSwitchCase="'GRE_QUANTITATIVE_MULTIPLE_ANSWER'"><answer-quantitative-multiple-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-quantitative-multiple-answer-question></div>
-    <div *ngSwitchCase="'GRE_READING_COMPREHENSION_SINGLE_ANSWER'"><answer-reading-comprehension-single-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-reading-comprehension-single-answer-question></div>
-    <div *ngSwitchCase="'GRE_READING_COMPREHENSION_MULTIPLE_ANSWER'"><answer-reading-comprehension-multiple-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-reading-comprehension-multiple-answer-question></div>
-    <div *ngSwitchCase="'GRE_READING_COMPREHENSION_SELECT_IN_PASSAGE'"><answer-select-in-passage-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-select-in-passage-question></div>
-    <div *ngSwitchCase="'GRE_SENTENCE_EQUIVALENCE'"><answer-sentence-equivalence-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-sentence-equivalence-question></div>
-    <div *ngSwitchCase="'GRE_TEXT_COMPLETION_ONE_BLANK'"><answer-text-completion-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-text-completion-question></div>
-    <div *ngSwitchCase="'GRE_TEXT_COMPLETION_TWO_BLANK'"><answer-text-completion-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-text-completion-question></div>
-    <div *ngSwitchCase="'GRE_TEXT_COMPLETION_THREE_BLANK'"><answer-text-completion-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-text-completion-question></div>
-    <div *ngSwitchCase="'GRE_WRITING_ISSUE'"><answer-writing-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-writing-question></div>
-    <div *ngSwitchCase="'GRE_WRITING_ARGUMENT'"><answer-writing-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-writing-question></div>
+  <div *ngIf="view == 'MAIN'" [ngSwitch]="currentQuestion.questionType" style="position: relative; height: calc(100vh - 86px)">
+    <div style="height: 100%;" *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_SINGLE_ANSWER'"><answer-data-interpretation-set-single-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-data-interpretation-set-single-answer-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_MULTIPLE_ANSWER'"><answer-data-interpretation-set-multiple-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-data-interpretation-set-multiple-answer-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_DATA_INTERPRETATION_SET_NUMERIC'"><answer-data-interpretation-set-numeric-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-data-interpretation-set-numeric-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_NUMERIC'"><answer-numeric-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-numeric-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_NUMERIC_FRACTION'"><answer-numeric-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-numeric-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_QUANTITATIVE_COMPARISON'"><answer-quantitative-comparison-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-quantitative-comparison-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_QUANTITATIVE_SINGLE_ANSWER'"><answer-quantitative-single-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-quantitative-single-answer-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_QUANTITATIVE_MULTIPLE_ANSWER'"><answer-quantitative-multiple-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-quantitative-multiple-answer-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_READING_COMPREHENSION_SINGLE_ANSWER'"><answer-reading-comprehension-single-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-reading-comprehension-single-answer-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_READING_COMPREHENSION_MULTIPLE_ANSWER'"><answer-reading-comprehension-multiple-answer-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-reading-comprehension-multiple-answer-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_READING_COMPREHENSION_SELECT_IN_PASSAGE'"><answer-select-in-passage-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-select-in-passage-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_SENTENCE_EQUIVALENCE'"><answer-sentence-equivalence-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-sentence-equivalence-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_TEXT_COMPLETION_ONE_BLANK'"><answer-text-completion-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-text-completion-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_TEXT_COMPLETION_TWO_BLANK'"><answer-text-completion-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-text-completion-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_TEXT_COMPLETION_THREE_BLANK'"><answer-text-completion-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-text-completion-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_WRITING_ISSUE'"><answer-writing-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-writing-question></div>
+    <div style="height: 100%;" *ngSwitchCase="'GRE_WRITING_ARGUMENT'"><answer-writing-question [question]="currentQuestion" (answerChanged)="answerChanged($event)"></answer-writing-question></div>
   </div>
 
   <div *ngIf="view == 'REVIEW'">

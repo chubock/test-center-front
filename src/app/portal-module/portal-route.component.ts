@@ -11,8 +11,8 @@ import { Location } from '@angular/common';
       </div>
   
       <div class="main-panel" style="height: 100%">
-          <navbar-cmp></navbar-cmp>
-          <router-outlet></router-outlet>
+          <div style="height: 65px"><navbar-cmp></navbar-cmp></div>
+          <div style="height: calc(100% - 65px);"><router-outlet></router-outlet></div>
           <!--<div *ngIf="isMap('maps')" class="footer navbar-fixed-bottom">-->
               <!--<footer-cmp></footer-cmp>-->
           <!--</div>-->

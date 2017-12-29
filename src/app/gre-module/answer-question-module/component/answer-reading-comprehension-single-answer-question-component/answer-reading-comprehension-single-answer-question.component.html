@@ -1,8 +1,8 @@
-<div class="row test-border" [ngClass]="{'hidden-tabs': mode == 'ANSWER'}">
+<div class="row test-border" [ngClass]="{'hidden-tabs': mode == 'ANSWER'}" style="height: 100%;">
   <tabset>
-    <tab heading="Question">
+    <tab heading="Question" style="height:100%">
 
-      <div class="col-sm-6 test-border" style="padding: 2px; height: calc(100vh - 88px)">
+      <div class="col-sm-6 test-border" style="padding: 2px; height: 100%; overflow: auto">
         <div *ngIf="question.parent.number != question.parent.lastNumber" style="background-color: blue; color: white; font-weight: bold; padding: 2px">
           Question {{question.parent.number}} to {{question.parent.lastNumber}} are based on this passage.
         </div>
@@ -16,7 +16,7 @@
         <img *ngIf="question.parent.image" [src]="serverUrl + '/file-service/' + question.parent.image" style="margin: 0 auto; display: block">
 
       </div>
-      <div class="col-sm-6 test-border" style="padding: 20px; height: calc(100vh - 88px)">
+      <div class="col-sm-6 test-border" style="padding: 20px; height: 100%; overflow: auto">
         <div style="margin-bottom: 50px;">
           <span [mathJax]="question.text" class="col-xs-12"></span>
         </div>

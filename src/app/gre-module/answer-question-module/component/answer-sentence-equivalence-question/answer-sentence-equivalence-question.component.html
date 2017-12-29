@@ -1,12 +1,12 @@
-<div class="row test-border" [ngClass]="{'hidden-tabs': mode == 'ANSWER'}">
+<div class="row test-border" [ngClass]="{'hidden-tabs': mode == 'ANSWER'}" style="height: 100%">
 
   <tabset>
-    <tab heading="Question">
+    <tab heading="Question" style="height: 100%;">
 
       <div class="test-border text-center" style="padding: 20px 100px; margin: 2px; height: 100px">
         Select the <u>two</u> answer choices that, when used to complete the sentence, fit the meaning of the sentence as a whole <u>and</u> produce complete sentences that are alike in meaning.
       </div>
-      <div class="test-border" style="padding: 50px 100px 0 100px; margin: 2px;">
+      <div class="test-border" style="padding: 50px 100px 0 100px; margin: 2px; height: calc(100% - 106px)">
         <span [mathJax]="question.text"></span>
         <table style="width: 100%; margin: 25px 0">
           <tbody>
