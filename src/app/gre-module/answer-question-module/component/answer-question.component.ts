@@ -22,7 +22,7 @@ export abstract class AnswerQuestionComponent<T extends Question> {
   abstract onAnswerChanged(): void;
 
   getDocument() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.serverUrl + 'files/' + this.question.document);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.serverUrl + '/file-service/' + this.question.document);
   }
 
   scoreQuestion():void {

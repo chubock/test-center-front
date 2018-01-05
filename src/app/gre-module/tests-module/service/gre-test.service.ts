@@ -104,32 +104,33 @@ export class GRETestService {
       });
   }
 
-  seeQuestion(id:number):Promise<void> {
+  seeQuestion(id:number):Promise<any> {
     return this.http.put(environment.apiEndPoint + "/gre-service/answered-questions/" + id + "/see", null)
       .toPromise();
   }
 
-  answerQuestion(id:number, answer:string): Promise<void> {
+  answerQuestion(id:number, answer:string): Promise<any> {
     return this.http.put(environment.apiEndPoint + "/gre-service/answered-questions/" + id + "/answer", answer)
       .toPromise();
   }
 
-  markQuestion(id:number):Promise<void> {
+  markQuestion(id:number):Promise<any> {
     return this.http.put(environment.apiEndPoint + "/gre-service/answered-questions/" + id + "/mark", null)
       .toPromise();
   }
 
-  unMarkQuestion(id:number):Promise<void> {
+  unMarkQuestion(id:number):Promise<any> {
     return this.http.put(environment.apiEndPoint + "/gre-service/answered-questions/" + id + "/unMark", null)
       .toPromise();
   }
 
   finishTest(id:number, answers:any):Promise<Date> {
     return this.http.post(environment.apiEndPoint + "/gre-service/tests/" + id + "/finish", answers)
-      .toPromise();
+      .toPromise()
+      .then(resp => resp.json().finishDate);
   }
 
-  commentTest(id:number, comment:string):Promise<void> {
+  commentTest(id:number, comment:string):Promise<any> {
     return this.http.patch(environment.apiEndPoint + "/gre-service/tests/" + id + "/comment", {comment: comment})
       .toPromise();
   }
